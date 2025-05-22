@@ -1,0 +1,33 @@
+# File: .docker/docker-compose.yml
+services:
+  solver:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      - MPLCONFIGDIR=/tmp/matplotlib
+    volumes:
+      - ../python:/app
+    ports:
+      - "5000:5000"
+  
+  #Just for ref. The below doesnt do anything right now but I dont want to delete
+  problem1:
+    extends: solver
+    command: bash -c "python3 problem_1.py"
+
+  latex:
+      user: "${UID:-1000}:${GID:-1000}"
+      build:
+        context: ..
+        dockerfile: .docker/Dockerfile.latex 
+      ports:
+        - "3000:3000"  # For LaTeX Workshop
+      working_dir: /project
+      command: tail -f /dev/null
+      volumes:
+       - ../paper/src:/project/src
+       - ../paper/output:/project/output
+       - ../paper/figures:/project/figures
+       - ../paper/include:/project/include
