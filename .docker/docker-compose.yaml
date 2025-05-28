@@ -31,3 +31,23 @@ services:
        - ../paper/output:/project/output
        - ../paper/figures:/project/figures
        - ../paper/include:/project/include
+  minecraft:
+    image: itzg/minecraft-server:latest
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "1.21.4"
+      MEMORY: "2G"
+      DIFFICULTY: "peaceful"
+      MODE: "creative"
+      MAX_PLAYERS: 10
+      ONLINE_MODE: "true"
+      WHITE_LIST: "false"
+      ENABLE_COMMAND_BLOCK: "true"
+      LEVEL_TYPE: "flat"
+      OPS: "Loopking,BT1013,jc_cr"
+    ports:
+      - "25565:25565"
+    volumes:
+      - ./minecraft_data:/data
+    restart: unless-stopped
