@@ -1,21 +1,42 @@
 # File: .docker/docker-compose.yml
 services:
-  solver:
+
+  py-base:
     build:
       context: .
       dockerfile: Dockerfile.python
     user: "${UID:-1000}:${GID:-1000}"
-    environment:
-      - MPLCONFIGDIR=/tmp/matplotlib
+    env_file: .env
     volumes:
-      - ../python:/app
+      - ../ai-pm:/app
     ports:
       - "5000:5000"
   
-  #Just for ref. The below doesnt do anything right now but I dont want to delete
-  problem1:
-    extends: solver
-    command: bash -c "python3 problem_1.py"
+  agent-hello-world:
+    extends: py-base
+    command: bash -c "python3 hello_agents.py"
+
+  minecraft:
+    image: itzg/minecraft-server:latest
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "1.21.4"
+      MEMORY: "2G"
+      DIFFICULTY: "peaceful"
+      MODE: "creative"
+      MAX_PLAYERS: 20
+      ONLINE_MODE: "true"
+      WHITE_LIST: "false"
+      ENABLE_COMMAND_BLOCK: "true"
+      LEVEL_TYPE: "flat"
+      OPS: "Loopking,BT1013,jc_cr"
+    ports:
+      - "25565:25565"
+    volumes:
+      - ../minecraft-dev:/data
+    restart: unless-stopped
 
   latex:
       user: "${UID:-1000}:${GID:-1000}"
@@ -31,23 +52,4 @@ services:
        - ../paper/output:/project/output
        - ../paper/figures:/project/figures
        - ../paper/include:/project/include
-  minecraft:
-    image: itzg/minecraft-server:latest
-    environment:
-      EULA: "TRUE"
-      TYPE: "PAPER"
-      VERSION: "1.21.4"
-      MEMORY: "2G"
-      DIFFICULTY: "peaceful"
-      MODE: "creative"
-      MAX_PLAYERS: 10
-      ONLINE_MODE: "true"
-      WHITE_LIST: "false"
-      ENABLE_COMMAND_BLOCK: "true"
-      LEVEL_TYPE: "flat"
-      OPS: "Loopking,BT1013,jc_cr"
-    ports:
-      - "25565:25565"
-    volumes:
-      - ./minecraft_data:/data
-    restart: unless-stopped
+
