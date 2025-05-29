@@ -14,7 +14,7 @@ services:
   
   agent-hello-world:
     extends: py-base
-    command: bash -c "python3 hello.py"
+    command: bash -c "python3 hello_agents.py"
 
   minecraft:
     image: itzg/minecraft-server:latest
