@@ -25,8 +25,11 @@ services:
       DIFFICULTY: "peaceful"
       MODE: "creative"
       MAX_PLAYERS: 20
+      WHITELIST: |
+        Loopking
+        BT1013
+        jc_cr
       ONLINE_MODE: "true"
-      WHITE_LIST: "false"
       ENABLE_COMMAND_BLOCK: "true"
       LEVEL_TYPE: "flat"
       GENERATOR_SETTINGS: >-
