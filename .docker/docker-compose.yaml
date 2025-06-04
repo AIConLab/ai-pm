@@ -1,6 +1,5 @@
 # File: .docker/docker-compose.yml
 services:
-
   py-base:
     build:
       context: .
@@ -18,7 +17,6 @@ services:
 
   minecraft:
     image: itzg/minecraft-server:latest
-    user: "${UID:-1000}:${GID:-1000}"
     environment:
       EULA: "TRUE"
       TYPE: "PAPER"
@@ -31,6 +29,11 @@ services:
       WHITE_LIST: "false"
       ENABLE_COMMAND_BLOCK: "true"
       LEVEL_TYPE: "flat"
+      GENERATOR_SETTINGS: >-
+        {
+          "layers": [],
+          "biome": "minecraft:the_void"
+        }
       OPS: "Loopking,BT1013,jc_cr"
     ports:
       - "25565:25565"
