@@ -1,20 +1,26 @@
-# File: .docker/docker-compose.yml
+#File: .docker/docker-compose.yml
 services:
-
   py-base:
     build:
       context: .
       dockerfile: Dockerfile.python
     user: "${UID:-1000}:${GID:-1000}"
     env_file: .env
-    volumes:
-      - ../ai-pm:/app
     ports:
       - "5000:5000"
-  
+
   agent-hello-world:
     extends: py-base
     command: bash -c "python3 hello_agents.py"
+
+  logs_to_db:
+    extends: py-base
+    volumes:
+      - /root/ai-pm-mc-world-dev/minecraft-dev/logs/latest.log:/app/data/latest.log:ro
+      - ../data:/app/data/db
+      - ../ai-pm:/app/scripts
+    command: bash -c "python3 /app/scripts/logs_to_db.py"
+
 
   minecraft:
     image: itzg/minecraft-server:latest

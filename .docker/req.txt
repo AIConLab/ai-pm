@@ -1,2 +1,4 @@
 openai-agents
 rich>=13.0.0
+nbtlib
+watchdog
