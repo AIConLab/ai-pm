@@ -21,6 +21,13 @@ services:
       - ../ai-pm:/app/scripts
     command: bash -c "python3 /app/scripts/logs_to_db.py"
 
+  hello_mcron:
+    extends: py-base
+    volumes:
+      - ../ai-pm:/app/scripts
+      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+    command: bash -c "python3 /app/scripts/hello_mcron.py"
+
 
   minecraft:
     image: itzg/minecraft-server:latest
