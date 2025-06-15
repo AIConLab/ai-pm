@@ -9,10 +9,6 @@ services:
     ports:
       - "5000:5000"
 
-  agent-hello-world:
-    extends: py-base
-    command: bash -c "python3 hello_agents.py"
-
   logs_to_db:
     extends: py-base
     volumes:
