@@ -3,12 +3,15 @@ import os
 import time
 from mc_actions import Actions
 
-LOG_PATH = "/app/data/latest.log"
+LOG_PATH = "/mc-data/latest.log"
 
 def main():
+
     if not os.path.exists(LOG_PATH):
         print(f"Log file not found: {LOG_PATH}")
         return
+        
+    print("🤗 Starting event listener 🤗")
         
     last_position = os.path.getsize(LOG_PATH)
     print(f"Starting monitoring from position: {last_position}")
@@ -27,7 +30,7 @@ def main():
                     
                     for line in new_lines:
                         if "jc_cr joined the game" in line:
-                            action.ai_welcome_greeting(name="jc_cr")
+                            action.ai_welcome_greeting(username="jc_cr")
 
             
             time.sleep(1) # check every sec

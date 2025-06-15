@@ -9,21 +9,14 @@ services:
     ports:
       - "5000:5000"
 
-  logs_to_db:
+  # Listens to minecraft events and generates an appropiate response
+  event_listener:
     extends: py-base
     volumes:
-      - /root/ai-pm-mc-world-dev/minecraft-dev/logs/latest.log:/app/data/latest.log:ro
-      - ../data:/app/data/db
-      - ../ai-pm:/app/scripts
-    command: bash -c "python3 /app/scripts/logs_to_db.py"
-
-  hello_mcron:
-    extends: py-base
-    volumes:
-      - ../ai-pm:/app/scripts
+      - ../ai-pm:/scripts
       - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
-    command: bash -c "python3 /app/scripts/hello_mcron.py"
-
+      - /root/ai-pm-mc-world-dev/minecraft-dev/logs/latest.log:/mc-data/latest.log:ro
+    command: bash -c "python3 /scripts/mc_event_listener.py"
 
   minecraft:
     image: itzg/minecraft-server:latest
