@@ -15,7 +15,6 @@ services:
     volumes:
       - ../ai-pm:/scripts
       - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
-      - /root/ai-pm-mc-world-dev/minecraft-dev/logs/latest.log:/mc-data/latest.log:ro
     command: bash -c "python3 /scripts/mc_event_listener.py"
 
   minecraft:

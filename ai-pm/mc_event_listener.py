@@ -3,7 +3,8 @@ import os
 import time
 from mc_actions import Actions
 
-LOG_PATH = "/mc-data/latest.log"
+LOG_PATH = "/mc-data/logs/latest.log"
+ADMIN_USERS = ["Loopking", "BT1013", "jc_cr"]
 
 def main():
 
@@ -29,9 +30,11 @@ def main():
                     last_position = current_size
                     
                     for line in new_lines:
-                        if "jc_cr joined the game" in line:
-                            action.ai_welcome_greeting(username="jc_cr")
-
+                        # Check for any admin joining
+                        for user in ADMIN_USERS:
+                            if f"{user} joined the game" in line:
+                                action.ai_welcome_greeting(username=user)
+                                break  # Only trigger once per line
             
             time.sleep(1) # check every sec
             
