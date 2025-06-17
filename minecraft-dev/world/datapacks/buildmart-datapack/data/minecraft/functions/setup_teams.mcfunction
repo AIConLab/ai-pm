@@ -1,10 +1,8 @@
-# Create teams
 team add AIPM "AI Project Manager"
 team add HumanPM "Human Project Manager"
 team add NoPM "No Project Manager"
 team add Admin "Admin Team"
 
-# Configure teams
 team modify AIPM color blue
 team modify AIPM friendlyFire false
 team modify AIPM prefix "§9[AI-PM] §r"
@@ -21,7 +19,6 @@ team modify Admin color gold
 team modify Admin friendlyFire false
 team modify Admin prefix "§6[Admin] §r"
 
-# Setup scoreboard
 scoreboard objectives add teams dummy "Team Overview"
 scoreboard objectives setdisplay sidebar teams
 scoreboard players set "§9AI Project Manager" teams 0
