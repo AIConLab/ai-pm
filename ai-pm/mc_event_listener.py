@@ -2,10 +2,15 @@
 # mc_event_listener.py - Using tail -F for log rotation handling
 import subprocess
 import sys
+import re
 from mc_actions import Actions
 
 LOG_PATH = "/mc-data/logs/latest.log"
 ADMIN_USERS = ["Loopking", "BT1013", "jc_cr"]
+
+# Regex patterns for different log types
+CHAT_PATTERN = r'\[.*?\] \[Async Chat Thread.*?\]: <(\w+)> (.*)'
+AIPM_PATTERN = r'@aipm\s*(.*)'
 
 def main():
     print("🤗 Starting event listener (using tail -F) 🤗")
@@ -35,8 +40,23 @@ def main():
                 for user in ADMIN_USERS:
                     if f"{user} joined the game" in line:
                         print(f"🎮 Detected {user} joining!")
-                        action.ai_welcome_greeting(username=user)
+                        action.get_ai_welcome_greeting(username=user)
                         break  # Only trigger once per line
+                
+                # Check for chat messages with @aipm
+                chat_match = re.search(CHAT_PATTERN, line)
+                if chat_match:
+                    username = chat_match.group(1)
+                    message = chat_match.group(2)
+                    
+                    # Check if message contains @aipm command
+                    aipm_match = re.search(AIPM_PATTERN, message)
+                    if aipm_match:
+                        command_text = aipm_match.group(1).strip()
+                        print(f"🤖 @aipm command from {username}: '{command_text}'")
+                        
+                        # Call AI PM handler
+                        action.get_ai_pm_response(username=username, command=command_text)
         
     except KeyboardInterrupt:
         print("\n🛑 Stopping...")

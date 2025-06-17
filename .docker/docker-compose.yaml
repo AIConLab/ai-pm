@@ -33,6 +33,11 @@ services:
       ENABLE_COMMAND_BLOCK: "true"
       LEVEL_TYPE: "flat"
       OPS: "Loopking,BT1013,jc_cr"
+      RCON_CMDS_STARTUP: |-
+            gamerule doDaylightCycle false
+            time set day
+            gamerule doWeatherCycle false
+            weather clear
     ports:
       - "25565:25565"
     volumes:
