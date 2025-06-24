@@ -1,33 +1,10 @@
 #!/usr/bin/env python3
 # mc_game_query.py - Periodic RCON query service
 import time
-from mcrcon import MCRcon
 from mc_database import Database
 
-class RCONClient:
-    def __init__(self, host="minecraft", port=25575, password_file="/mc-data/.rcon-cli.env"):
-        self.host = host
-        self.port = port
-        self.password = self._get_password(password_file)
-    
-    def _get_password(self, password_file):
-        try:
-            with open(password_file, 'r') as f:
-                for line in f:
-                    if 'password=' in line:
-                        return line.split('=')[1].strip()
-        except:
-            pass
-        return None
-    
-    def execute(self, command):
-        if not self.password:
-            return None
-        try:
-            with MCRcon(self.host, self.password, port=self.port) as mcr:
-                return mcr.command(command)
-        except:
-            return None
+
+from rcon_client import RCONClient
 
 def get_server_players(rcon_client):
     """Get list of players currently on server"""
@@ -76,6 +53,11 @@ def sync_server_data(db, rcon):
             position = get_player_position(rcon, username)
             if position:
                 db.update_position(username, position[0], position[1], position[2])
+            
+            # Update inventory from NBT file
+            inventory = get_player_inventory_from_nbt(username)
+            for item_type, quantity in inventory.items():
+                db.update_inventory(username, item_type, quantity)
         
         if server_players:
             print(f"Synced {len(server_players)} online players")

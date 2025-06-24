@@ -4,67 +4,18 @@ from agents import Agent, Runner
 
 # MC imports
 from mcrcon import MCRcon
+
+
 import re
+from rcon_client import RCONClient
 
-
-class RCONManager:
-    """Manages RCON connections and credentials"""
-    
-    def __init__(self, host="minecraft", port=25575, password_file="/mc-data/.rcon-cli.env"):
-        self.host = host
-        self.port = port
-        self.password_file = password_file
-        self._password = None
-    
-    def _get_password(self):
-        """Cache and return RCON password"""
-        if self._password is None:
-            try:
-                with open(self.password_file, 'r') as f:
-                    for line in f:
-                        if 'password=' in line:
-                            self._password = line.split('=')[1].strip()
-                            break
-                if not self._password:
-                    raise ValueError("Password not found in file")
-            except Exception as e:
-                print(f"❌ Could not read RCON password: {e}")
-                raise
-        return self._password
-    
-    def execute_command(self, command):
-        """Execute single RCON command"""
-        try:
-            password = self._get_password()
-            with MCRcon(self.host, password, port=self.port) as mcr:
-                response = mcr.command(command)
-                print(f"✅ RCON: {command}")
-                return response
-        except Exception as e:
-            print(f"❌ RCON failed: {command} - {e}")
-            return None
-    
-    def execute_commands(self, commands):
-        """Execute multiple RCON commands in single connection"""
-        try:
-            password = self._get_password()
-            with MCRcon(self.host, password, port=self.port) as mcr:
-                responses = []
-                for command in commands:
-                    response = mcr.command(command)
-                    responses.append(response)
-                    print(f"✅ RCON: {command}")
-                return responses
-        except Exception as e:
-            print(f"❌ RCON batch failed: {e}")
-            return None
 
 
 class MessageService:
     """Handles message formatting and delivery"""
     
-    def __init__(self, rcon_manager, max_length=200):
-        self.rcon = rcon_manager
+    def __init__(self, rcon_client, max_length=200):
+        self.rcon = rcon_client
         self.max_length = max_length
     
     def _clean_message(self, message):
@@ -122,7 +73,14 @@ class MessageService:
             else:
                 commands.append(f'say {chunk}')
         
-        return self.rcon.execute_commands(commands)
+        try:
+            for command in commands:
+                self.rcon.execute(command)
+            
+            return True
+
+        except Exception as e:
+            return False
     
     def send_private(self, username, message):
         """Send private message to specific player"""
@@ -135,14 +93,21 @@ class MessageService:
             else:
                 commands.append(f'msg {username} {chunk}')
         
-        return self.rcon.execute_commands(commands)
+        try:
+            for command in commands:
+                self.rcon.execute(command)
+            
+            return True
+
+        except Exception as e:
+            return False
 
 
 class Actions:
     """Business logic for AI actions"""
     
     def __init__(self):
-        self.rcon_manager = RCONManager()
+        self.rcon_manager = RCONClient()
         self.message_service = MessageService(self.rcon_manager)
 
     def get_ai_welcome_greeting(self, username="player"):
