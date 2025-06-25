@@ -75,7 +75,7 @@ def main():
         print("❌ No RCON password found, exiting")
         return
     
-    interval = 30  # seconds
+    interval = 60  # seconds
     print(f"📊 Querying server every {interval} seconds...")
     
     try:

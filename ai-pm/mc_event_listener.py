@@ -36,6 +36,8 @@ def handle_aipm_command(actions, db, username, command):
             response = f"Online players: {', '.join(names)}"
         else:
             response = "No players online"
+        actions.message_service.send_private(username, response)
+        
     elif command_lower.startswith('inv'):
         # Get inventory of specified player or self
         target = command.split()[-1] if len(command.split()) > 1 else username

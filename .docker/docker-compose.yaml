@@ -14,16 +14,11 @@ services:
     extends: py-base
     volumes:
       - ../ai-pm:/scripts
+      - ../data:/database
       - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
     command: bash -c "python3 /scripts/mc_event_listener.py"
 
 
-  nbt:
-    extends: py-base
-    volumes:
-      - ../ai-pm:/scripts
-      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
-    command: bash -c "python3 /scripts/test-nbt.py"
 
   minecraft:
     image: itzg/minecraft-server:latest

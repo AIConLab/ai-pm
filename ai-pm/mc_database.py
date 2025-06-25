@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-# mc_database.py
+# mc_database.py - Database operations only
+
 import sqlite3
-import threading
-import time
 from datetime import datetime
 from contextlib import contextmanager
 
 class Database:
-    def __init__(self, db_path="/mc-data/players.db"):
+    def __init__(self, db_path="/database/aipm.db"):
         self.db_path = db_path
         self.init_tables()
     
@@ -51,6 +50,9 @@ class Database:
                     UNIQUE(user_id, item_type)
                 )
             """)
+            
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_username ON Users(minecraft_username)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_online ON Users(is_online)")
     
     def add_user(self, username):
         with self.get_connection() as conn:
@@ -78,12 +80,60 @@ class Database:
                 WHERE minecraft_username = ?
             """, (x, y, z, datetime.now(), username))
     
+    def update_inventory(self, username, item_type, quantity):
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Get user_id first
+            cursor.execute("SELECT user_id FROM Users WHERE minecraft_username = ?", (username,))
+            result = cursor.fetchone()
+            if not result:
+                return
+            
+            user_id = result['user_id']
+            cursor.execute("""
+                INSERT OR REPLACE INTO UserInventory (user_id, item_type, quantity, last_updated)
+                VALUES (?, ?, ?, ?)
+            """, (user_id, item_type, quantity, datetime.now()))
+    
     def get_online_users(self):
         with self.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute("""
-                SELECT minecraft_username, current_x, current_y, current_z
+                SELECT minecraft_username, current_x, current_y, current_z, last_updated
                 FROM Users WHERE is_online = 1
+                ORDER BY minecraft_username
             """)
             return [dict(row) for row in cursor.fetchall()]
-
+    
+    def get_user_inventory(self, username):
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT ui.item_type, ui.quantity, ui.last_updated
+                FROM UserInventory ui
+                JOIN Users u ON ui.user_id = u.user_id
+                WHERE u.minecraft_username = ?
+                ORDER BY ui.item_type
+            """, (username,))
+            return [dict(row) for row in cursor.fetchall()]
+    
+    def get_all_users(self):
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT minecraft_username, is_online, current_x, current_y, current_z, last_updated
+                FROM Users
+                ORDER BY minecraft_username
+            """)
+            return [dict(row) for row in cursor.fetchall()]
+    
+    def cleanup_offline_users(self, hours=24):
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                DELETE FROM Users 
+                WHERE is_online = 0 
+                AND datetime(last_updated) < datetime('now', '-{} hours')
+            """.format(hours))
+            return cursor.rowcount
