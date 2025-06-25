@@ -1,0 +1,24 @@
+# config.toml
+
+[aipm_team]
+# list of mc username of team meembers for AIPM team
+members = ["jc_cr"]
+
+[planner_agent]
+
+# Prompt with: map layout, player locations, round structures list, structure recipes for round
+start_of_round_prompt = 
+"""
+
+
+"""
+
+# Milestone update prompt: previous plan, map layout, player locations, player inventory, remaining structures, structure recipes
+milestone_prompt = 
+"""
+
+
+"""
+
+
+[manager_agent]
