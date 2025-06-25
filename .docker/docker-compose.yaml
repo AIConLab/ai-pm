@@ -1,5 +1,6 @@
 #File: .docker/docker-compose.yml
 services:
+  # Python base for shared image
   py-base:
     build:
       context: .
@@ -18,8 +19,16 @@ services:
       - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
     command: bash -c "python3 /scripts/mc_event_listener.py"
 
+  # Queries game state at fixed intervals and writes to DB
+  game_query:
+      extends: py-base
+      volumes:
+        - ../ai-pm:/scripts
+        - ../data:/database
+        - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+      command: bash -c "python3 /scripts/mc_game_query.py"
 
-
+  # Minecraft server service
   minecraft:
     image: itzg/minecraft-server:latest
     user: "${UID:-1000}:${GID:-1000}"
@@ -47,6 +56,7 @@ services:
       - ../minecraft-dev:/data
     restart: unless-stopped
 
+  # For running latex
   latex:
       user: "${UID:-1000}:${GID:-1000}"
       build:

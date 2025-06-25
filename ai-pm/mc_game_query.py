@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # mc_game_query.py - Periodic RCON query service
 import time
+import nbtlib
+from pathlib import Path
 from mc_database import Database
-
-
 from rcon_client import RCONClient
 
 def get_server_players(rcon_client):
@@ -29,6 +29,47 @@ def get_player_position(rcon_client, username):
         return coords if len(coords) >= 3 else None
     except:
         return None
+
+def get_player_inventory_from_nbt(username):
+    """Get player inventory from NBT file"""
+    try:
+        playerdata_dir = Path("/mc-data/world/playerdata")
+        if not playerdata_dir.exists():
+            return {}
+        
+        # Find the player's NBT file by checking lastKnownName
+        for player_file in playerdata_dir.glob("*.dat"):
+            try:
+                nbt_data = nbtlib.load(player_file)
+                if 'bukkit' in nbt_data and 'lastKnownName' in nbt_data['bukkit']:
+                    if str(nbt_data['bukkit']['lastKnownName']) == username:
+                        # Parse inventory
+                        inventory_dict = {}
+                        inventory = nbt_data.get('Inventory', [])
+                        
+                        for item in inventory:
+                            item_id = str(item.get('id', 'unknown'))
+                            count = int(item.get('count', 0))
+                            
+                            # Clean up item ID (remove minecraft: prefix if present)
+                            if item_id.startswith('minecraft:'):
+                                item_id = item_id[10:]
+                            
+                            # Add to inventory dict (combine if item already exists)
+                            if item_id in inventory_dict:
+                                inventory_dict[item_id] += count
+                            else:
+                                inventory_dict[item_id] = count
+                        
+                        return inventory_dict
+            except Exception as e:
+                # Skip files that can't be read
+                continue
+        
+        return {}
+    except Exception as e:
+        print(f"Error reading NBT for {username}: {e}")
+        return {}
 
 def sync_server_data(db, rcon):
     """Sync all online players with database"""
@@ -75,7 +116,7 @@ def main():
         print("❌ No RCON password found, exiting")
         return
     
-    interval = 60  # seconds
+    interval = 30  # seconds
     print(f"📊 Querying server every {interval} seconds...")
     
     try:
