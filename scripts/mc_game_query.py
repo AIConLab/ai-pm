@@ -3,8 +3,18 @@
 import time
 import nbtlib
 from pathlib import Path
+import tomllib
+
 from mc_database import Database
 from rcon_client import RCONClient
+
+def load_config(config_path="config.toml"):
+    """Load all params from config file"""
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Config file {config_path} not found")
+    
+    with open(config_path, 'rb') as f:
+        return tomllib.load(f)
 
 def get_server_players(rcon_client):
     """Get list of players currently on server"""
@@ -107,19 +117,21 @@ def sync_server_data(db, rcon):
         print(f"Sync error: {e}")
 
 def main():
-    print("🔄 Starting periodic query service")
-    
-    db = Database()
-    rcon = RCONClient()
-    
-    if not rcon.password:
-        print("❌ No RCON password found, exiting")
-        return
-    
-    interval = 30  # seconds
-    print(f"📊 Querying server every {interval} seconds...")
     
     try:
+        print("🔄 Starting periodic query service")
+        
+        db = Database()
+        rcon = RCONClient()
+        config = load_config()
+        
+        if not rcon.password:
+            print("❌ No RCON password found, exiting")
+            return
+        
+        interval = 30  # seconds
+        print(f"📊 Querying server every {interval} seconds...")
+
         while True:
             sync_server_data(db, rcon)
             time.sleep(interval)

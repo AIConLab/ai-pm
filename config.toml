@@ -5,10 +5,10 @@
 members = ["jc_cr"]
 
 [planner_agent]
-
 # Prompt with: map layout, player locations, round structures list, structure recipes for round
 start_of_round_prompt = 
 """
+You must 
 
 
 """

@@ -5,110 +5,150 @@ from agents import Agent, Runner
 # MC imports
 from mcrcon import MCRcon
 
-
 import re
-from rcon_client import RCONClient
-
-
-
-class MessageService:
-    """Handles message formatting and delivery"""
-    
-    def __init__(self, rcon_client, max_length=200):
-        self.rcon = rcon_client
-        self.max_length = max_length
-    
-    def _clean_message(self, message):
-        """Clean message for Minecraft compatibility"""
-        # Remove markdown formatting
-        message = re.sub(r'\*\*(.*?)\*\*', r'\1', message)  # Remove **bold**
-        message = re.sub(r'\*(.*?)\*', r'\1', message)      # Remove *italic*
-        message = re.sub(r'`(.*?)`', r'\1', message)        # Remove `code`
-        
-        # Replace newlines with spaces
-        message = message.replace('\n', ' ')
-        
-        # Remove multiple spaces
-        message = re.sub(r'\s+', ' ', message)
-        
-        # Remove special characters that might break commands
-        message = re.sub(r'[^\w\s\!\?\.\,\-\:]', '', message)
-        
-        # Trim whitespace
-        return message.strip()
-    
-    def _chunk_message(self, message):
-        """Split message into chunks if too long"""
-        clean_msg = self._clean_message(message)
-        
-        if len(clean_msg) <= self.max_length:
-            return [clean_msg]
-        
-        # Split into chunks
-        words = clean_msg.split()
-        chunks = []
-        current_chunk = ""
-        
-        for word in words:
-            if len(current_chunk + " " + word) <= self.max_length:
-                current_chunk += (" " + word) if current_chunk else word
-            else:
-                if current_chunk:
-                    chunks.append(current_chunk)
-                current_chunk = word
-        
-        if current_chunk:
-            chunks.append(current_chunk)
-        
-        return chunks
-    
-    def send_broadcast(self, message):
-        """Send public message to all players"""
-        chunks = self._chunk_message(message)
-        commands = []
-        
-        for i, chunk in enumerate(chunks):
-            if len(chunks) > 1:
-                commands.append(f'say [{i+1}/{len(chunks)}] {chunk}')
-            else:
-                commands.append(f'say {chunk}')
-        
-        try:
-            for command in commands:
-                self.rcon.execute(command)
-            
-            return True
-
-        except Exception as e:
-            return False
-    
-    def send_private(self, username, message):
-        """Send private message to specific player"""
-        chunks = self._chunk_message(message)
-        commands = []
-        
-        for i, chunk in enumerate(chunks):
-            if len(chunks) > 1:
-                commands.append(f'msg {username} [{i+1}/{len(chunks)}] {chunk}')
-            else:
-                commands.append(f'msg {username} {chunk}')
-        
-        try:
-            for command in commands:
-                self.rcon.execute(command)
-            
-            return True
-
-        except Exception as e:
-            return False
+from rcon_client import MessageService
 
 
 class Actions:
     """Business logic for AI actions"""
     
     def __init__(self):
-        self.rcon_manager = RCONClient()
-        self.message_service = MessageService(self.rcon_manager)
+        self.message_service = MessageService()
+
+    def handle_player_join(self, database, username):
+        """Handle player join event"""
+        print(f"🎮 Player joined: {username}")
+        database.add_user(username)
+        database.set_online(username, True)
+
+    def handle_player_leave(self, database, username):
+        """Handle player leave event"""
+        print(f"👋 Player left: {username}")
+        database.set_online(username, False)
+
+    def handle_debug_command(self, database, username, command):
+        """Handle @debug commands - SYSTEM COMMANDS ONLY"""
+        command_lower = command.lower()
+        
+        debug_commands = {
+            "help": "Show all available debug commands",
+            "players": "List all online players", 
+            "inv": "Show player inventory. Usage: @debug inv [playername]",
+            "pos": "Show player position. Usage: @debug pos [playername]",
+            "db": "Show database statistics",
+            "sync": "Force database sync",
+            "status": "Show system status"
+        }
+        
+        # Handle help command
+        if command_lower == 'help':
+            help_lines = ["Available @debug commands:"]
+            for cmd, desc in debug_commands.items():
+                help_lines.append(f"• @debug {cmd} - {desc}")
+            help_message = "\n".join(help_lines)
+            self.message_service.send_private(username, help_message)
+            return
+        
+        # System commands
+        if command_lower == 'players':
+            online_users = database.get_online_users()
+            if online_users:
+                names = [user['minecraft_username'] for user in online_users]
+                response = f"Online players ({len(names)}): {', '.join(names)}"
+            else:
+                response = "No players online"
+            self.message_service.send_private(username, response)
+        
+        elif command_lower.startswith('inv'):
+            # Get inventory of specified player or self
+            target = command.split()[-1] if len(command.split()) > 1 else username
+            inventory = database.get_user_inventory(target)
+            
+            if inventory:
+                items = [f"{item['item_type']} x{item['quantity']}" for item in inventory[:5]]  # First 5 items
+                response = f"{target} inventory: {', '.join(items)}"
+                if len(inventory) > 5:
+                    response += f" (+{len(inventory)-5} more)"
+            else:
+                response = f"No inventory data for {target}"
+            self.message_service.send_private(username, response)
+            
+        elif command_lower.startswith('pos'):
+            # Get position of specified player or self
+            target = command.split()[-1] if len(command.split()) > 1 else username
+            online_users = database.get_online_users()
+            target_user = next((u for u in online_users if u['minecraft_username'] == target), None)
+            
+            if target_user:
+                x, y, z = target_user['current_x'], target_user['current_y'], target_user['current_z']
+                response = f"{target} position: X={x:.1f}, Y={y:.1f}, Z={z:.1f}"
+            else:
+                response = f"Player {target} not found or offline"
+            self.message_service.send_private(username, response)
+        
+        elif command_lower == 'db':
+            try:
+                all_users = database.get_all_users()
+                online_count = len([u for u in all_users if u['is_online']])
+                response = f"DB Stats: {len(all_users)} total users, {online_count} online, DB: {database.db_path}"
+                self.message_service.send_private(username, response)
+            except Exception as e:
+                self.message_service.send_private(username, f"DB error: {str(e)}")
+        
+        elif command_lower == 'sync':
+            response = "Database sync triggered (not implemented yet)"
+            self.message_service.send_private(username, response)
+        
+        elif command_lower == 'status':
+            online_users = database.get_online_users()
+            all_users = database.get_all_users()
+            
+            status_lines = [
+                f"System Status:",
+                f"• Online players: {len(online_users)}",
+                f"• Total registered: {len(all_users)}"
+            ]
+            
+            if online_users:
+                player_names = [u['minecraft_username'] for u in online_users]
+                status_lines.append(f"• Active: {', '.join(player_names)}")
+            
+            response = "\n".join(status_lines)
+            self.message_service.send_private(username, response)
+        
+        else:
+            # Unknown debug command
+            available = list(debug_commands.keys())
+            error_msg = f"Unknown debug command '{command_lower}'. Available: {', '.join(available)}. Use '@debug help' for details."
+            self.message_service.send_private(username, error_msg)
+
+    def handle_aipm_command(self, database, username, command):
+        """Handle @aipm commands - AI INQUIRIES ONLY"""
+        
+        # If empty command, show help
+        if not command.strip():
+            help_message = """AIPM Assistant Help:
+• Ask me anything about Minecraft, strategy, or building!
+• Examples: "@aipm how do I build a castle?", "@aipm what's the best mining level?", "@aipm help me plan our build"
+• I'm your AI project manager and Minecraft expert."""
+            self.message_service.send_private(username, help_message)
+            return
+        
+        # Check if it's a help request
+        if command.lower().strip() in ['help', 'help me']:
+            help_message = """AIPM Assistant:
+I'm your AI project manager! Ask me:
+• Minecraft questions: "how do I craft redstone?"
+• Strategy advice: "what should we build first?"  
+• Project management: "how should we organize our team?"
+• Building tips: "best materials for a castle?"
+
+Just type: @aipm [your question]"""
+            self.message_service.send_private(username, help_message)
+            return
+        
+        # Everything else goes to AI
+        self.get_ai_pm_response(username=username, command=command)
 
     def get_ai_welcome_greeting(self, username="player"):
         """Generate and broadcast AI welcome message"""
@@ -142,8 +182,15 @@ class Actions:
                 return
             
             agent = Agent(
-                name="MinecraftHelper", 
-                instructions="""You are a helpful Minecraft assistant. Provide concise, accurate answers about Minecraft gameplay, crafting, mechanics, and tips. Keep responses under 150 words and avoid special formatting. Be friendly and helpful."""
+                name="MinecraftProjectManager", 
+                instructions="""You are an AI project manager for a Minecraft building team. Help players with:
+- Minecraft gameplay, crafting, and building advice
+- Project management and team coordination  
+- Strategic planning for builds
+- Resource management tips
+- Construction techniques and tips
+
+Keep responses under 150 words, avoid special formatting, and be helpful and encouraging. You're managing a research study about AI project management in Minecraft."""
             )
             
             result = Runner.run_sync(agent, f"Player {username} asks: {command}")
