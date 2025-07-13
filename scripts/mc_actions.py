@@ -3,10 +3,8 @@
 from agents import Agent, Runner
 
 # MC imports
-from mcrcon import MCRcon
-
 import re
-from rcon_client import MessageService
+from rcon_client import MessageService, RCONClient
 from mc_database import Database
 
 
@@ -14,8 +12,9 @@ class Actions:
     """Business logic for AI actions"""
     
     def __init__(self):
-        self.message_service = MessageService()
-        self.database = Database()
+        self.rcon_client = RCONClient(password_file="/mc-data/.rcon-cli.env")
+        self.message_service = MessageService(self.rcon_client)
+        self.database = Database(db_path="/app/database/aipm.db")
 
     def handle_player_join(self, username):
         """Handle player join event"""

@@ -1,0 +1,1 @@
+tmux new -s minecraft

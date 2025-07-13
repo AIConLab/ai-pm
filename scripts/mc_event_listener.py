@@ -14,7 +14,7 @@ DEBUG_PATTERN = r'@debug\s*(.*)'
 JOIN_PATTERN = r'\[.*?\] \[Server thread/INFO\]: (\w+) joined the game'
 LEAVE_PATTERN = r'\[.*?\] \[Server thread/INFO\]: (\w+) left the game'
 
-def load_config(config_path="config.toml"):
+def load_config(config_path="/app/config.toml"):
     """Load all params from config file"""
     if not os.path.exists(config_path):
         raise FileNotFoundError(f"Config file {config_path} not found")

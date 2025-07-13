@@ -6,7 +6,7 @@ from datetime import datetime
 from contextlib import contextmanager
 
 class Database:
-    def __init__(self, db_path="/database/aipm.db"):
+    def __init__(self, db_path="/app/database/aipm.db"):
         self.db_path = db_path
         self.init_tables()
     
