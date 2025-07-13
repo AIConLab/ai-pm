@@ -7,6 +7,7 @@ from mcrcon import MCRcon
 
 import re
 from rcon_client import MessageService
+from mc_database import Database
 
 
 class Actions:
@@ -14,19 +15,20 @@ class Actions:
     
     def __init__(self):
         self.message_service = MessageService()
+        self.database = Database()
 
-    def handle_player_join(self, database, username):
+    def handle_player_join(self, username):
         """Handle player join event"""
         print(f"🎮 Player joined: {username}")
-        database.add_user(username)
-        database.set_online(username, True)
+        self.database.add_user(username)
+        self.database.set_online(username, True)
 
-    def handle_player_leave(self, database, username):
+    def handle_player_leave(self, username):
         """Handle player leave event"""
         print(f"👋 Player left: {username}")
-        database.set_online(username, False)
+        self.database.set_online(username, False)
 
-    def handle_debug_command(self, database, username, command):
+    def handle_debug_command(self, username, command):
         """Handle @debug commands - SYSTEM COMMANDS ONLY"""
         command_lower = command.lower()
         
@@ -51,7 +53,7 @@ class Actions:
         
         # System commands
         if command_lower == 'players':
-            online_users = database.get_online_users()
+            online_users = self.database.get_online_users()
             if online_users:
                 names = [user['minecraft_username'] for user in online_users]
                 response = f"Online players ({len(names)}): {', '.join(names)}"
@@ -62,7 +64,7 @@ class Actions:
         elif command_lower.startswith('inv'):
             # Get inventory of specified player or self
             target = command.split()[-1] if len(command.split()) > 1 else username
-            inventory = database.get_user_inventory(target)
+            inventory = self.database.get_user_inventory(target)
             
             if inventory:
                 items = [f"{item['item_type']} x{item['quantity']}" for item in inventory[:5]]  # First 5 items
@@ -76,7 +78,7 @@ class Actions:
         elif command_lower.startswith('pos'):
             # Get position of specified player or self
             target = command.split()[-1] if len(command.split()) > 1 else username
-            online_users = database.get_online_users()
+            online_users = self.database.get_online_users()
             target_user = next((u for u in online_users if u['minecraft_username'] == target), None)
             
             if target_user:
@@ -88,9 +90,9 @@ class Actions:
         
         elif command_lower == 'db':
             try:
-                all_users = database.get_all_users()
+                all_users = self.database.get_all_users()
                 online_count = len([u for u in all_users if u['is_online']])
-                response = f"DB Stats: {len(all_users)} total users, {online_count} online, DB: {database.db_path}"
+                response = f"DB Stats: {len(all_users)} total users, {online_count} online, DB: {self.database.db_path}"
                 self.message_service.send_private(username, response)
             except Exception as e:
                 self.message_service.send_private(username, f"DB error: {str(e)}")
@@ -100,8 +102,8 @@ class Actions:
             self.message_service.send_private(username, response)
         
         elif command_lower == 'status':
-            online_users = database.get_online_users()
-            all_users = database.get_all_users()
+            online_users = self.database.get_online_users()
+            all_users = self.database.get_all_users()
             
             status_lines = [
                 f"System Status:",
@@ -122,7 +124,7 @@ class Actions:
             error_msg = f"Unknown debug command '{command_lower}'. Available: {', '.join(available)}. Use '@debug help' for details."
             self.message_service.send_private(username, error_msg)
 
-    def handle_aipm_command(self, database, username, command):
+    def handle_aipm_command(self, username, command):
         """Handle @aipm commands - AI INQUIRIES ONLY"""
         
         # If empty command, show help

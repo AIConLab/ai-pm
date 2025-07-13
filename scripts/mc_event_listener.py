@@ -6,10 +6,7 @@ import os
 import re
 import tomllib
 from mc_actions import Actions
-from mc_database import Database
 
-LOG_PATH = "/mc-data/logs/latest.log"
-ADMIN_USERS = ["Loopking", "BT1013", "jc_cr"]
 
 CHAT_PATTERN = r'\[.*?\] \[Async Chat Thread.*?\]: <(\w+)> (.*)'
 AIPM_PATTERN = r'@aipm\s*(.*)'  # Added missing pattern
@@ -25,30 +22,26 @@ def load_config(config_path="config.toml"):
     with open(config_path, 'rb') as f:
         return tomllib.load(f)
 
-def handle_player_join(db, actions, username, config):
-    """Handle player join event"""
-    print(f"🎮 Player joined: {username}")
-    db.add_user(username)
-    db.set_online(username, True)
-    
-    # Send welcome for team members
-    if username in config["aipm_team"]["members"]:
-        actions.get_ai_welcome_greeting(username=username)
+def is_admin_user(username: str, config: dict) -> bool:
+    return username in config["minecraft"]["admins"]
 
-def handle_player_leave(db, username):
-    """Handle player leave event"""
-    print(f"👋 Player left: {username}")
-    db.set_online(username, False)
+def is_in_aipm_team(username: str, config: dict) -> bool:
+    return username in config["aipm_team"]["members"]
+
 
 def main():
     print("🤗 Starting event listener service 🤗")
     
     try:
         actions = Actions()
-        db = Database()
         config = load_config()
-        
+
+        LOG_PATH = config["minecraft"]["log_path"] 
+
+
         # Start tail process for log monitoring
+        # We use this since minecraft makes a new log file everyday.
+        # Popen we can moniter even if new file is made
         tail_process = subprocess.Popen(
             ['tail', '-F', '-n', '0', LOG_PATH],
             stdout=subprocess.PIPE,
@@ -67,14 +60,17 @@ def main():
                 join_match = re.search(JOIN_PATTERN, line)
                 if join_match:
                     username = join_match.group(1)
-                    handle_player_join(db, actions, username, config)
+                    if is_in_aipm_team(username, config):
+                        actions.handle_player_join(username)
                     continue
                 
                 # Handle player leaves
                 leave_match = re.search(LEAVE_PATTERN, line)
                 if leave_match:
                     username = leave_match.group(1)
-                    handle_player_leave(db, username)
+
+                    if is_in_aipm_team(username, config):
+                        actions.handle_player_leave(username)
                     continue
                 
                 # Handle chat messages (both @debug and @aipm)
@@ -85,22 +81,24 @@ def main():
                     
                     # Check for @debug commands first (admin only)
                     debug_cmd_match = re.search(DEBUG_PATTERN, message)
-                    if debug_cmd_match and username in ADMIN_USERS:
+                    if debug_cmd_match and is_admin_user(username, config):
                         command_text = debug_cmd_match.group(1).strip()
                         print(f"🔧 @debug command from {username}: '{command_text}'")
-                        actions.handle_debug_command(db, username, command_text)
+                        actions.handle_debug_command(username, command_text)
                         continue
                     
                     # Check for @aipm commands (team members only)
                     aipm_cmd_match = re.search(AIPM_PATTERN, message)
-                    if aipm_cmd_match and username in config["aipm_team"]["members"]:
+                    if aipm_cmd_match and is_in_aipm_team(username, config):
                         command_text = aipm_cmd_match.group(1).strip()
                         print(f"🤖 @aipm command from {username}: '{command_text}'")
-                        actions.handle_aipm_command(db, username, command_text)
+                        actions.handle_aipm_command(username, command_text)
                         continue
+
         
     except KeyboardInterrupt:
         print("\n🛑 Stopping...")
+
     except Exception as e:
         print(f"❌ Error: {e}")
     finally:
