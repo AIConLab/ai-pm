@@ -2,6 +2,7 @@
 # File: mc_game_query.py
 # Desc: Code to query game state and get information for players in the AIPM team to feed to AI agents
 
+import os
 import time
 import nbtlib
 from pathlib import Path
@@ -11,13 +12,19 @@ from typing import List
 from mc_database import Database
 from rcon_client import RCONClient
 
-def load_config(config_path="config.toml"):
-    """Load all params from config file"""
+def load_config(config_path="/app/config.toml"):
+    """Load all params from config file with better error handling"""
     if not os.path.exists(config_path):
         raise FileNotFoundError(f"Config file {config_path} not found")
     
-    with open(config_path, 'rb') as f:
-        return tomllib.load(f)
+    try:
+        with open(config_path, 'rb') as f:
+            return tomllib.load(f)
+    except tomllib.TOMLDecodeError as e:
+        raise ValueError(f"TOML parsing error in {config_path}: {str(e)}") from e
+    except Exception as e:
+        # Catch any other file reading errors
+        raise RuntimeError(f"Failed to read config file {config_path}: {str(e)}") from e
 
 def get_server_players(rcon_client):
     """Get list of players currently on server"""
@@ -85,18 +92,18 @@ def get_player_inventory_from_nbt(username):
         return {}
 
 
-def sync_server_data(db, rcon, aipm_team: List[str]):
+def sync_server_data(db, rcon, aimp_team: List[str]):
     """Sync only AIPM team players with database"""
     try:
         # Get current server players
         all_server_players = set(get_server_players(rcon))
         
         # Filter for players in AIPM team only
-        aipm_team_set = set(aipm_team) 
+        aipm_team_set = set(aimp_team) 
         server_players = all_server_players & aipm_team_set
         
         # Delete players from database who are not currently in AIPM team
-        deleted_count = db.delete_users_not_in_list(aipm_team)
+        deleted_count = db.delete_users_not_in_list(aimp_team)
         if deleted_count > 0:
             print(f"Removed {deleted_count} users not in AIPM team")
         
@@ -136,9 +143,16 @@ def main():
     try:
         print("🔄 Starting periodic query service")
         
+        # Load config with better error handling
+        print("📄 Loading configuration...")
+        config = load_config()
+        print("✅ Configuration loaded successfully")
+        
+        # Initialize database and RCON
+        print("🔧 Initializing database and RCON...")
         db = Database()
         rcon = RCONClient()
-        config = load_config()
+        print("✅ Database and RCON initialized")
         
         if not rcon.password:
             print("❌ No RCON password found, exiting")
@@ -153,10 +167,31 @@ def main():
 
     except KeyboardInterrupt:
         print("\n🛑 Stopping query service...")
+        
+    except FileNotFoundError as e:
+        print(f"❌ File Error: {e}")
+        return 1
+        
+    except ValueError as e:
+        # This will catch our TOML parsing errors with detailed info
+        print(f"❌ Configuration Error: {e}")
+        return 1
+        
+    except RuntimeError as e:
+        # This will catch other config loading errors
+        print(f"❌ Runtime Error: {e}")
+        return 1
+        
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"❌ Unexpected Error: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
+        
     finally:
         print("✅ Query service stopped")
 
 if __name__ == "__main__":
-    main()
+    exit_code = main()
+    if exit_code:
+        sys.exit(exit_code)

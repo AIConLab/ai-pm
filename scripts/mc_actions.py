@@ -123,31 +123,34 @@ class Actions:
             error_msg = f"Unknown debug command '{command_lower}'. Available: {', '.join(available)}. Use '@debug help' for details."
             self.message_service.send_private(username, error_msg)
 
+
     def handle_aipm_command(self, username, command):
         """Handle @aipm commands - AI INQUIRIES ONLY"""
 
-
         help_message = """AIPM Assistant:
-I'm your AI project manager! Ask me:
-• Minecraft questions: "how do I craft redstone?"
-• Strategy advice: "what should we build first?"  
-• Project management: "how should we organize our team?"
-• Building tips: "best materials for a castle?"
+    I'm your AI project manager! Ask me:
+    • Minecraft questions: "how do I craft redstone?"
+    • Strategy advice: "what should we build first?"  
+    • Project management: "how should we organize our team?"
+    • Building tips: "best materials for a castle?"
 
-Just type: @aipm [your question]"""
-        
-        # If empty command, show help
-        if not command.strip():
+    Just type your question after the command!"""
+
+        command_clean = command.lower().strip()
+
+        # Handle empty commands
+        if not command_clean:
+            self.message_service.send_private(username, "How can I help? Send your question after the command.")
+            return
+
+        # Handle help requests - FIX: Use string comparison, not list
+        if command_clean == "help":
             self.message_service.send_private(username, help_message)
             return
-        
-        # Check if it's a help request
-        if command.lower().strip() in ['help', 'help me']:
-            self.message_service.send_private(username, help_message)
-            return
-        
-        # Everything else goes to AI
+
+        # All other commands go to AI
         self.get_ai_pm_response(username=username, command=command)
+        
 
     def get_ai_welcome_greeting(self, username="player"):
         """Generate and broadcast AI welcome message"""
@@ -171,14 +174,11 @@ Just type: @aipm [your question]"""
         except Exception as e:
             print(f"❌ Error in ai_welcome_greeting: {e}")
 
+
     def get_ai_pm_response(self, username="player", command=""):
         """Generate and send private AI response"""
         try:
             print(f"🤖 Processing @aipm command from {username}: '{command}'")
-            
-            if not command:
-                self.message_service.send_private(username, f"How can I help? Send a msg via @aipm MSG")
-                return
             
             agent = Agent(
                 name="MinecraftProjectManager", 

@@ -7,20 +7,25 @@ import re
 import tomllib
 from mc_actions import Actions
 
-
 CHAT_PATTERN = r'\[.*?\] \[Async Chat Thread.*?\]: <(\w+)> (.*)'
-AIPM_PATTERN = r'@aipm\s*(.*)'  # Added missing pattern
+AIPM_PATTERN = r'@aipm\s*(.*)'
 DEBUG_PATTERN = r'@debug\s*(.*)'
 JOIN_PATTERN = r'\[.*?\] \[Server thread/INFO\]: (\w+) joined the game'
 LEAVE_PATTERN = r'\[.*?\] \[Server thread/INFO\]: (\w+) left the game'
 
 def load_config(config_path="/app/config.toml"):
-    """Load all params from config file"""
+    """Load all params from config file with better error handling"""
     if not os.path.exists(config_path):
         raise FileNotFoundError(f"Config file {config_path} not found")
     
-    with open(config_path, 'rb') as f:
-        return tomllib.load(f)
+    try:
+        with open(config_path, 'rb') as f:
+            return tomllib.load(f)
+    except tomllib.TOMLDecodeError as e:
+        raise ValueError(f"TOML parsing error in {config_path}: {str(e)}") from e
+    except Exception as e:
+        # Catch any other file reading errors
+        raise RuntimeError(f"Failed to read config file {config_path}: {str(e)}") from e
 
 
 def is_admin_user(username: str, config: dict) -> bool:
@@ -28,22 +33,33 @@ def is_admin_user(username: str, config: dict) -> bool:
 
 
 def is_in_aipm_team(username: str, config: dict) -> bool:
-    return username in config["aipm_team"]["members"]
+    return username in config["aipm"]["members"]
 
 
 def main():
     print("🤗 Starting event listener service 🤗")
     
     try:
-        actions = Actions()
+        # Load config with better error handling
+        print("📄 Loading configuration...")
         config = load_config()
+        print("✅ Configuration loaded successfully")
+        
+        # Initialize actions
+        print("🔧 Initializing actions...")
+        actions = Actions()
+        print("✅ Actions initialized")
 
-        LOG_PATH = config["minecraft"]["log_path"] 
+        LOG_PATH = config["minecraft"]["log_path"]
+        print(f"📁 Log path: {LOG_PATH}")
 
+        # Check if log file exists
+        if not os.path.exists(LOG_PATH):
+            raise FileNotFoundError(f"Minecraft log file not found: {LOG_PATH}")
 
         # Start tail process for log monitoring
         # We use this since minecraft makes a new log file everyday.
-        # Popen we can moniter even if new file is made
+        # Popen we can monitor even if new file is made
         tail_process = subprocess.Popen(
             ['tail', '-F', '-n', '0', LOG_PATH],
             stdout=subprocess.PIPE,
@@ -103,8 +119,25 @@ def main():
     except KeyboardInterrupt:
         print("\n🛑 Stopping...")
 
+    except FileNotFoundError as e:
+        print(f"❌ File Error: {e}")
+        sys.exit(1)
+        
+    except ValueError as e:
+        # This will catch our TOML parsing errors with detailed info
+        print(f"❌ Configuration Error: {e}")
+        sys.exit(1)
+        
+    except RuntimeError as e:
+        # This will catch other config loading errors
+        print(f"❌ Runtime Error: {e}")
+        sys.exit(1)
+
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"❌ Unexpected Error: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
     finally:
         if 'tail_process' in locals():

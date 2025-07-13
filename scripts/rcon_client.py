@@ -1,4 +1,5 @@
 from mcrcon import MCRcon
+import re
 
 class RCONClient:
     def __init__(self, host="minecraft", port=25575, password_file="/mc-data/.rcon-cli.env"):
