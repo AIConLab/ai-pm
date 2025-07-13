@@ -126,19 +126,9 @@ class Actions:
 
     def handle_aipm_command(self, username, command):
         """Handle @aipm commands - AI INQUIRIES ONLY"""
-        
-        # If empty command, show help
-        if not command.strip():
-            help_message = """AIPM Assistant Help:
-• Ask me anything about Minecraft, strategy, or building!
-• Examples: "@aipm how do I build a castle?", "@aipm what's the best mining level?", "@aipm help me plan our build"
-• I'm your AI project manager and Minecraft expert."""
-            self.message_service.send_private(username, help_message)
-            return
-        
-        # Check if it's a help request
-        if command.lower().strip() in ['help', 'help me']:
-            help_message = """AIPM Assistant:
+
+
+        help_message = """AIPM Assistant:
 I'm your AI project manager! Ask me:
 • Minecraft questions: "how do I craft redstone?"
 • Strategy advice: "what should we build first?"  
@@ -146,6 +136,14 @@ I'm your AI project manager! Ask me:
 • Building tips: "best materials for a castle?"
 
 Just type: @aipm [your question]"""
+        
+        # If empty command, show help
+        if not command.strip():
+            self.message_service.send_private(username, help_message)
+            return
+        
+        # Check if it's a help request
+        if command.lower().strip() in ['help', 'help me']:
             self.message_service.send_private(username, help_message)
             return
         

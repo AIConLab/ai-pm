@@ -137,3 +137,56 @@ class Database:
                 AND datetime(last_updated) < datetime('now', '-{} hours')
             """.format(hours))
             return cursor.rowcount
+
+    def delete_user(self, username):
+        """Delete user and all associated data from database"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Get user_id first
+            cursor.execute("SELECT user_id FROM Users WHERE minecraft_username = ?", (username,))
+            result = cursor.fetchone()
+            if not result:
+                return 0  # User doesn't exist
+            
+            user_id = result['user_id']
+            
+            # Delete inventory records first (foreign key constraint)
+            cursor.execute("DELETE FROM UserInventory WHERE user_id = ?", (user_id,))
+            
+            # Delete user record
+            cursor.execute("DELETE FROM Users WHERE user_id = ?", (user_id,))
+            
+            return cursor.rowcount  # Returns 1 if user was deleted, 0 if not found
+
+    def delete_users_not_in_list(self, allowed_usernames):
+        """Delete all users not in the allowed list"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            if not allowed_usernames:
+                # If no allowed users, delete everyone
+                cursor.execute("DELETE FROM UserInventory")
+                cursor.execute("DELETE FROM Users")
+                return cursor.rowcount
+            
+            # Create placeholders for the IN clause
+            placeholders = ','.join('?' * len(allowed_usernames))
+            
+            # Get user_ids to delete
+            cursor.execute(f"""
+                SELECT user_id FROM Users 
+                WHERE minecraft_username NOT IN ({placeholders})
+            """, allowed_usernames)
+            
+            user_ids_to_delete = [row['user_id'] for row in cursor.fetchall()]
+            
+            if user_ids_to_delete:
+                # Delete inventory records first
+                placeholders_ids = ','.join('?' * len(user_ids_to_delete))
+                cursor.execute(f"DELETE FROM UserInventory WHERE user_id IN ({placeholders_ids})", user_ids_to_delete)
+                
+                # Delete user records
+                cursor.execute(f"DELETE FROM Users WHERE user_id IN ({placeholders_ids})", user_ids_to_delete)
+            
+            return len(user_ids_to_delete)

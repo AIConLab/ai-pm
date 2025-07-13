@@ -22,8 +22,10 @@ def load_config(config_path="config.toml"):
     with open(config_path, 'rb') as f:
         return tomllib.load(f)
 
+
 def is_admin_user(username: str, config: dict) -> bool:
     return username in config["minecraft"]["admins"]
+
 
 def is_in_aipm_team(username: str, config: dict) -> bool:
     return username in config["aipm_team"]["members"]
@@ -95,12 +97,15 @@ def main():
                         actions.handle_aipm_command(username, command_text)
                         continue
 
+                    # TODO: round start event, round progress event
+
         
     except KeyboardInterrupt:
         print("\n🛑 Stopping...")
 
     except Exception as e:
         print(f"❌ Error: {e}")
+
     finally:
         if 'tail_process' in locals():
             tail_process.terminate()

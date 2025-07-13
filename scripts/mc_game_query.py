@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-# mc_game_query.py - Periodic RCON query service
+# File: mc_game_query.py
+# Desc: Code to query game state and get information for players in the AIPM team to feed to AI agents
+
 import time
 import nbtlib
 from pathlib import Path
 import tomllib
+from typing import List 
 
 from mc_database import Database
 from rcon_client import RCONClient
@@ -81,21 +84,32 @@ def get_player_inventory_from_nbt(username):
         print(f"Error reading NBT for {username}: {e}")
         return {}
 
-def sync_server_data(db, rcon):
-    """Sync all online players with database"""
+
+def sync_server_data(db, rcon, aipm_team: List[str]):
+    """Sync only AIPM team players with database"""
     try:
         # Get current server players
-        server_players = set(get_server_players(rcon))
+        all_server_players = set(get_server_players(rcon))
         
-        # Get database online players
-        db_online = {user['minecraft_username'] for user in db.get_online_users()}
+        # Filter for players in AIPM team only
+        aipm_team_set = set(aipm_team) 
+        server_players = all_server_players & aipm_team_set
         
-        # Handle disconnected players (in DB but not on server)
+        # Delete players from database who are not currently in AIPM team
+        deleted_count = db.delete_users_not_in_list(aipm_team)
+        if deleted_count > 0:
+            print(f"Removed {deleted_count} users not in AIPM team")
+        
+        # Get database online players (filtered to AIPM team)
+        db_online = {user['minecraft_username'] for user in db.get_online_users() 
+                    if user['minecraft_username'] in aipm_team_set}
+        
+        # Handle disconnected AIPM players (in DB but not on server)
         for username in db_online - server_players:
             db.set_online(username, False)
             print(f"Set {username} offline (not on server)")
         
-        # Handle online players
+        # Get information for online AIPM team members only
         for username in server_players:
             db.add_user(username)
             db.set_online(username, True)
@@ -111,10 +125,11 @@ def sync_server_data(db, rcon):
                 db.update_inventory(username, item_type, quantity)
         
         if server_players:
-            print(f"Synced {len(server_players)} online players")
+            print(f"Synced {len(server_players)} AIPM team members")
         
     except Exception as e:
         print(f"Sync error: {e}")
+
 
 def main():
     
@@ -133,8 +148,9 @@ def main():
         print(f"📊 Querying server every {interval} seconds...")
 
         while True:
-            sync_server_data(db, rcon)
+            sync_server_data(db, rcon, config["aipm"]["members"])
             time.sleep(interval)
+
     except KeyboardInterrupt:
         print("\n🛑 Stopping query service...")
     except Exception as e:
