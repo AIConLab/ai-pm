@@ -8,6 +8,7 @@ import nbtlib
 from pathlib import Path
 import tomllib
 from typing import List 
+import sys
 
 from mc_database import Database
 from rcon_client import RCONClient
