@@ -1,11 +1,12 @@
-# mc_actions
-# AI imports
+# File:mc_actions
+# Desc: Class for defining expected actions for game events
 from agents import Agent, Runner
-
-# MC imports
 import re
+
 from rcon_client import MessageService, RCONClient
 from mc_database import Database
+from utils import load_config
+
 
 
 class Actions:
@@ -15,6 +16,7 @@ class Actions:
         self.rcon_client = RCONClient(password_file="/mc-data/.rcon-cli.env")
         self.message_service = MessageService(self.rcon_client)
         self.database = Database(db_path="/app/database/aipm.db")
+        self.config = load_config("/app/config.toml")
 
     def handle_player_join(self, username):
         """Handle player join event"""
@@ -152,29 +154,6 @@ class Actions:
         self.get_ai_pm_response(username=username, command=command)
         
 
-    def get_ai_welcome_greeting(self, username="player"):
-        """Generate and broadcast AI welcome message"""
-        try:
-            print(f"🎮 Processing welcome for {username}")
-            
-            agent = Agent(
-                name="TownCrier", 
-                instructions="""You are a medieval town crier. Create SHORT, enthusiastic welcome messages for the arrival of your majesty, the greatest warrior above the pleebs, a god amongst men. Keep messages under 100 words, avoid special formatting, and use simple punctuation only."""
-            )
-            
-            result = Runner.run_sync(agent, f"Make a brief celebratory announcement that {username} has joined the server")
-            print(f"🤖 AI Result: {result.final_output}")
-            
-            # Broadcast the welcome
-            if self.message_service.send_broadcast(result.final_output):
-                print("✅ Welcome message broadcasted successfully!")
-            else:
-                print("❌ Failed to broadcast welcome message")
-                
-        except Exception as e:
-            print(f"❌ Error in ai_welcome_greeting: {e}")
-
-
     def get_ai_pm_response(self, username="player", command=""):
         """Generate and send private AI response"""
         try:
@@ -182,14 +161,7 @@ class Actions:
             
             agent = Agent(
                 name="MinecraftProjectManager", 
-                instructions="""You are an AI project manager for a Minecraft building team. Help players with:
-- Minecraft gameplay, crafting, and building advice
-- Project management and team coordination  
-- Strategic planning for builds
-- Resource management tips
-- Construction techniques and tips
-
-Keep responses under 150 words, avoid special formatting, and be helpful and encouraging. You're managing a research study about AI project management in Minecraft."""
+                instructions=self.config["aipm"]["manager_agent"]["helper_instructions"]
             )
             
             result = Runner.run_sync(agent, f"Player {username} asks: {command}")

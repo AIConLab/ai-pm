@@ -6,26 +6,13 @@ import os
 import time
 import nbtlib
 from pathlib import Path
-import tomllib
 from typing import List 
 import sys
 
 from mc_database import Database
 from rcon_client import RCONClient
+from utils import load_config
 
-def load_config(config_path="/app/config.toml"):
-    """Load all params from config file with better error handling"""
-    if not os.path.exists(config_path):
-        raise FileNotFoundError(f"Config file {config_path} not found")
-    
-    try:
-        with open(config_path, 'rb') as f:
-            return tomllib.load(f)
-    except tomllib.TOMLDecodeError as e:
-        raise ValueError(f"TOML parsing error in {config_path}: {str(e)}") from e
-    except Exception as e:
-        # Catch any other file reading errors
-        raise RuntimeError(f"Failed to read config file {config_path}: {str(e)}") from e
 
 def get_server_players(rcon_client):
     """Get list of players currently on server"""
