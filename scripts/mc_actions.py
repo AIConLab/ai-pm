@@ -7,8 +7,6 @@ from rcon_client import MessageService, RCONClient
 from mc_database import Database
 from utils import load_config
 
-
-
 class Actions:
     """Business logic for AI actions"""
     
@@ -124,7 +122,6 @@ class Actions:
             available = list(debug_commands.keys())
             error_msg = f"Unknown debug command '{command_lower}'. Available: {', '.join(available)}. Use '@debug help' for details."
             self.message_service.send_private(username, error_msg)
-
 
     def handle_aipm_command(self, username, command):
         """Handle @aipm commands - AI INQUIRIES ONLY"""

@@ -8,7 +8,6 @@ from contextlib import contextmanager
 class Database:
     def __init__(self, db_path="/app/database/aipm.db"):
         self.db_path = db_path
-        self.init_tables()
     
     @contextmanager
     def get_connection(self):
@@ -190,3 +189,42 @@ class Database:
                 cursor.execute(f"DELETE FROM Users WHERE user_id IN ({placeholders_ids})", user_ids_to_delete)
             
             return len(user_ids_to_delete)
+
+    def clear_user_inventory(self, username):
+        """Clear all inventory items for a specific user"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Get user_id first
+            cursor.execute("SELECT user_id FROM Users WHERE minecraft_username = ?", (username,))
+            result = cursor.fetchone()
+            if not result:
+                return 0
+            
+            user_id = result['user_id']
+            cursor.execute("DELETE FROM UserInventory WHERE user_id = ?", (user_id,))
+            return cursor.rowcount
+
+    def replace_user_inventory(self, username, inventory_dict):
+        """Replace entire inventory for a user (clear old + add new)"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Get user_id first
+            cursor.execute("SELECT user_id FROM Users WHERE minecraft_username = ?", (username,))
+            result = cursor.fetchone()
+            if not result:
+                return
+            
+            user_id = result['user_id']
+            
+            # Clear existing inventory
+            cursor.execute("DELETE FROM UserInventory WHERE user_id = ?", (user_id,))
+            
+            # Add new inventory items
+            for item_type, quantity in inventory_dict.items():
+                cursor.execute("""
+                    INSERT INTO UserInventory (user_id, item_type, quantity, last_updated)
+                    VALUES (?, ?, ?, ?)
+                """, (user_id, item_type, quantity, datetime.now()))
+
