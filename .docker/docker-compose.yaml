@@ -30,6 +30,16 @@ services:
       - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
       command: bash -c "python3 /app/scripts/mc_game_query.py"
 
+  nbt:
+    extends: py-base
+    volumes:
+      - ../scripts:/app/scripts
+      - ../data:/app/database
+      - ../config.toml:/app/config.toml
+      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+    command: bash -c "python3 /app/scripts/nbt_debug.py"
+
+
   # Minecraft server service
   minecraft:
     image: itzg/minecraft-server:latest
