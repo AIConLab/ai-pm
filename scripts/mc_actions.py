@@ -1,5 +1,6 @@
 # File:mc_actions
-# Desc: Class for defining expected actions for game events
+# Desc: Class for defining expected actions for game events. Is the central locaiton for database operations.
+
 from agents import Agent, Runner
 import re
 
