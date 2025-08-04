@@ -96,13 +96,14 @@ def process_structure(db, structure_id, complete_file, init_file):
         import traceback
         traceback.print_exc()
 
-def main():
+
+if __name__ == "__main__":
+
     print("🏗️  Starting Build Recipe Table Population")
     
     # Initialize database
     db = Database()
     db.init_tables()
-    print("✅ Database initialized")
     
     # Clear existing build recipes (for clean testing)
     with db.get_connection() as conn:
@@ -110,38 +111,8 @@ def main():
         cursor.execute("DELETE FROM BuildRecipes")
         print("🧹 Cleared existing build recipes")
     
-    # Process structure 1
-    structure_1_complete = "/mc-data/plugins/WorldEdit/schematics/1_complete.schem"
-    structure_1_init = "/mc-data/plugins/WorldEdit/schematics/1_init.schem"
-    process_structure(db, 1, structure_1_complete, structure_1_init)
-    
-    # Verify results
-    with db.get_connection() as conn:
-        cursor = conn.cursor()
-        cursor.execute("""
-            SELECT structure_id, COUNT(*) as item_types, SUM(quantity) as total_blocks
-            FROM BuildRecipes 
-            GROUP BY structure_id
-        """)
-        
-        results = cursor.fetchall()
-        for row in results:
-            print(f"Structure {row['structure_id']} build recipe: {row['item_types']} item types, {row['total_blocks']} total blocks required")
-        
-        # Show sample recipes
-        cursor.execute("""
-            SELECT item_type, item_attributes, quantity 
-            FROM BuildRecipes 
-            WHERE structure_id = 1 
-            ORDER BY quantity DESC 
-            LIMIT 10
-        """)
-        
-        print("\nBuild recipe for Structure 1:")
-        for row in cursor.fetchall():
-            attrs = row['item_attributes'] or ''
-            print(f"  {row['item_type']}{attrs}: {row['quantity']}")
-
-
-if __name__ == "__main__":
-    main()
+    for i in range(1,13):
+        # Process structure 1
+        structure_complete = f"/mc-data/plugins/WorldEdit/schematics/{i}_complete.schem"
+        structure_init = f"/mc-data/plugins/WorldEdit/schematics/{i}_init.schem"
+        process_structure(db, i, structure_complete, structure_init)
