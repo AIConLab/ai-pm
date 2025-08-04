@@ -22,7 +22,7 @@ class Database:
         finally:
             conn.close()
 
-    def init_userdata_table(self):
+    def init_user_data_table(self):
         with self.get_connection() as conn:
             cursor = conn.cursor()
             
@@ -41,7 +41,7 @@ class Database:
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_username ON Users(minecraft_username)")
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_users_online ON Users(is_online)")
 
-    def init_userinventory_table(self):
+    def init_user_inventory_table(self):
         with self.get_connection() as conn:
             cursor = conn.cursor()
             
@@ -57,10 +57,28 @@ class Database:
                 )
             """)
 
+    def init_build_recipes_table(self):
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS BuildRecipes (
+                    recipe_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    structure_id INTEGER NOT NULL,
+                    item_type TEXT NOT NULL,
+                    item_attributes TEXT,
+                    quantity INTEGER NOT NULL,
+                    UNIQUE(structure_id, item_type, item_attributes)
+                )
+            """)
+            
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_build_recipes_structure ON BuildRecipes(structure_id)")
+
     def init_tables(self):
         try:
-            self.init_userdata_table()
-            self.init_userinventory_table()
+            self.init_user_data_table()
+            self.init_user_inventory_table()
+            self.init_build_recipes_table()
         except Exception as e:
             raise e
 

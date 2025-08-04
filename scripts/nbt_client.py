@@ -1,3 +1,6 @@
+# file: nbt_client.py
+# desc: read nbt files
+
 import nbtlib
 from typing import Dict, List, Any, Optional
 import os
