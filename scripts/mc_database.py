@@ -4,6 +4,10 @@
 import sqlite3
 from datetime import datetime
 from contextlib import contextmanager
+import json
+import os
+
+
 
 class Database:
     def __init__(self, db_path="/app/database/aipm.db"):
@@ -81,6 +85,54 @@ class Database:
             self.init_build_recipes_table()
         except Exception as e:
             raise e
+
+    def export_table_to_json(self, table_name, output_dir="/app/exports"):
+        """Export a single table to JSON file"""
+        # Create output directory if it doesn't exist
+        os.makedirs(output_dir, exist_ok=True)
+        
+        output_file = os.path.join(output_dir, f"{table_name.lower()}.json")
+        
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Get all data from table
+            cursor.execute(f"SELECT * FROM {table_name}")
+            rows = cursor.fetchall()
+            
+            if not rows:
+                print(f"⚠️  Table {table_name} is empty")
+                # Still create empty JSON file
+                with open(output_file, 'w', encoding='utf-8') as jsonfile:
+                    json.dump([], jsonfile, indent=2)
+                return output_file
+            
+            # Convert rows to list of dictionaries
+            data = [dict(row) for row in rows]
+            
+            # Write JSON with nice formatting
+            with open(output_file, 'w', encoding='utf-8') as jsonfile:
+                json.dump(data, jsonfile, indent=2, ensure_ascii=False)
+            
+            print(f"✅ Exported {len(rows)} rows from {table_name} to {output_file}")
+            return output_file
+
+    def export_all_tables_to_json(self, output_dir="/app/exports"):
+        """Export all tables to JSON files"""
+        tables = ['Users', 'UserInventory', 'BuildRecipes']
+        
+        print(f"📁 Exporting all tables to {output_dir}")
+        exported_files = []
+        
+        for table in tables:
+            try:
+                file_path = self.export_table_to_json(table, output_dir)
+                exported_files.append(file_path)
+            except Exception as e:
+                print(f"❌ Failed to export {table}: {e}")
+        
+        print(f"🎯 Export complete! Files: {len(exported_files)}")
+        return exported_files
 
 
 class UserDataService:

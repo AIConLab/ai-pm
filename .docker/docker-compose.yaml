@@ -40,6 +40,15 @@ services:
     command: bash -c "python3 /app/scripts/create_build_recipe_table.py"
 
 
+  export_tables:
+    extends: py-base
+    volumes:
+      - ../scripts:/app/scripts
+      - ../data:/app/database
+      - ../config.toml:/app/config.toml
+      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+    command: bash -c "python3 /app/scripts/export_tables.py"
+
   # Minecraft server service
   minecraft:
     image: itzg/minecraft-server:latest

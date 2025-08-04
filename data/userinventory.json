@@ -1,0 +1,65 @@
+[
+  {
+    "inventory_id": 5056,
+    "user_id": 1,
+    "item_type": "music_disc_creator",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193154"
+  },
+  {
+    "inventory_id": 5057,
+    "user_id": 1,
+    "item_type": "stone_bricks",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193377"
+  },
+  {
+    "inventory_id": 5058,
+    "user_id": 1,
+    "item_type": "smooth_stone",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193421"
+  },
+  {
+    "inventory_id": 5059,
+    "user_id": 1,
+    "item_type": "music_disc_precipice",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193443"
+  },
+  {
+    "inventory_id": 5060,
+    "user_id": 1,
+    "item_type": "light_gray_wool",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193459"
+  },
+  {
+    "inventory_id": 5061,
+    "user_id": 1,
+    "item_type": "villager_spawn_egg",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193476"
+  },
+  {
+    "inventory_id": 5062,
+    "user_id": 1,
+    "item_type": "waxed_weathered_copper",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193492"
+  },
+  {
+    "inventory_id": 5063,
+    "user_id": 1,
+    "item_type": "coal_block",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193515"
+  },
+  {
+    "inventory_id": 5064,
+    "user_id": 1,
+    "item_type": "sea_lantern",
+    "quantity": 1,
+    "last_updated": "2025-07-16 02:04:30.193549"
+  }
+]

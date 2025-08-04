@@ -1,0 +1,1150 @@
+[
+  {
+    "recipe_id": 200,
+    "structure_id": 1,
+    "item_type": "minecraft:oak_stairs",
+    "item_attributes": "[facing=south,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 201,
+    "structure_id": 1,
+    "item_type": "minecraft:oak_stairs",
+    "item_attributes": "[facing=east,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 202,
+    "structure_id": 1,
+    "item_type": "minecraft:light_gray_concrete",
+    "item_attributes": null,
+    "quantity": 25
+  },
+  {
+    "recipe_id": 203,
+    "structure_id": 1,
+    "item_type": "minecraft:oak_stairs",
+    "item_attributes": "[facing=west,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 204,
+    "structure_id": 1,
+    "item_type": "minecraft:oak_stairs",
+    "item_attributes": "[facing=north,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 205,
+    "structure_id": 1,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=false,south=false,waterlogged=false,west=false]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 206,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=true,waterlogged=false,west=false]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 207,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=false,waterlogged=false,west=true]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 208,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=false,south=true,waterlogged=false,west=true]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 209,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=true,waterlogged=false,west=false]",
+    "quantity": 6
+  },
+  {
+    "recipe_id": 210,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=false,waterlogged=false,west=false]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 211,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=false,south=false,waterlogged=false,west=true]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 212,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=false,waterlogged=false,west=false]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 213,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=false,waterlogged=false,west=true]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 214,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=false,waterlogged=false,west=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 215,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=false,south=true,waterlogged=false,west=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 216,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=true,waterlogged=false,west=true]",
+    "quantity": 8
+  },
+  {
+    "recipe_id": 217,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=true,waterlogged=false,west=false]",
+    "quantity": 9
+  },
+  {
+    "recipe_id": 218,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=true,waterlogged=false,west=true]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 219,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=false,waterlogged=false,west=true]",
+    "quantity": 8
+  },
+  {
+    "recipe_id": 220,
+    "structure_id": 2,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=true,waterlogged=false,west=true]",
+    "quantity": 9
+  },
+  {
+    "recipe_id": 221,
+    "structure_id": 2,
+    "item_type": "minecraft:stripped_oak_wood",
+    "item_attributes": "[axis=y]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 222,
+    "structure_id": 2,
+    "item_type": "minecraft:stripped_oak_wood",
+    "item_attributes": "[axis=x]",
+    "quantity": 6
+  },
+  {
+    "recipe_id": 223,
+    "structure_id": 2,
+    "item_type": "minecraft:stripped_oak_wood",
+    "item_attributes": "[axis=z]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 224,
+    "structure_id": 3,
+    "item_type": "minecraft:bricks",
+    "item_attributes": null,
+    "quantity": 13
+  },
+  {
+    "recipe_id": 225,
+    "structure_id": 3,
+    "item_type": "minecraft:heavy_weighted_pressure_plate",
+    "item_attributes": "[power=0]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 226,
+    "structure_id": 3,
+    "item_type": "minecraft:iron_door",
+    "item_attributes": "[facing=north,half=lower,hinge=left,open=false,powered=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 227,
+    "structure_id": 3,
+    "item_type": "minecraft:pale_oak_planks",
+    "item_attributes": null,
+    "quantity": 15
+  },
+  {
+    "recipe_id": 228,
+    "structure_id": 3,
+    "item_type": "minecraft:glass",
+    "item_attributes": null,
+    "quantity": 14
+  },
+  {
+    "recipe_id": 229,
+    "structure_id": 3,
+    "item_type": "minecraft:iron_door",
+    "item_attributes": "[facing=north,half=upper,hinge=left,open=false,powered=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 230,
+    "structure_id": 3,
+    "item_type": "minecraft:pale_oak_slab",
+    "item_attributes": "[type=double,waterlogged=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 231,
+    "structure_id": 3,
+    "item_type": "minecraft:pale_oak_slab",
+    "item_attributes": "[type=bottom,waterlogged=false]",
+    "quantity": 24
+  },
+  {
+    "recipe_id": 232,
+    "structure_id": 4,
+    "item_type": "minecraft:iron_block",
+    "item_attributes": null,
+    "quantity": 12
+  },
+  {
+    "recipe_id": 233,
+    "structure_id": 4,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=south,half=bottom,open=true,powered=true,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 234,
+    "structure_id": 4,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=east,half=bottom,open=true,powered=true,waterlogged=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 235,
+    "structure_id": 4,
+    "item_type": "minecraft:redstone_torch",
+    "item_attributes": "[lit=true]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 236,
+    "structure_id": 4,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=west,half=bottom,open=true,powered=true,waterlogged=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 237,
+    "structure_id": 4,
+    "item_type": "minecraft:iron_door",
+    "item_attributes": "[facing=north,half=lower,hinge=right,open=true,powered=true]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 238,
+    "structure_id": 4,
+    "item_type": "minecraft:orange_concrete",
+    "item_attributes": null,
+    "quantity": 19
+  },
+  {
+    "recipe_id": 239,
+    "structure_id": 4,
+    "item_type": "minecraft:iron_door",
+    "item_attributes": "[facing=north,half=upper,hinge=right,open=true,powered=true]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 240,
+    "structure_id": 4,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=east,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 6
+  },
+  {
+    "recipe_id": 241,
+    "structure_id": 4,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=north,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 12
+  },
+  {
+    "recipe_id": 242,
+    "structure_id": 5,
+    "item_type": "minecraft:light_gray_concrete",
+    "item_attributes": null,
+    "quantity": 16
+  },
+  {
+    "recipe_id": 243,
+    "structure_id": 5,
+    "item_type": "minecraft:iron_block",
+    "item_attributes": null,
+    "quantity": 49
+  },
+  {
+    "recipe_id": 244,
+    "structure_id": 5,
+    "item_type": "minecraft:iron_door",
+    "item_attributes": "[facing=west,half=lower,hinge=left,open=false,powered=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 245,
+    "structure_id": 5,
+    "item_type": "minecraft:pale_oak_trapdoor",
+    "item_attributes": "[facing=north,half=bottom,open=true,powered=false,waterlogged=false]",
+    "quantity": 18
+  },
+  {
+    "recipe_id": 246,
+    "structure_id": 5,
+    "item_type": "minecraft:stone_button",
+    "item_attributes": "[face=wall,facing=east,powered=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 247,
+    "structure_id": 5,
+    "item_type": "minecraft:iron_door",
+    "item_attributes": "[facing=west,half=upper,hinge=left,open=false,powered=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 248,
+    "structure_id": 5,
+    "item_type": "minecraft:stone_button",
+    "item_attributes": "[face=wall,facing=west,powered=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 249,
+    "structure_id": 5,
+    "item_type": "minecraft:glass",
+    "item_attributes": null,
+    "quantity": 1
+  },
+  {
+    "recipe_id": 250,
+    "structure_id": 5,
+    "item_type": "minecraft:deepslate_tile_stairs",
+    "item_attributes": "[facing=east,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 18
+  },
+  {
+    "recipe_id": 251,
+    "structure_id": 5,
+    "item_type": "minecraft:deepslate_tile_stairs",
+    "item_attributes": "[facing=west,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 18
+  },
+  {
+    "recipe_id": 252,
+    "structure_id": 5,
+    "item_type": "minecraft:end_rod",
+    "item_attributes": "[facing=east]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 253,
+    "structure_id": 5,
+    "item_type": "minecraft:end_rod",
+    "item_attributes": "[facing=west]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 254,
+    "structure_id": 5,
+    "item_type": "minecraft:pale_oak_trapdoor",
+    "item_attributes": "[facing=south,half=bottom,open=true,powered=false,waterlogged=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 255,
+    "structure_id": 6,
+    "item_type": "minecraft:light_gray_concrete",
+    "item_attributes": null,
+    "quantity": 25
+  },
+  {
+    "recipe_id": 256,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=tall,north=none,south=tall,up=true,waterlogged=false,west=none]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 257,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=none,north=none,south=tall,up=true,waterlogged=false,west=tall]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 258,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=low,north=tall,south=tall,up=true,waterlogged=false,west=none]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 259,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=none,north=tall,south=tall,up=true,waterlogged=false,west=low]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 260,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=low,north=tall,south=none,up=true,waterlogged=false,west=none]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 261,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=none,north=tall,south=none,up=true,waterlogged=false,west=low]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 262,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=tall,north=none,south=none,up=false,waterlogged=false,west=tall]",
+    "quantity": 12
+  },
+  {
+    "recipe_id": 263,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=tall,north=none,south=low,up=true,waterlogged=false,west=tall]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 264,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=none,north=tall,south=tall,up=false,waterlogged=false,west=none]",
+    "quantity": 6
+  },
+  {
+    "recipe_id": 265,
+    "structure_id": 6,
+    "item_type": "minecraft:waxed_oxidized_cut_copper_stairs",
+    "item_attributes": "[facing=north,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 266,
+    "structure_id": 6,
+    "item_type": "minecraft:brick_wall",
+    "item_attributes": "[east=none,north=tall,south=none,up=true,waterlogged=false,west=none]",
+    "quantity": 8
+  },
+  {
+    "recipe_id": 267,
+    "structure_id": 6,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=north,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 7
+  },
+  {
+    "recipe_id": 268,
+    "structure_id": 6,
+    "item_type": "minecraft:polished_diorite_stairs",
+    "item_attributes": "[facing=south,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 7
+  },
+  {
+    "recipe_id": 269,
+    "structure_id": 6,
+    "item_type": "minecraft:dark_oak_hanging_sign",
+    "item_attributes": "[attached=false,rotation=0,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 270,
+    "structure_id": 6,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=south,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 8
+  },
+  {
+    "recipe_id": 271,
+    "structure_id": 6,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=east,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 6
+  },
+  {
+    "recipe_id": 272,
+    "structure_id": 7,
+    "item_type": "minecraft:peony",
+    "item_attributes": "[half=lower]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 273,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_planks",
+    "item_attributes": null,
+    "quantity": 8
+  },
+  {
+    "recipe_id": 274,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=false,waterlogged=false,west=true]",
+    "quantity": 10
+  },
+  {
+    "recipe_id": 275,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence_gate",
+    "item_attributes": "[facing=north,in_wall=false,open=false,powered=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 276,
+    "structure_id": 7,
+    "item_type": "minecraft:stripped_oak_wood",
+    "item_attributes": "[axis=y]",
+    "quantity": 20
+  },
+  {
+    "recipe_id": 277,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_trapdoor",
+    "item_attributes": "[facing=east,half=bottom,open=true,powered=false,waterlogged=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 278,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_trapdoor",
+    "item_attributes": "[facing=west,half=bottom,open=true,powered=false,waterlogged=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 279,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=true,waterlogged=false,west=false]",
+    "quantity": 10
+  },
+  {
+    "recipe_id": 280,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_trapdoor",
+    "item_attributes": "[facing=south,half=bottom,open=true,powered=false,waterlogged=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 281,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence_gate",
+    "item_attributes": "[facing=west,in_wall=false,open=false,powered=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 282,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence_gate",
+    "item_attributes": "[facing=east,in_wall=false,open=false,powered=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 283,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_trapdoor",
+    "item_attributes": "[facing=north,half=bottom,open=true,powered=false,waterlogged=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 284,
+    "structure_id": 7,
+    "item_type": "minecraft:peony",
+    "item_attributes": "[half=upper]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 285,
+    "structure_id": 7,
+    "item_type": "minecraft:lantern",
+    "item_attributes": "[hanging=true,waterlogged=false]",
+    "quantity": 12
+  },
+  {
+    "recipe_id": 286,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=true,waterlogged=false,west=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 287,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=false,south=true,waterlogged=false,west=true]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 288,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=false,waterlogged=false,west=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 289,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=false,waterlogged=false,west=true]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 290,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=east,half=bottom,shape=outer_right,waterlogged=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 291,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=south,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 9
+  },
+  {
+    "recipe_id": 292,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=west,half=bottom,shape=outer_left,waterlogged=false]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 293,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=east,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 9
+  },
+  {
+    "recipe_id": 294,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=west,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 9
+  },
+  {
+    "recipe_id": 295,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=east,half=bottom,shape=outer_left,waterlogged=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 296,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=north,half=bottom,shape=straight,waterlogged=false]",
+    "quantity": 9
+  },
+  {
+    "recipe_id": 297,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=west,half=bottom,shape=outer_right,waterlogged=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 298,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=south,half=bottom,shape=outer_left,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 299,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=true,waterlogged=false,west=true]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 300,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=false,waterlogged=false,west=true]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 301,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=true,waterlogged=false,west=true]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 302,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=true,waterlogged=false,west=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 303,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=true,waterlogged=false,west=true]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 304,
+    "structure_id": 7,
+    "item_type": "minecraft:oak_trapdoor",
+    "item_attributes": "[facing=west,half=top,open=false,powered=false,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 305,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=north,half=bottom,shape=outer_right,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 306,
+    "structure_id": 7,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=north,half=bottom,shape=outer_left,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 307,
+    "structure_id": 8,
+    "item_type": "minecraft:brick_stairs",
+    "item_attributes": "[facing=west,half=bottom,shape=inner_right,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 308,
+    "structure_id": 8,
+    "item_type": "minecraft:brick_stairs",
+    "item_attributes": "[facing=south,half=bottom,shape=inner_right,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 309,
+    "structure_id": 8,
+    "item_type": "minecraft:brick_stairs",
+    "item_attributes": "[facing=east,half=bottom,shape=inner_right,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 310,
+    "structure_id": 8,
+    "item_type": "minecraft:air",
+    "item_attributes": null,
+    "quantity": 74
+  },
+  {
+    "recipe_id": 311,
+    "structure_id": 8,
+    "item_type": "minecraft:chiseled_stone_bricks",
+    "item_attributes": null,
+    "quantity": 24
+  },
+  {
+    "recipe_id": 312,
+    "structure_id": 8,
+    "item_type": "minecraft:smooth_stone_slab",
+    "item_attributes": "[type=bottom,waterlogged=false]",
+    "quantity": 32
+  },
+  {
+    "recipe_id": 313,
+    "structure_id": 8,
+    "item_type": "minecraft:stone_brick_wall",
+    "item_attributes": "[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+    "quantity": 14
+  },
+  {
+    "recipe_id": 314,
+    "structure_id": 8,
+    "item_type": "minecraft:smooth_stone_slab",
+    "item_attributes": "[type=top,waterlogged=false]",
+    "quantity": 13
+  },
+  {
+    "recipe_id": 315,
+    "structure_id": 8,
+    "item_type": "minecraft:end_rod",
+    "item_attributes": "[facing=down]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 316,
+    "structure_id": 8,
+    "item_type": "minecraft:end_rod",
+    "item_attributes": "[facing=up]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 317,
+    "structure_id": 9,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=false,south=false,waterlogged=false,west=false]",
+    "quantity": 18
+  },
+  {
+    "recipe_id": 318,
+    "structure_id": 9,
+    "item_type": "minecraft:smooth_stone_slab",
+    "item_attributes": "[type=bottom,waterlogged=false]",
+    "quantity": 19
+  },
+  {
+    "recipe_id": 319,
+    "structure_id": 9,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=west,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 8
+  },
+  {
+    "recipe_id": 320,
+    "structure_id": 9,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=east,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 321,
+    "structure_id": 9,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=south,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 322,
+    "structure_id": 9,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=north,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 5
+  },
+  {
+    "recipe_id": 323,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=east,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 324,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_block",
+    "item_attributes": null,
+    "quantity": 7
+  },
+  {
+    "recipe_id": 325,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=north,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 326,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=south,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 327,
+    "structure_id": 10,
+    "item_type": "minecraft:red_wall_banner",
+    "item_attributes": "[facing=north]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 328,
+    "structure_id": 10,
+    "item_type": "minecraft:red_wall_banner",
+    "item_attributes": "[facing=west]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 329,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=true,north=false,south=true,waterlogged=false,west=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 330,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=false,south=false,waterlogged=false,west=true]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 331,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=true,south=false,waterlogged=false,west=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 332,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=false,south=true,waterlogged=false,west=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 333,
+    "structure_id": 10,
+    "item_type": "minecraft:red_wall_banner",
+    "item_attributes": "[facing=east]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 334,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=true,north=false,south=false,waterlogged=false,west=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 335,
+    "structure_id": 10,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=true,south=false,waterlogged=false,west=true]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 336,
+    "structure_id": 10,
+    "item_type": "minecraft:red_wall_banner",
+    "item_attributes": "[facing=south]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 337,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_wall",
+    "item_attributes": "[east=none,north=none,south=none,up=true,waterlogged=false,west=none]",
+    "quantity": 16
+  },
+  {
+    "recipe_id": 338,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_wall",
+    "item_attributes": "[east=tall,north=none,south=none,up=true,waterlogged=false,west=none]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 339,
+    "structure_id": 11,
+    "item_type": "minecraft:black_wool",
+    "item_attributes": null,
+    "quantity": 1
+  },
+  {
+    "recipe_id": 340,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_wall",
+    "item_attributes": "[east=none,north=none,south=none,up=true,waterlogged=false,west=tall]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 341,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_slab",
+    "item_attributes": "[type=bottom,waterlogged=false]",
+    "quantity": 22
+  },
+  {
+    "recipe_id": 342,
+    "structure_id": 11,
+    "item_type": "minecraft:yellow_wall_banner",
+    "item_attributes": "[facing=west]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 343,
+    "structure_id": 11,
+    "item_type": "minecraft:yellow_wall_banner",
+    "item_attributes": "[facing=east]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 344,
+    "structure_id": 11,
+    "item_type": "minecraft:lantern",
+    "item_attributes": "[hanging=true,waterlogged=false]",
+    "quantity": 6
+  },
+  {
+    "recipe_id": 345,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_slab",
+    "item_attributes": "[type=top,waterlogged=false]",
+    "quantity": 19
+  },
+  {
+    "recipe_id": 346,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_slab",
+    "item_attributes": "[type=double,waterlogged=false]",
+    "quantity": 7
+  },
+  {
+    "recipe_id": 347,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_wall",
+    "item_attributes": "[east=none,north=none,south=low,up=true,waterlogged=false,west=none]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 348,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_wall",
+    "item_attributes": "[east=none,north=low,south=low,up=false,waterlogged=false,west=none]",
+    "quantity": 4
+  },
+  {
+    "recipe_id": 349,
+    "structure_id": 11,
+    "item_type": "minecraft:polished_deepslate_wall",
+    "item_attributes": "[east=none,north=low,south=none,up=true,waterlogged=false,west=none]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 350,
+    "structure_id": 12,
+    "item_type": "minecraft:quartz_pillar",
+    "item_attributes": "[axis=y]",
+    "quantity": 24
+  },
+  {
+    "recipe_id": 351,
+    "structure_id": 12,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=true,waterlogged=false,west=true]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 352,
+    "structure_id": 12,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=false,waterlogged=false,west=true]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 353,
+    "structure_id": 12,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=false,waterlogged=false,west=true]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 354,
+    "structure_id": 12,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=false,waterlogged=false,west=false]",
+    "quantity": 3
+  },
+  {
+    "recipe_id": 355,
+    "structure_id": 12,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=false,south=false,waterlogged=false,west=true]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 356,
+    "structure_id": 12,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=false,south=false,waterlogged=false,west=false]",
+    "quantity": 2
+  },
+  {
+    "recipe_id": 357,
+    "structure_id": 12,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=west,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 12
+  },
+  {
+    "recipe_id": 358,
+    "structure_id": 12,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=north,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 15
+  },
+  {
+    "recipe_id": 359,
+    "structure_id": 12,
+    "item_type": "minecraft:iron_block",
+    "item_attributes": null,
+    "quantity": 10
+  },
+  {
+    "recipe_id": 360,
+    "structure_id": 12,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=false,north=true,south=true,waterlogged=false,west=true]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 361,
+    "structure_id": 12,
+    "item_type": "minecraft:oak_fence",
+    "item_attributes": "[east=true,north=true,south=true,waterlogged=false,west=false]",
+    "quantity": 1
+  },
+  {
+    "recipe_id": 362,
+    "structure_id": 12,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=east,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 7
+  },
+  {
+    "recipe_id": 363,
+    "structure_id": 12,
+    "item_type": "minecraft:iron_trapdoor",
+    "item_attributes": "[facing=south,half=bottom,open=false,powered=false,waterlogged=false]",
+    "quantity": 1
+  }
+]
