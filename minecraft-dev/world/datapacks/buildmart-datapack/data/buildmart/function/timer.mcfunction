@@ -1,18 +1,12 @@
-# Only run if active
-execute if score active bm_active matches 1 run scoreboard players add ticks bm_timer 1
+# Silent tick that runs every game tick from command block
+# This replaces any repeating command block checking
 
-# Convert ticks to seconds
-execute if score active bm_active matches 1 if score ticks bm_timer matches 20.. run scoreboard players add seconds bm_timer 1
-execute if score active bm_active matches 1 if score ticks bm_timer matches 20.. run scoreboard players set ticks bm_timer 0
+# Only check if round is active
+execute if score #round_active bm_status matches 1 run function buildmart:check_structure_silent
 
-# Convert seconds to minutes
-execute if score active bm_active matches 1 if score seconds bm_timer matches 60.. run scoreboard players add minutes bm_timer 1
-execute if score active bm_active matches 1 if score seconds bm_timer matches 60.. run scoreboard players set seconds bm_timer 0
-
-# Update timer display
-execute if score active bm_active matches 1 run scoreboard players operation §9Timer§r bm_display = seconds bm_timer
-execute if score active bm_active matches 1 if score minutes bm_timer matches 1.. run scoreboard players operation §9Timer§r bm_display = minutes bm_timer
-
-# Check structures
-execute if score active bm_active matches 1 if score s1_done bm_s1_done matches 0 run function buildmart:check_structure1
-```
+# Update timer display in action bar (no chat spam)
+execute if score #round_active bm_status matches 1 store result score #elapsed bm_timer run time query gametime
+execute if score #round_active bm_status matches 1 run scoreboard players operation #elapsed bm_timer -= #start_time bm_start
+execute if score #round_active bm_status matches 1 run scoreboard players operation #elapsed_sec bm_timer = #elapsed bm_timer
+execute if score #round_active bm_status matches 1 run scoreboard players operation #elapsed_sec bm_timer /= #20 bm_timer
+execute if score #round_active bm_status matches 1 run title @a actionbar [{"text":"⏱ Time: ","color":"yellow"},{"score":{"name":"#elapsed_sec","objective":"bm_timer"},"color":"white","bold":true},{"text":"s","color":"yellow"}]
