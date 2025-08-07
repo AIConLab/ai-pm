@@ -1,46 +1,37 @@
-# ===========================================
-# File: data/buildmart/function/setup_clean.mcfunction
-# ===========================================
+# Remove old objectives
+scoreboard objectives remove bm_timer
+scoreboard objectives remove bm_active
+scoreboard objectives remove bm_display
+scoreboard objectives remove bm_s1_done
+scoreboard objectives remove bm_s2_done
+scoreboard objectives remove bm_s3_done
 
-# Recreate your original team setup
-team add AIPM "AI Project Manager"
-team add HumanPM "Human Project Manager"
-team add NoPM "No Project Manager"
-team add Admin "Admin Team"
-team modify AIPM color blue
-team modify AIPM friendlyFire false
-team modify AIPM prefix "[AI-PM] "
-team modify HumanPM color green
-team modify HumanPM friendlyFire false
-team modify HumanPM prefix "[Human-PM] "
-team modify NoPM color red
-team modify NoPM friendlyFire false
-team modify NoPM prefix "[No-PM] "
-team modify Admin color gold
-team modify Admin friendlyFire false
-team modify Admin prefix "[Admin] "
+# Create objectives
+scoreboard objectives add bm_timer dummy
+scoreboard objectives add bm_active dummy
+scoreboard objectives add bm_s1_done dummy
+scoreboard objectives add bm_s2_done dummy
+scoreboard objectives add bm_s3_done dummy
 
-# Recreate your original scoreboard
-scoreboard objectives add teams dummy "Team Overview"
-scoreboard objectives setdisplay sidebar teams
-scoreboard players set AI_Project_Manager teams 0
-scoreboard players set Human_Project_Manager teams 0
-scoreboard players set No_Project_Manager teams 0
-scoreboard players set Admin_Team teams 0
+# Create display
+scoreboard objectives add bm_display dummy "§6§lBUILD MART TIMER"
+scoreboard objectives setdisplay sidebar bm_display
 
-# Add Build Mart scoreboards
-scoreboard objectives add bm_timer dummy "Build Timer"
-scoreboard objectives add bm_status dummy "Round Status" 
-scoreboard objectives add bm_start dummy "Start Time"
-scoreboard objectives add bm_end dummy "End Time"
-scoreboard objectives add bm_final dummy "Final Time"
+# Initialize
+scoreboard players set active bm_active 0
+scoreboard players set ticks bm_timer 0
+scoreboard players set seconds bm_timer 0
+scoreboard players set minutes bm_timer 0
 
-# Initialize values
-scoreboard players set #20 bm_timer 20
-scoreboard players set #round_active bm_status 0
-scoreboard players set #total_required bm_timer 50
+# Display setup
+scoreboard players set §9Timer§r bm_display 100
+scoreboard players set §aStructure_1§r bm_display 95
+scoreboard players set §eStructure_2§r bm_display 90
+scoreboard players set §cStructure_3§r bm_display 85
 
-say [BUILD MART] Clean system initialized successfully!
-say [BUILD MART] Teams and scoreboard recreated
-say [BUILD MART] Round status: INACTIVE
-say [BUILD MART] Ready to use /function buildmart:start_round
+# Structure completion flags
+scoreboard players set s1_done bm_s1_done 0
+scoreboard players set s2_done bm_s2_done 0
+scoreboard players set s3_done bm_s3_done 0
+
+tellraw @a {"text":"Build Mart Timer Initialized!","color":"green","bold":true}

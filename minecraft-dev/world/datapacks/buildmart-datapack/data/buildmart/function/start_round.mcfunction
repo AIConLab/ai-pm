@@ -1,20 +1,18 @@
-# ===========================================
-# File: data/buildmart/function/start_round.mcfunction
-# ===========================================
+# Start round
+scoreboard players set active bm_active 1
+scoreboard players set ticks bm_timer 0
+scoreboard players set seconds bm_timer 0
+scoreboard players set minutes bm_timer 0
 
-# Start the round timer
-execute if score #round_active bm_status matches 1 run tellraw @s {"text":"Round already active! Use /function buildmart:end_round first","color":"red"}
-execute if score #round_active bm_status matches 1 run return fail
+# Reset structures
+scoreboard players set s1_done bm_s1_done 0
+scoreboard players set s2_done bm_s2_done 0
+scoreboard players set s3_done bm_s3_done 0
 
-# Set round as active
-scoreboard players set #round_active bm_status 1
+# Reset display
+scoreboard players set §aStructure_1§r bm_display 95
+scoreboard players set §eStructure_2§r bm_display 90
+scoreboard players set §cStructure_3§r bm_display 85
 
-# Record start time
-execute store result score #start_time bm_start run time query gametime
-
-# Announce start
-title @a title {"text":"ROUND STARTED","color":"gold","bold":true}
-title @a subtitle {"text":"Build Structure 1 as fast as possible!","color":"yellow"}
-playsound minecraft:block.note_block.chime master @a ~ ~ ~ 1 2
-
-say [BUILD MART] Round timer started! Build Structure 1 now.
+tellraw @a {"text":"Round Started!","color":"green","bold":true}
+playsound minecraft:block.note_block.pling master @a ~ ~ ~ 1 2
