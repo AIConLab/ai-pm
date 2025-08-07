@@ -1,22 +1,13 @@
-team add AIPM "AI Project Manager"
-team add HumanPM "Human Project Manager"
-team add NoPM "No Project Manager"
-team add Admin "Admin Team"
-team modify AIPM color blue
-team modify AIPM friendlyFire false
-team modify AIPM prefix "[AI-PM] "
-team modify HumanPM color green
-team modify HumanPM friendlyFire false
-team modify HumanPM prefix "[Human-PM] "
-team modify NoPM color red
-team modify NoPM friendlyFire false
-team modify NoPM prefix "[No-PM] "
-team modify Admin color gold
-team modify Admin friendlyFire false
-team modify Admin prefix "[Admin] "
-scoreboard objectives add teams dummy "Team Overview"
-scoreboard objectives setdisplay sidebar teams
-scoreboard players set AI_Project_Manager teams 0
-scoreboard players set Human_Project_Manager teams 0
-scoreboard players set No_Project_Manager teams 0
-scoreboard players set Admin_Team teams 0
+scoreboard objectives add bm_timer dummy "Build Timer"
+scoreboard objectives add bm_status dummy "Round Status" 
+scoreboard objectives add bm_start dummy "Start Time"
+scoreboard objectives add bm_end dummy "End Time"
+scoreboard objectives add bm_final dummy "Final Time"
+
+# Set constants
+scoreboard players set #20 bm_timer 20
+scoreboard players set #round_active bm_status 0
+
+say [BUILD MART] Simple system initialized
+say Use: /function buildmart:start_round to begin
+say Use: /function buildmart:check_structure from command block under build area
