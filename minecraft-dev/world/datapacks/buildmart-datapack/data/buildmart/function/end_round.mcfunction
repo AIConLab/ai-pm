@@ -1,3 +1,4 @@
+#file: end_round.mcfunction
 # End the round and calculate time
 execute if score #round_active bm_status matches 0 run tellraw @s {"text":"No round currently active!","color":"red"}
 execute if score #round_active bm_status matches 0 run return fail

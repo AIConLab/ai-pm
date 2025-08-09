@@ -1,3 +1,4 @@
+#file: setup_scoreboard.mcfunction
 # Recreate your original team setup
 team add AIPM "AI Project Manager"
 team add HumanPM "Human Project Manager"

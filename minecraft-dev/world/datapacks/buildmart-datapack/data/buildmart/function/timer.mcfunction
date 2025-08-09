@@ -1,3 +1,4 @@
+# file: timer.mcfunction
 # Silent tick that runs every game tick from command block
 # This replaces any repeating command block checking
 
