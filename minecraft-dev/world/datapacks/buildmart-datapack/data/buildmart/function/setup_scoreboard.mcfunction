@@ -1,31 +1,24 @@
-#file: setup_scoreboard.mcfunction
-# Recreate your original team setup
-team add AIPM "AI Project Manager"
-team add HumanPM "Human Project Manager"
-team add NoPM "No Project Manager"
-team add Admin "Admin Team"
-team modify AIPM color blue
-team modify AIPM friendlyFire false
-team modify AIPM prefix "[AI-PM] "
-team modify HumanPM color green
-team modify HumanPM friendlyFire false
-team modify HumanPM prefix "[Human-PM] "
-team modify NoPM color red
-team modify NoPM friendlyFire false
-team modify NoPM prefix "[No-PM] "
-team modify Admin color gold
-team modify Admin friendlyFire false
-team modify Admin prefix "[Admin] "
+# file: setup_scoreboard.mcfunction
+# Create round-based scoreboard system
+scoreboard objectives add round_times dummy "Round Completion Times (seconds)"
+scoreboard objectives add current_round dummy "Current Round"
+scoreboard objectives setdisplay sidebar round_times
 
-# Recreate your original scoreboard
-scoreboard objectives add teams dummy "Team Overview"
-scoreboard objectives setdisplay sidebar teams
-scoreboard players set AI_Project_Manager teams 0
-scoreboard players set Human_Project_Manager teams 0
-scoreboard players set No_Project_Manager teams 0
-scoreboard players set Admin_Team teams 0
+# Initialize all rounds to 0 (not completed yet)
+scoreboard players set Round_1 round_times 0
+scoreboard players set Round_2 round_times 0
+scoreboard players set Round_3 round_times 0
+scoreboard players set Round_4 round_times 0
+scoreboard players set Round_5 round_times 0
+scoreboard players set Round_6 round_times 0
+scoreboard players set Round_7 round_times 0
+scoreboard players set Round_8 round_times 0
+scoreboard players set Round_9 round_times 0
 
-# Add Build Mart scoreboards
+# Set starting round to 1
+scoreboard players set #current current_round 1
+
+# Timer scoreboards for calculations
 scoreboard objectives add bm_timer dummy "Build Timer"
 scoreboard objectives add bm_status dummy "Round Status" 
 scoreboard objectives add bm_start dummy "Start Time"
@@ -35,8 +28,7 @@ scoreboard objectives add bm_final dummy "Final Time"
 # Initialize values
 scoreboard players set #20 bm_timer 20
 scoreboard players set #round_active bm_status 0
-scoreboard players set #total_required bm_timer 50
 
-# Single setup confirmation
-tellraw @a ["",{"text":"[","color":"dark_gray"},{"text":"BUILD MART","color":"gold","bold":true},{"text":"] ","color":"dark_gray"},{"text":"System Initialized","color":"green"}]
+# Setup confirmation
+tellraw @a ["",{"text":"[","color":"dark_gray"},{"text":"BUILD MART","color":"gold","bold":true},{"text":"] ","color":"dark_gray"},{"text":"Scoreboard Ready - Round 1","color":"green"}]
 playsound minecraft:block.note_block.pling master @a ~ ~ ~ 0.5 2
