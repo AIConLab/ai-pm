@@ -1,5 +1,5 @@
+# file: structure_1_done.mcfunction
 # Structure 1 is complete!
-
 # Mark as complete FIRST to prevent re-triggering
 scoreboard players set #already_complete bm_status 1
 

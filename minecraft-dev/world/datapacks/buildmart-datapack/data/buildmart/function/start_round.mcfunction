@@ -7,8 +7,9 @@ execute if score #round_active bm_status matches 1 run return fail
 execute if score #current current_round matches 10.. run tellraw @s {"text":"All 9 rounds completed!","color":"gold"}
 execute if score #current current_round matches 10.. run return fail
 
-# Set round as active
+# Set round as active and reset completion flag
 scoreboard players set #round_active bm_status 1
+scoreboard players set #already_complete bm_status 0
 
 # Record start time
 execute store result score #start_time bm_start run time query gametime
