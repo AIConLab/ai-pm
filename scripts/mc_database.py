@@ -10,8 +10,9 @@ import os
 
 
 class Database:
-    def __init__(self, db_path="/app/database/aipm.db"):
+    def __init__(self, db_path="/app/database/aipm.db", user_config=None):
         self.db_path = db_path
+        self.user_config = user_config
     
     @contextmanager
     def get_connection(self):
@@ -78,11 +79,90 @@ class Database:
             
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_build_recipes_structure ON BuildRecipes(structure_id)")
 
+    
+    def init_map_table(self):
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Create the GameMap table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS GameMap (
+                    waypoint_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    waypoint_name TEXT UNIQUE NOT NULL,
+                    waypoint_type TEXT NOT NULL,
+                    x REAL NOT NULL,
+                    y REAL NOT NULL,
+                    z REAL NOT NULL,
+                    description TEXT,
+                    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            
+            # Create index for faster lookups
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_waypoint_name ON GameMap(waypoint_name)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_waypoint_type ON GameMap(waypoint_type)")
+            
+            # If config is provided, populate the table with waypoint data
+            if self.user_config and 'minecraft' in self.user_config:
+                minecraft_config = self.user_config['minecraft']
+                
+                # Define the waypoints mapping
+                waypoint_mappings = {
+                    'build_area_xyz': {
+                        'name': 'build_area',
+                        'type': 'build',
+                        'description': 'Main building and construction area'
+                    },
+                    'resource_area_xyz': {
+                        'name': 'resource_area', 
+                        'type': 'resource',
+                        'description': 'Resource gathering and mining area'
+                    },
+                    'processing_area_xyz': {
+                        'name': 'processing_area',
+                        'type': 'processing', 
+                        'description': 'Item processing and crafting area'
+                    }
+                }
+                
+                # Clear existing waypoints first (in case config changed)
+                cursor.execute("DELETE FROM GameMap")
+
+                # Reset the auto-increment counter to start from 1
+                cursor.execute("DELETE FROM sqlite_sequence WHERE name='GameMap'")
+                
+                # Insert waypoints from config
+                for config_key, waypoint_info in waypoint_mappings.items():
+                    if config_key in minecraft_config:
+                        coords = minecraft_config[config_key]
+                        
+                        # Ensure we have exactly 3 coordinates
+                        if len(coords) >= 3:
+                            cursor.execute("""
+                                INSERT INTO GameMap (waypoint_name, waypoint_type, x, y, z, description, last_updated)
+                                VALUES (?, ?, ?, ?, ?, ?, ?)
+                            """, (
+                                waypoint_info['name'],
+                                waypoint_info['type'],
+                                float(coords[0]),  # x
+                                float(coords[1]),  # y  
+                                float(coords[2]),  # z
+                                waypoint_info['description'],
+                                datetime.now()
+                            ))
+                            
+                            print(f"✅ Added waypoint: {waypoint_info['name']} at ({coords[0]}, {coords[1]}, {coords[2]})")
+                        else:
+                            print(f"❌ Invalid coordinates for {config_key}: {coords}")
+
+
     def init_tables(self):
         try:
             self.init_user_data_table()
             self.init_user_inventory_table()
             self.init_build_recipes_table()
+            self.init_map_table()
+
         except Exception as e:
             raise e
 
@@ -119,7 +199,7 @@ class Database:
 
     def export_all_tables_to_json(self, output_dir="/app/exports"):
         """Export all tables to JSON files"""
-        tables = ['Users', 'UserInventory', 'BuildRecipes']
+        tables = ['Users', 'UserInventory', 'BuildRecipes', 'GameMap']
         
         print(f"📁 Exporting all tables to {output_dir}")
         exported_files = []

@@ -25,6 +25,7 @@ def get_server_players(rcon_client):
         return [name.strip() for name in players_part.split(",")]
     return []
 
+
 def get_player_position(rcon_client, username):
     """Get player's current position"""
     response = rcon_client.execute(f"data get entity {username} Pos")
@@ -127,31 +128,31 @@ def get_player_inventory_from_nbt(username):
         return {}
 
 
-def sync_server_data(db, rcon, aimp_team: List[str]):
+def sync_server_data(db, rcon, aipm_team: List[str]):
     """Updated sync function with proper inventory replacement"""
     try:
         # Get current server players
         all_server_players = set(get_server_players(rcon))
         
         # Filter for players in AIPM team only
-        aimp_team_set = set(aimp_team) 
-        server_players = all_server_players & aimp_team_set
+        aipm_team_set = set(aipm_team) 
+        server_players = all_server_players & aipm_team_set
         
         # Delete players from database who are not currently in AIPM team
-        deleted_count = db.delete_users_not_in_list(aimp_team)
+        deleted_count = db.delete_users_not_in_list(aipm_team)
         if deleted_count > 0:
             print(f"Removed {deleted_count} users not in AIPM team")
         
-        # Get database online players (filtered to AIMP team)
+        # Get database online players (filtered to aipm team)
         db_online = {user['minecraft_username'] for user in db.get_online_users() 
-                    if user['minecraft_username'] in aimp_team_set}
+                    if user['minecraft_username'] in aipm_team_set}
         
-        # Handle disconnected AIMP players (in DB but not on server)
+        # Handle disconnected aipm players (in DB but not on server)
         for username in db_online - server_players:
             db.set_online(username, False)
             print(f"Set {username} offline (not on server)")
         
-        # Get information for online AIMP team members only
+        # Get information for online aipm team members only
         for username in server_players:
             print(f"🔄 Processing player: {username}")
             db.add_user(username)
@@ -184,6 +185,7 @@ def sync_server_data(db, rcon, aimp_team: List[str]):
         import traceback
         traceback.print_exc()
 
+
 def main():
     
     try:
@@ -196,7 +198,10 @@ def main():
         
         # Initialize database and RCON
         print("🔧 Initializing database and RCON...")
-        db = Database()
+        db = Database(
+            db_path="/app/database/aipm.db",
+            user_config=config
+            )
         db.init_tables()
         rcon = RCONClient()
         print("✅ Database and RCON initialized")

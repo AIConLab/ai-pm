@@ -5,10 +5,15 @@
 admins = ["Loopking", "BT1013", "jc_cr"]
 log_path = "/mc-data/logs/latest.log"
 
+build_area_xyz = [-20.672, 65.0, -86.143]
+resource_area_xyz = [34.398, 65, -83.750]
+processing_area_xyz = [-69.365, 66, -84.426]
+
+
 [aipm]
 
 # list of mc username of team members for AIPM team
-members = ["jc_cr"]
+members = ["Loopking", "BT1013", "jc_cr"]
 
 [aipm.planner_agent]
 
