@@ -1,0 +1,236 @@
+[
+  {
+    "item_id": 79,
+    "item_type": "minecraft:netherite_axe",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.220315"
+  },
+  {
+    "item_id": 80,
+    "item_type": "minecraft:brown_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.225981"
+  },
+  {
+    "item_id": 81,
+    "item_type": "minecraft:gray_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.226064"
+  },
+  {
+    "item_id": 82,
+    "item_type": "minecraft:netherite_shovel",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.226105"
+  },
+  {
+    "item_id": 83,
+    "item_type": "minecraft:leather_boots",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.226193"
+  },
+  {
+    "item_id": 84,
+    "item_type": "minecraft:smooth_stone_slab",
+    "item_attributes": "[type=bottom,waterlogged=false]",
+    "last_updated": "2025-08-20 02:28:55.226275"
+  },
+  {
+    "item_id": 85,
+    "item_type": "minecraft:crafting_table",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:28:55.226361"
+  },
+  {
+    "item_id": 86,
+    "item_type": "minecraft:yellow_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.226446"
+  },
+  {
+    "item_id": 87,
+    "item_type": "minecraft:anvil",
+    "item_attributes": "[facing=north]",
+    "last_updated": "2025-08-20 02:28:55.226545"
+  },
+  {
+    "item_id": 88,
+    "item_type": "minecraft:light_gray_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.226654"
+  },
+  {
+    "item_id": 89,
+    "item_type": "minecraft:stone_bricks",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:28:55.226719"
+  },
+  {
+    "item_id": 90,
+    "item_type": "minecraft:coal_block",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.226802"
+  },
+  {
+    "item_id": 91,
+    "item_type": "minecraft:water",
+    "item_attributes": "[level=0]",
+    "last_updated": "2025-08-20 02:28:55.226899"
+  },
+  {
+    "item_id": 92,
+    "item_type": "minecraft:white_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.226978"
+  },
+  {
+    "item_id": 93,
+    "item_type": "minecraft:chest",
+    "item_attributes": "[facing=south,type=left,waterlogged=false]",
+    "last_updated": "2025-08-20 02:28:55.227056"
+  },
+  {
+    "item_id": 94,
+    "item_type": "minecraft:scaffolding",
+    "item_attributes": "[bottom=false,distance=0,waterlogged=false]",
+    "last_updated": "2025-08-20 02:28:55.227132"
+  },
+  {
+    "item_id": 95,
+    "item_type": "minecraft:furnace",
+    "item_attributes": "[facing=south,lit=false]",
+    "last_updated": "2025-08-20 02:28:55.227215"
+  },
+  {
+    "item_id": 96,
+    "item_type": "minecraft:leather_chestplate",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.227284"
+  },
+  {
+    "item_id": 97,
+    "item_type": "minecraft:bucket",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.227343"
+  },
+  {
+    "item_id": 98,
+    "item_type": "minecraft:blue_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.227412"
+  },
+  {
+    "item_id": 99,
+    "item_type": "minecraft:anvil",
+    "item_attributes": "[facing=south]",
+    "last_updated": "2025-08-20 02:28:55.227457"
+  },
+  {
+    "item_id": 100,
+    "item_type": "minecraft:netherite_pickaxe",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.227530"
+  },
+  {
+    "item_id": 101,
+    "item_type": "minecraft:cyan_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.227594"
+  },
+  {
+    "item_id": 102,
+    "item_type": "minecraft:stonecutter",
+    "item_attributes": "[facing=north]",
+    "last_updated": "2025-08-20 02:28:55.227629"
+  },
+  {
+    "item_id": 103,
+    "item_type": "minecraft:stonecutter",
+    "item_attributes": "[facing=south]",
+    "last_updated": "2025-08-20 02:28:55.227706"
+  },
+  {
+    "item_id": 104,
+    "item_type": "minecraft:leather_leggings",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.227843"
+  },
+  {
+    "item_id": 105,
+    "item_type": "minecraft:chest",
+    "item_attributes": "[facing=east,type=left,waterlogged=false]",
+    "last_updated": "2025-08-20 02:28:55.227960"
+  },
+  {
+    "item_id": 106,
+    "item_type": "minecraft:blast_furnace",
+    "item_attributes": "[facing=south,lit=false]",
+    "last_updated": "2025-08-20 02:28:55.228091"
+  },
+  {
+    "item_id": 107,
+    "item_type": "minecraft:red_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.228202"
+  },
+  {
+    "item_id": 108,
+    "item_type": "minecraft:smithing_table",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:28:55.228299"
+  },
+  {
+    "item_id": 109,
+    "item_type": "minecraft:pink_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.228432"
+  },
+  {
+    "item_id": 110,
+    "item_type": "minecraft:chest",
+    "item_attributes": "[facing=south,type=right,waterlogged=false]",
+    "last_updated": "2025-08-20 02:28:55.228467"
+  },
+  {
+    "item_id": 111,
+    "item_type": "minecraft:lime_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.228530"
+  },
+  {
+    "item_id": 112,
+    "item_type": "minecraft:chest",
+    "item_attributes": "[facing=east,type=right,waterlogged=false]",
+    "last_updated": "2025-08-20 02:28:55.228590"
+  },
+  {
+    "item_id": 113,
+    "item_type": "minecraft:purple_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.228707"
+  },
+  {
+    "item_id": 114,
+    "item_type": "minecraft:light_blue_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.228805"
+  },
+  {
+    "item_id": 115,
+    "item_type": "minecraft:golden_helmet",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.228899"
+  },
+  {
+    "item_id": 116,
+    "item_type": "minecraft:netherite_hoe",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.228995"
+  },
+  {
+    "item_id": 117,
+    "item_type": "minecraft:black_dye",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:28:55.229109"
+  }
+]

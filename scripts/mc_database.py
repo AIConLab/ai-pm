@@ -27,6 +27,27 @@ class Database:
         finally:
             conn.close()
 
+
+    def init_processing_area_table(self):
+        """Initialize the ProcessingArea table"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            
+            # Create new table without quantity column
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS ProcessingArea (
+                    item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    item_type TEXT NOT NULL,
+                    item_attributes TEXT,
+                    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE(item_type, item_attributes)
+                )
+            """)
+            
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_processing_area_item_type ON ProcessingArea(item_type)")
+
+
     def init_user_data_table(self):
         with self.get_connection() as conn:
             cursor = conn.cursor()
@@ -79,7 +100,6 @@ class Database:
             
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_build_recipes_structure ON BuildRecipes(structure_id)")
 
-    
     def init_map_table(self):
         with self.get_connection() as conn:
             cursor = conn.cursor()
@@ -155,13 +175,13 @@ class Database:
                         else:
                             print(f"❌ Invalid coordinates for {config_key}: {coords}")
 
-
     def init_tables(self):
         try:
             self.init_user_data_table()
             self.init_user_inventory_table()
             self.init_build_recipes_table()
             self.init_map_table()
+            self.init_processing_area_table()
 
         except Exception as e:
             raise e
@@ -199,7 +219,11 @@ class Database:
 
     def export_all_tables_to_json(self, output_dir="/app/exports"):
         """Export all tables to JSON files"""
-        tables = ['Users', 'UserInventory', 'BuildRecipes', 'GameMap']
+        tables = ['Users', 
+        'UserInventory', 
+        'BuildRecipes', 
+        'GameMap', 
+        'ProcessingArea']
         
         print(f"📁 Exporting all tables to {output_dir}")
         exported_files = []

@@ -7,7 +7,7 @@
     "y": 65.0,
     "z": -86.143,
     "description": "Main building and construction area",
-    "last_updated": "2025-08-14 02:35:44.887700"
+    "last_updated": "2025-08-20 02:29:02.025732"
   },
   {
     "waypoint_id": 2,
@@ -17,7 +17,7 @@
     "y": 65.0,
     "z": -83.75,
     "description": "Resource gathering and mining area",
-    "last_updated": "2025-08-14 02:35:44.887952"
+    "last_updated": "2025-08-20 02:29:02.025963"
   },
   {
     "waypoint_id": 3,
@@ -27,6 +27,6 @@
     "y": 66.0,
     "z": -84.426,
     "description": "Item processing and crafting area",
-    "last_updated": "2025-08-14 02:35:44.888014"
+    "last_updated": "2025-08-20 02:29:02.026029"
   }
 ]

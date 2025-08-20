@@ -18,6 +18,7 @@ def parse_block_state(block_state_str):
         # No attributes: minecraft:iron_block
         return block_state_str, None
 
+
 def get_block_counts(schematic_reader):
     """Get block counts from a schematic file"""
     palette = schematic_reader.get_block_palette()
