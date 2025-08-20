@@ -28,6 +28,25 @@ class Database:
             conn.close()
 
 
+    def init_resource_area_table(self):
+        """Initialize the ProcessingArea table"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            
+            # Create new table without quantity column
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS ResourceArea (
+                    item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    item_type TEXT NOT NULL,
+                    item_attributes TEXT,
+                    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE(item_type, item_attributes)
+                )
+            """)
+            
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_processing_area_item_type ON ProcessingArea(item_type)")
+
     def init_processing_area_table(self):
         """Initialize the ProcessingArea table"""
         with self.get_connection() as conn:
@@ -182,6 +201,7 @@ class Database:
             self.init_build_recipes_table()
             self.init_map_table()
             self.init_processing_area_table()
+            self.init_resource_area_table()
 
         except Exception as e:
             raise e
@@ -223,7 +243,8 @@ class Database:
         'UserInventory', 
         'BuildRecipes', 
         'GameMap', 
-        'ProcessingArea']
+        'ProcessingArea',
+        'ResourceArea']
         
         print(f"📁 Exporting all tables to {output_dir}")
         exported_files = []
