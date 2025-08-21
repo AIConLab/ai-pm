@@ -13,6 +13,53 @@ from mc_database import Database
 from rcon_client import RCONClient
 from utils import load_config
 
+def get_round_information(rcon_client):
+    """Get current round information from the game scoreboards"""
+    try:
+        # First check if a round is active
+        active_response = rcon_client.execute("scoreboard players get #round_active bm_status")
+        print(f"🔍 Round active response: {active_response}")
+        
+        if not active_response or "has no score" in active_response:
+            print("❌ No round status found")
+            return None
+        
+        # Parse if round is active (1) or not (0)
+        try:
+            parts = active_response.split("has")[1].split("[")[0].strip()
+            round_active = int(parts) == 1
+            print(f"🎮 Round active: {round_active}")
+        except (ValueError, IndexError):
+            print("❌ Could not parse round active status")
+            return None
+        
+        # If no round is active, return early
+        if not round_active:
+            print("⏸️  No round currently active")
+            return None
+        
+        # Round is active, get the current round number
+        round_response = rcon_client.execute("scoreboard players get #current current_round")
+        print(f"🔍 Current round response: {round_response}")
+        
+        if not round_response or "has no score" in round_response:
+            print("❌ No current round found")
+            return None
+        
+        # Parse current round number
+        try:
+            parts = round_response.split("has")[1].split("[")[0].strip()
+            current_round = int(parts)
+            print(f"🎯 Current round: {current_round}")
+            return current_round
+        except (ValueError, IndexError):
+            print("❌ Could not parse current round number")
+            return None
+        
+    except Exception as e:
+        print(f"❌ Error getting round info: {e}")
+        return None
+
 
 def get_server_players(rcon_client):
     """Get list of players currently on server"""
@@ -210,12 +257,19 @@ def main():
             print("❌ No RCON password found, exiting")
             return
         
-        interval = 30  # seconds
-        print(f"📊 Querying server every {interval} seconds...")
+        query_interval = config["aipm"]["query_interval_sec"]
+        print(f"📊 Querying server every {query_interval} seconds...")
 
         while True:
             sync_server_data(db, rcon, config["aipm"]["members"])
-            time.sleep(interval)
+
+            round_num = get_round_information(rcon)
+            if round_num:
+                print(f"✅ Currently in round: {round_num}")
+            else:
+                print("ℹ️  No active round")
+
+            time.sleep(query_interval)
 
     except KeyboardInterrupt:
         print("\n🛑 Stopping query service...")
