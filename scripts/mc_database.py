@@ -28,7 +28,11 @@ class Database:
             conn.close()
 
     def init_round_data_table(self):
-        """Initialize the RoundData table with proper foreign key references"""
+        """
+        Initialize the RoundData table with proper foreign key references.
+        This should be done after 
+        
+        """
         with self.get_connection() as conn:
             cursor = conn.cursor()
             
@@ -50,6 +54,9 @@ class Database:
                     FOREIGN KEY (waypoint_id) REFERENCES GameMap (waypoint_id)
                 )
             """)
+
+            # Game map is static so we use that update that table now...
+            # TODO:
             
             # Junction table for RoundData -> BuildRecipes relationships  
             cursor.execute("""
@@ -72,6 +79,11 @@ class Database:
                     FOREIGN KEY (item_id) REFERENCES ProcessingArea (item_id)
                 )
             """)
+
+
+            # Processing Area is static so we use that update that table now...
+            # TODO:
+            
             
             # Junction table for RoundData -> ResourceArea relationships
             cursor.execute("""
@@ -83,6 +95,10 @@ class Database:
                     FOREIGN KEY (item_id) REFERENCES ResourceArea (item_id)
                 )
             """)
+
+
+            # Resource Area is static so we use that update that table now...
+            # TODO:
             
             # Create indexes for better performance
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_round_data_round ON RoundData(current_round)")
