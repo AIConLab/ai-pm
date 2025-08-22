@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import List 
 import sys
 
-from mc_database import Database
+from mc_database import Database, UserDataService, RoundDataService
 from rcon_client import RCONClient
 from utils import load_config
 
@@ -175,9 +175,14 @@ def get_player_inventory_from_nbt(username):
         return {}
 
 
-def sync_server_data(db, rcon, aipm_team: List[str]):
-    """Updated sync function with proper inventory replacement"""
+def sync_player_data_table(
+    user_data_service:UserDataService,
+    rcon:RCONClient,
+    config):
+
     try:
+        aipm_team = config["aipm"]["members"]
+
         # Get current server players
         all_server_players = set(get_server_players(rcon))
         
@@ -186,29 +191,29 @@ def sync_server_data(db, rcon, aipm_team: List[str]):
         server_players = all_server_players & aipm_team_set
         
         # Delete players from database who are not currently in AIPM team
-        deleted_count = db.delete_users_not_in_list(aipm_team)
+        deleted_count = user_data_service.delete_users_not_in_list(aipm_team)
         if deleted_count > 0:
             print(f"Removed {deleted_count} users not in AIPM team")
         
         # Get database online players (filtered to aipm team)
-        db_online = {user['minecraft_username'] for user in db.get_online_users() 
+        user_data_service_online = {user['minecraft_username'] for user in user_data_service.get_online_users() 
                     if user['minecraft_username'] in aipm_team_set}
         
-        # Handle disconnected aipm players (in DB but not on server)
-        for username in db_online - server_players:
-            db.set_online(username, False)
+        # Handle disconnected aipm players (in user_data_service but not on server)
+        for username in user_data_service_online - server_players:
+            user_data_service.set_online(username, False)
             print(f"Set {username} offline (not on server)")
         
         # Get information for online aipm team members only
         for username in server_players:
             print(f"🔄 Processing player: {username}")
-            db.add_user(username)
-            db.set_online(username, True)
+            user_data_service.add_user(username)
+            user_data_service.set_online(username, True)
             
             # Update position
             position = get_player_position(rcon, username)
             if position:
-                db.update_position(username, position[0], position[1], position[2])
+                user_data_service.update_position(username, position[0], position[1], position[2])
                 print(f"📍 Updated position for {username}: {position}")
             
             # Update inventory from NBT file - REPLACE entire inventory
@@ -218,19 +223,65 @@ def sync_server_data(db, rcon, aipm_team: List[str]):
             if inventory:
                 print(f"📊 Replacing database inventory with: {inventory}")
                 # Use the new replace method instead of individual updates
-                db.replace_user_inventory(username, inventory)
+                user_data_service.replace_user_inventory(username, inventory)
             else:
                 print(f"❌ No inventory found for {username}, clearing database inventory")
                 # Clear inventory if NBT shows no items
-                db.clear_user_inventory(username)
+                user_data_service.clear_user_inventory(username)
         
         if server_players:
             print(f"✅ Synced {len(server_players)} AIPM team members")
-        
+
     except Exception as e:
         print(f"❌ Sync error: {e}")
         import traceback
         traceback.print_exc()
+        
+
+def sync_round_data_table(
+    round_data_service:RoundDataService,
+    rcon:RCONClient,
+    config):
+    try:
+        round_num = get_round_information(rcon)
+        if round_num:
+            print(f"✅ Currently in round: {round_num}")
+        else:
+            print("ℹ️  No active round")
+
+    
+    except Exception as e:
+        print(f"❌ Sync error: {e}")
+        import traceback
+        traceback.print_exc()
+
+
+def sync_server_data(
+    user_data_service:UserDataService,
+    round_data_service:RoundDataService,
+    rcon:RCONClient,
+    config):
+
+    """Updated sync function with proper inventory replacement"""
+    try:
+        sync_player_data_table(
+            user_data_service=user_data_service,
+            rcon=rcon,
+            config=config
+        )
+
+
+        sync_round_data_table(
+            round_data_service=round_data_service,
+            rcon=rcon,
+            config=config
+        )
+
+    except Exception as e:
+        print(f"❌ Sync error: {e}")
+        import traceback
+        traceback.print_exc()
+
 
 
 def main():
@@ -250,6 +301,10 @@ def main():
             user_config=config
             )
         db.init_tables()
+
+        user_data_service = UserDataService(db=db)
+        round_data_service = RoundDataService(db=db)
+
         rcon = RCONClient()
         print("✅ Database and RCON initialized")
         
@@ -261,13 +316,13 @@ def main():
         print(f"📊 Querying server every {query_interval} seconds...")
 
         while True:
-            sync_server_data(db, rcon, config["aipm"]["members"])
 
-            round_num = get_round_information(rcon)
-            if round_num:
-                print(f"✅ Currently in round: {round_num}")
-            else:
-                print("ℹ️  No active round")
+            sync_server_data(
+                user_data_service=user_data_service,
+                round_data_service=round_data_service,
+                rcon=rcon,
+                config=config
+            )
 
             time.sleep(query_interval)
 
@@ -297,7 +352,10 @@ def main():
     finally:
         print("✅ Query service stopped")
 
+
 if __name__ == "__main__":
+
     exit_code = main()
+
     if exit_code:
         sys.exit(exit_code)

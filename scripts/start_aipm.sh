@@ -16,4 +16,4 @@ tmux send-keys -t game_query 'docker compose run --rm game_query' Enter
 
 echo "Started event_listener and game_query in tmux sessions"
 echo "Check status with: tmux list-sessions"
-echo "Attach to view logs: tmux attach -t event_listener"
+echo "Attach to view logs: tmux attach -t event_listener or game_query "

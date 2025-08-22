@@ -27,6 +27,66 @@ class Database:
         finally:
             conn.close()
 
+    def init_round_data_table(self):
+        """Initialize the RoundData table with proper foreign key references"""
+        with self.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS RoundData (
+                    round_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    current_round INTEGER NOT NULL,
+                    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            
+            # Junction table for RoundData -> GameMap relationships
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS RoundData_GameMap (
+                    round_id INTEGER,
+                    waypoint_id INTEGER,
+                    PRIMARY KEY (round_id, waypoint_id),
+                    FOREIGN KEY (round_id) REFERENCES RoundData (round_id),
+                    FOREIGN KEY (waypoint_id) REFERENCES GameMap (waypoint_id)
+                )
+            """)
+            
+            # Junction table for RoundData -> BuildRecipes relationships  
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS RoundData_BuildRecipes (
+                    round_id INTEGER,
+                    recipe_id INTEGER,
+                    PRIMARY KEY (round_id, recipe_id),
+                    FOREIGN KEY (round_id) REFERENCES RoundData (round_id),
+                    FOREIGN KEY (recipe_id) REFERENCES BuildRecipes (recipe_id)
+                )
+            """)
+            
+            # Junction table for RoundData -> ProcessingArea relationships
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS RoundData_ProcessingArea (
+                    round_id INTEGER,
+                    item_id INTEGER,
+                    PRIMARY KEY (round_id, item_id),
+                    FOREIGN KEY (round_id) REFERENCES RoundData (round_id),
+                    FOREIGN KEY (item_id) REFERENCES ProcessingArea (item_id)
+                )
+            """)
+            
+            # Junction table for RoundData -> ResourceArea relationships
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS RoundData_ResourceArea (
+                    round_id INTEGER,
+                    item_id INTEGER,
+                    PRIMARY KEY (round_id, item_id),
+                    FOREIGN KEY (round_id) REFERENCES RoundData (round_id),
+                    FOREIGN KEY (item_id) REFERENCES ResourceArea (item_id)
+                )
+            """)
+            
+            # Create indexes for better performance
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_round_data_round ON RoundData(current_round)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_round_data_updated ON RoundData(last_updated)")
 
     def init_resource_area_table(self):
         """Initialize the ProcessingArea table"""
@@ -65,7 +125,6 @@ class Database:
             """)
             
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_processing_area_item_type ON ProcessingArea(item_type)")
-
 
     def init_user_data_table(self):
         with self.get_connection() as conn:
@@ -202,6 +261,7 @@ class Database:
             self.init_map_table()
             self.init_processing_area_table()
             self.init_resource_area_table()
+            self.init_round_data_table()
 
         except Exception as e:
             raise e
@@ -260,7 +320,21 @@ class Database:
         return exported_files
 
 
+class RoundDataService:
+    """
+    Service class to update RoundData Table in DB
+    """
+    def __init__(self, db: Database):
+        self.db = db
+
+    def update_current_round_number(self, username):
+        pass
+
+
 class UserDataService:
+    """
+    Service class to update UserData Table in DB
+    """
     def __init__(self, db: Database):
         self.db = db
     

@@ -16,7 +16,7 @@ processing_area_xyz = [-69.365, 66, -84.426]
 members = ["Loopking", "BT1013", "jc_cr"]
 
 # How often mc_game_query should query the game state in seconds
-query_interval_sec = 30
+query_interval_sec = 3
 
 [aipm.planner_agent]
 
