@@ -43,6 +43,19 @@ class Database:
                     last_updated DATETIME DEFAULT CURRENT_TIMESTAMP
                 )
             """)
+
+
+            # Junction table for RoundData -> BuildRecipes relationships  
+            # Matches current round number to structure number 
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS RoundData_BuildRecipes (
+                    round_id INTEGER,
+                    recipe_id INTEGER,
+                    PRIMARY KEY (round_id, recipe_id),
+                    FOREIGN KEY (round_id) REFERENCES RoundData (round_id),
+                    FOREIGN KEY (recipe_id) REFERENCES BuildRecipes (recipe_id)
+                )
+            """)
             
             # Junction table for RoundData -> GameMap relationships
             cursor.execute("""
@@ -58,16 +71,6 @@ class Database:
             # Game map is static so we use that update that table now...
             # TODO:
             
-            # Junction table for RoundData -> BuildRecipes relationships  
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS RoundData_BuildRecipes (
-                    round_id INTEGER,
-                    recipe_id INTEGER,
-                    PRIMARY KEY (round_id, recipe_id),
-                    FOREIGN KEY (round_id) REFERENCES RoundData (round_id),
-                    FOREIGN KEY (recipe_id) REFERENCES BuildRecipes (recipe_id)
-                )
-            """)
             
             # Junction table for RoundData -> ProcessingArea relationships
             cursor.execute("""
@@ -343,8 +346,186 @@ class RoundDataService:
     def __init__(self, db: Database):
         self.db = db
 
-    def update_current_round_number(self, username):
-        pass
+    def update_current_round_number(self, round_num):
+        """
+        Update or insert the current round number in RoundData table.
+        Only updates if the round has actually changed.
+        """
+        with self.db.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Check if we already have this round number
+            cursor.execute("""
+                SELECT round_id, current_round FROM RoundData 
+                ORDER BY last_updated DESC 
+                LIMIT 1
+            """)
+            
+            existing_round = cursor.fetchone()
+            
+            if existing_round and existing_round['current_round'] == round_num:
+                # Round hasn't changed, just update timestamp
+                cursor.execute("""
+                    UPDATE RoundData 
+                    SET last_updated = ? 
+                    WHERE round_id = ?
+                """, (datetime.now(), existing_round['round_id']))
+                
+                print(f"🔄 Round {round_num} still active (round_id: {existing_round['round_id']})")
+                return existing_round['round_id']
+            else:
+                # Round has changed, clear old data and insert new
+                cursor.execute("DELETE FROM RoundData")
+                
+                # Insert the new current round
+                cursor.execute("""
+                    INSERT INTO RoundData (current_round, last_updated)
+                    VALUES (?, ?)
+                """, (round_num, datetime.now()))
+                
+                # Get the round_id that was just inserted
+                round_id = cursor.lastrowid
+                print(f"✅ NEW round detected: {round_num} (round_id: {round_id})")
+                
+                return round_id
+
+    def update_current_structure_recipes_table(self, round_num):
+        """
+        Update the RoundData_BuildRecipes junction table to link the current round
+        with all recipes for the corresponding structure_id.
+        Only updates if this is a new round or round_id changed.
+        
+        Round number maps directly to structure_id (round 1 = structure 1, etc.)
+        """
+        with self.db.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Get the current round_id from RoundData
+            cursor.execute("SELECT round_id FROM RoundData WHERE current_round = ?", (round_num,))
+            result = cursor.fetchone()
+            
+            if not result:
+                print(f"❌ No round data found for round {round_num}")
+                return
+            
+            round_id = result['round_id']
+            
+            # Check if we already have recipe links for this round_id
+            cursor.execute("""
+                SELECT COUNT(*) as link_count 
+                FROM RoundData_BuildRecipes 
+                WHERE round_id = ?
+            """, (round_id,))
+            
+            existing_links = cursor.fetchone()['link_count']
+            
+            if existing_links > 0:
+                # Already have links for this round_id, no need to update
+                print(f"🔄 Round {round_num} recipes already linked ({existing_links} recipes)")
+                return
+            
+            # No existing links, create them
+            cursor.execute("""
+                SELECT recipe_id FROM BuildRecipes 
+                WHERE structure_id = ?
+                ORDER BY recipe_id
+            """, (round_num,))
+            
+            recipes = cursor.fetchall()
+            
+            if not recipes:
+                print(f"⚠️  No recipes found for structure {round_num}")
+                return
+            
+            # Insert all recipe links for this round
+            for recipe in recipes:
+                cursor.execute("""
+                    INSERT INTO RoundData_BuildRecipes (round_id, recipe_id)
+                    VALUES (?, ?)
+                """, (round_id, recipe['recipe_id']))
+            
+            print(f"✅ NEW round: Linked {len(recipes)} recipes to round {round_num}")
+
+    def get_current_round_info(self):
+        """
+        Get the current round information and associated recipes
+        """
+        with self.db.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Get current round data
+            cursor.execute("""
+                SELECT round_id, current_round, last_updated 
+                FROM RoundData 
+                ORDER BY last_updated DESC 
+                LIMIT 1
+            """)
+            
+            round_data = cursor.fetchone()
+            if not round_data:
+                return None
+            
+            round_info = dict(round_data)
+            
+            # Get associated recipes from existing BuildRecipes table
+            cursor.execute("""
+                SELECT br.recipe_id, br.structure_id, br.item_type, 
+                       br.item_attributes, br.quantity
+                FROM BuildRecipes br
+                JOIN RoundData_BuildRecipes rdbr ON br.recipe_id = rdbr.recipe_id
+                WHERE rdbr.round_id = ?
+                ORDER BY br.recipe_id
+            """, (round_info['round_id'],))
+            
+            recipes = [dict(row) for row in cursor.fetchall()]
+            round_info['recipes'] = recipes
+            
+            return round_info
+
+    def get_current_round_materials_summary(self):
+        """
+        Get a summary of materials needed for the current round.
+        Works with existing BuildRecipes table data.
+        Returns a dictionary with item_type as key and total quantity as value
+        """
+        with self.db.get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Get current round
+            cursor.execute("""
+                SELECT round_id FROM RoundData 
+                ORDER BY last_updated DESC 
+                LIMIT 1
+            """)
+            
+            result = cursor.fetchone()
+            if not result:
+                return {}
+            
+            round_id = result['round_id']
+            
+            # Get materials summary for current round from existing BuildRecipes
+            cursor.execute("""
+                SELECT 
+                    CASE 
+                        WHEN br.item_type LIKE 'minecraft:%' 
+                        THEN SUBSTR(br.item_type, 11)  -- Remove 'minecraft:' prefix
+                        ELSE br.item_type 
+                    END as clean_item_type,
+                    SUM(br.quantity) as total_quantity
+                FROM BuildRecipes br
+                JOIN RoundData_BuildRecipes rdbr ON br.recipe_id = rdbr.recipe_id
+                WHERE rdbr.round_id = ? 
+                AND br.item_type != 'minecraft:air'  -- Exclude air blocks
+                GROUP BY clean_item_type
+                ORDER BY total_quantity DESC
+            """, (round_id,))
+            
+            materials = {}
+            for row in cursor.fetchall():
+                materials[row['clean_item_type']] = row['total_quantity']
+            
+            return materials
 
 
 class UserDataService:

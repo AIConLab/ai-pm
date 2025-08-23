@@ -239,19 +239,33 @@ def sync_player_data_table(
         
 
 def sync_round_data_table(
-    round_data_service:RoundDataService,
-    rcon:RCONClient,
+    round_data_service: RoundDataService,
+    rcon: RCONClient,
     config):
+    """
+    Sync the current round data from the game server to the database
+    """
     try:
         round_num = get_round_information(rcon)
-        if round_num:
-            print(f"✅ Currently in round: {round_num}")
-        else:
-            print("ℹ️  No active round")
 
-    
+        if round_num and 1 <= round_num <= 12:  # Valid rounds 1-12
+            print(f"🎯 Active round detected: {round_num}")
+            
+            # Update the current round number in the database
+            round_id = round_data_service.update_current_round_number(round_num)
+            
+            # Link the round to its corresponding structure recipes
+            round_data_service.update_current_structure_recipes_table(round_num)
+
+            
+        else:
+            print("ℹ️  No active round or invalid round number")
+
+
+        return round_num
+
     except Exception as e:
-        print(f"❌ Sync error: {e}")
+        print(f"❌ Round data sync error: {e}")
         import traceback
         traceback.print_exc()
 
@@ -304,6 +318,9 @@ def main():
 
         user_data_service = UserDataService(db=db)
         round_data_service = RoundDataService(db=db)
+
+        # TODO: AIPM service would go here, we need to pass the round number
+        #       so planner knows when to activate
 
         rcon = RCONClient()
         print("✅ Database and RCON initialized")
