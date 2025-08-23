@@ -255,11 +255,12 @@ def sync_round_data_table(
             round_id = round_data_service.update_current_round_number(round_num)
             
             # Link the round to its corresponding structure recipes
-            round_data_service.update_current_structure_recipes_table(round_num)
+            round_data_service.update_current_round_links(round_num)
 
             
         else:
             print("ℹ️  No active round or invalid round number")
+            round_data_service.clear_round_data()
 
 
         return round_num

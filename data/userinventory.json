@@ -1,65 +1,226 @@
 [
   {
-    "inventory_id": 5056,
+    "inventory_id": 8105,
     "user_id": 1,
-    "item_type": "music_disc_creator",
-    "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193154"
+    "item_type": "wooden_axe",
+    "quantity": 2,
+    "last_updated": "2025-08-23 11:16:44.112888"
   },
   {
-    "inventory_id": 5057,
+    "inventory_id": 8106,
     "user_id": 1,
-    "item_type": "stone_bricks",
+    "item_type": "white_terracotta",
     "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193377"
+    "last_updated": "2025-08-23 11:16:44.112992"
   },
   {
-    "inventory_id": 5058,
+    "inventory_id": 8107,
     "user_id": 1,
-    "item_type": "smooth_stone",
+    "item_type": "light_gray_concrete",
     "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193421"
+    "last_updated": "2025-08-23 11:16:44.113010"
   },
   {
-    "inventory_id": 5059,
+    "inventory_id": 8108,
     "user_id": 1,
-    "item_type": "music_disc_precipice",
+    "item_type": "oak_stairs",
     "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193443"
+    "last_updated": "2025-08-23 11:16:44.113022"
   },
   {
-    "inventory_id": 5060,
+    "inventory_id": 8109,
     "user_id": 1,
-    "item_type": "light_gray_wool",
+    "item_type": "dirt",
     "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193459"
+    "last_updated": "2025-08-23 11:16:44.113034"
   },
   {
-    "inventory_id": 5061,
+    "inventory_id": 8110,
     "user_id": 1,
-    "item_type": "villager_spawn_egg",
+    "item_type": "command_block",
     "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193476"
+    "last_updated": "2025-08-23 11:16:44.113045"
   },
   {
-    "inventory_id": 5062,
+    "inventory_id": 8111,
     "user_id": 1,
-    "item_type": "waxed_weathered_copper",
-    "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193492"
+    "item_type": "chain_command_block",
+    "quantity": 2,
+    "last_updated": "2025-08-23 11:16:44.113056"
   },
   {
-    "inventory_id": 5063,
-    "user_id": 1,
-    "item_type": "coal_block",
-    "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193515"
-  },
-  {
-    "inventory_id": 5064,
+    "inventory_id": 8112,
     "user_id": 1,
     "item_type": "sea_lantern",
     "quantity": 1,
-    "last_updated": "2025-07-16 02:04:30.193549"
+    "last_updated": "2025-08-23 11:16:44.113066"
+  },
+  {
+    "inventory_id": 8113,
+    "user_id": 1,
+    "item_type": "painting",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113077"
+  },
+  {
+    "inventory_id": 8114,
+    "user_id": 1,
+    "item_type": "stripped_oak_wood",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113088"
+  },
+  {
+    "inventory_id": 8115,
+    "user_id": 1,
+    "item_type": "pale_oak_button",
+    "quantity": 2,
+    "last_updated": "2025-08-23 11:16:44.113098"
+  },
+  {
+    "inventory_id": 8116,
+    "user_id": 1,
+    "item_type": "birch_pressure_plate",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113109"
+  },
+  {
+    "inventory_id": 8117,
+    "user_id": 1,
+    "item_type": "piston",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113119"
+  },
+  {
+    "inventory_id": 8118,
+    "user_id": 1,
+    "item_type": "orange_concrete",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113130"
+  },
+  {
+    "inventory_id": 8119,
+    "user_id": 1,
+    "item_type": "quartz_pillar",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113141"
+  },
+  {
+    "inventory_id": 8120,
+    "user_id": 1,
+    "item_type": "quartz_block",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113151"
+  },
+  {
+    "inventory_id": 8121,
+    "user_id": 1,
+    "item_type": "blue_dye",
+    "quantity": 58,
+    "last_updated": "2025-08-23 11:16:44.113162"
+  },
+  {
+    "inventory_id": 8122,
+    "user_id": 1,
+    "item_type": "sentry_armor_trim_smithing_template",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113173"
+  },
+  {
+    "inventory_id": 8123,
+    "user_id": 1,
+    "item_type": "red_candle",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113184"
+  },
+  {
+    "inventory_id": 8124,
+    "user_id": 1,
+    "item_type": "diamond_pickaxe",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113194"
+  },
+  {
+    "inventory_id": 8125,
+    "user_id": 1,
+    "item_type": "repeating_command_block",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113205"
+  },
+  {
+    "inventory_id": 8126,
+    "user_id": 1,
+    "item_type": "loom",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113215"
+  },
+  {
+    "inventory_id": 8127,
+    "user_id": 1,
+    "item_type": "flint_and_steel",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113226"
+  },
+  {
+    "inventory_id": 8128,
+    "user_id": 1,
+    "item_type": "brown_dye",
+    "quantity": 63,
+    "last_updated": "2025-08-23 11:16:44.113256"
+  },
+  {
+    "inventory_id": 8129,
+    "user_id": 1,
+    "item_type": "dune_armor_trim_smithing_template",
+    "quantity": 63,
+    "last_updated": "2025-08-23 11:16:44.113279"
+  },
+  {
+    "inventory_id": 8130,
+    "user_id": 1,
+    "item_type": "leather_boots",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113295"
+  },
+  {
+    "inventory_id": 8131,
+    "user_id": 1,
+    "item_type": "leather_leggings",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113312"
+  },
+  {
+    "inventory_id": 8132,
+    "user_id": 1,
+    "item_type": "leather_chestplate",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113339"
+  },
+  {
+    "inventory_id": 8133,
+    "user_id": 1,
+    "item_type": "golden_helmet",
+    "quantity": 2,
+    "last_updated": "2025-08-23 11:16:44.113365"
+  },
+  {
+    "inventory_id": 8134,
+    "user_id": 1,
+    "item_type": "bolt_armor_trim_smithing_template",
+    "quantity": 61,
+    "last_updated": "2025-08-23 11:16:44.113390"
+  },
+  {
+    "inventory_id": 8135,
+    "user_id": 1,
+    "item_type": "shears",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113416"
+  },
+  {
+    "inventory_id": 8136,
+    "user_id": 1,
+    "item_type": "enchanted_book",
+    "quantity": 1,
+    "last_updated": "2025-08-23 11:16:44.113441"
   }
 ]

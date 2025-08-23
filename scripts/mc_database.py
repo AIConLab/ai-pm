@@ -318,12 +318,19 @@ class Database:
 
     def export_all_tables_to_json(self, output_dir="/app/exports"):
         """Export all tables to JSON files"""
-        tables = ['Users', 
-        'UserInventory', 
-        'BuildRecipes', 
-        'GameMap', 
-        'ProcessingArea',
-        'ResourceArea']
+        tables = [
+            'Users', 
+            'UserInventory', 
+            'BuildRecipes', 
+            'GameMap', 
+            'ProcessingArea',
+            'ResourceArea',
+            'RoundData',
+            'RoundData_BuildRecipes',
+            'RoundData_GameMap', 
+            'RoundData_ProcessingArea',
+            'RoundData_ResourceArea'
+        ]
         
         print(f"📁 Exporting all tables to {output_dir}")
         exported_files = []
@@ -389,13 +396,13 @@ class RoundDataService:
                 
                 return round_id
 
-    def update_current_structure_recipes_table(self, round_num):
+    def update_current_round_links(self, round_num):
         """
-        Update the RoundData_BuildRecipes junction table to link the current round
-        with all recipes for the corresponding structure_id.
-        Only updates if this is a new round or round_id changed.
-        
-        Round number maps directly to structure_id (round 1 = structure 1, etc.)
+        Update all RoundData junction tables to link the current round with:
+        - BuildRecipes for the corresponding structure_id
+        - All GameMap waypoints (static data)
+        - All ProcessingArea items (static data) 
+        - All ResourceArea items (static data)
         """
         with self.db.get_connection() as conn:
             cursor = conn.cursor()
@@ -410,7 +417,7 @@ class RoundDataService:
             
             round_id = result['round_id']
             
-            # Check if we already have recipe links for this round_id
+            # Check if we already have any links for this round_id
             cursor.execute("""
                 SELECT COUNT(*) as link_count 
                 FROM RoundData_BuildRecipes 
@@ -420,112 +427,68 @@ class RoundDataService:
             existing_links = cursor.fetchone()['link_count']
             
             if existing_links > 0:
-                # Already have links for this round_id, no need to update
-                print(f"🔄 Round {round_num} recipes already linked ({existing_links} recipes)")
+                print(f"🔄 Round {round_num} already linked to all data")
                 return
             
-            # No existing links, create them
+            # Link to BuildRecipes for current structure
             cursor.execute("""
                 SELECT recipe_id FROM BuildRecipes 
                 WHERE structure_id = ?
-                ORDER BY recipe_id
             """, (round_num,))
             
             recipes = cursor.fetchall()
-            
-            if not recipes:
-                print(f"⚠️  No recipes found for structure {round_num}")
-                return
-            
-            # Insert all recipe links for this round
             for recipe in recipes:
                 cursor.execute("""
                     INSERT INTO RoundData_BuildRecipes (round_id, recipe_id)
                     VALUES (?, ?)
                 """, (round_id, recipe['recipe_id']))
             
-            print(f"✅ NEW round: Linked {len(recipes)} recipes to round {round_num}")
+            # Link to all GameMap waypoints (static)
+            cursor.execute("SELECT waypoint_id FROM GameMap")
+            waypoints = cursor.fetchall()
+            for waypoint in waypoints:
+                cursor.execute("""
+                    INSERT INTO RoundData_GameMap (round_id, waypoint_id)
+                    VALUES (?, ?)
+                """, (round_id, waypoint['waypoint_id']))
+            
+            # Link to all ProcessingArea items (static)
+            cursor.execute("SELECT item_id FROM ProcessingArea")
+            processing_items = cursor.fetchall()
+            for item in processing_items:
+                cursor.execute("""
+                    INSERT INTO RoundData_ProcessingArea (round_id, item_id)
+                    VALUES (?, ?)
+                """, (round_id, item['item_id']))
+            
+            # Link to all ResourceArea items (static)
+            cursor.execute("SELECT item_id FROM ResourceArea")
+            resource_items = cursor.fetchall()
+            for item in resource_items:
+                cursor.execute("""
+                    INSERT INTO RoundData_ResourceArea (round_id, item_id)
+                    VALUES (?, ?)
+                """, (round_id, item['item_id']))
+            
+            print(f"✅ NEW round: Linked {len(recipes)} recipes, {len(waypoints)} waypoints, {len(processing_items)} processing items, {len(resource_items)} resource items")
 
-    def get_current_round_info(self):
+    def clear_round_data(self):
         """
-        Get the current round information and associated recipes
+        Clear all round data (useful for testing or reset)
         """
         with self.db.get_connection() as conn:
             cursor = conn.cursor()
             
-            # Get current round data
-            cursor.execute("""
-                SELECT round_id, current_round, last_updated 
-                FROM RoundData 
-                ORDER BY last_updated DESC 
-                LIMIT 1
-            """)
+            # Clear junction tables first (foreign key constraints)
+            cursor.execute("DELETE FROM RoundData_BuildRecipes")
+            cursor.execute("DELETE FROM RoundData_GameMap") 
+            cursor.execute("DELETE FROM RoundData_ProcessingArea")
+            cursor.execute("DELETE FROM RoundData_ResourceArea")
             
-            round_data = cursor.fetchone()
-            if not round_data:
-                return None
+            # Clear main table
+            cursor.execute("DELETE FROM RoundData")
             
-            round_info = dict(round_data)
-            
-            # Get associated recipes from existing BuildRecipes table
-            cursor.execute("""
-                SELECT br.recipe_id, br.structure_id, br.item_type, 
-                       br.item_attributes, br.quantity
-                FROM BuildRecipes br
-                JOIN RoundData_BuildRecipes rdbr ON br.recipe_id = rdbr.recipe_id
-                WHERE rdbr.round_id = ?
-                ORDER BY br.recipe_id
-            """, (round_info['round_id'],))
-            
-            recipes = [dict(row) for row in cursor.fetchall()]
-            round_info['recipes'] = recipes
-            
-            return round_info
-
-    def get_current_round_materials_summary(self):
-        """
-        Get a summary of materials needed for the current round.
-        Works with existing BuildRecipes table data.
-        Returns a dictionary with item_type as key and total quantity as value
-        """
-        with self.db.get_connection() as conn:
-            cursor = conn.cursor()
-            
-            # Get current round
-            cursor.execute("""
-                SELECT round_id FROM RoundData 
-                ORDER BY last_updated DESC 
-                LIMIT 1
-            """)
-            
-            result = cursor.fetchone()
-            if not result:
-                return {}
-            
-            round_id = result['round_id']
-            
-            # Get materials summary for current round from existing BuildRecipes
-            cursor.execute("""
-                SELECT 
-                    CASE 
-                        WHEN br.item_type LIKE 'minecraft:%' 
-                        THEN SUBSTR(br.item_type, 11)  -- Remove 'minecraft:' prefix
-                        ELSE br.item_type 
-                    END as clean_item_type,
-                    SUM(br.quantity) as total_quantity
-                FROM BuildRecipes br
-                JOIN RoundData_BuildRecipes rdbr ON br.recipe_id = rdbr.recipe_id
-                WHERE rdbr.round_id = ? 
-                AND br.item_type != 'minecraft:air'  -- Exclude air blocks
-                GROUP BY clean_item_type
-                ORDER BY total_quantity DESC
-            """, (round_id,))
-            
-            materials = {}
-            for row in cursor.fetchall():
-                materials[row['clean_item_type']] = row['total_quantity']
-            
-            return materials
+            print("✅ Cleared all round data")
 
 
 class UserDataService:
