@@ -26,6 +26,9 @@ execute if score #current current_round matches 7 run scoreboard players operati
 execute if score #current current_round matches 8 run scoreboard players operation Round_8 round_times = #total_seconds bm_final
 execute if score #current current_round matches 9 run scoreboard players operation Round_9 round_times = #total_seconds bm_final
 
+# Teleport all players to the break area
+tp @a -55.39 65 96.847
+
 # End sequence
 title @a title {"text":"COMPLETE!","color":"green","bold":true}
 title @a subtitle [{"text":"Round ","color":"white"},{"score":{"name":"#current","objective":"current_round"},"color":"yellow","bold":true},{"text":" - ","color":"white"},{"score":{"name":"#total_seconds","objective":"bm_final"},"color":"green","bold":true},{"text":" seconds","color":"white"}]
