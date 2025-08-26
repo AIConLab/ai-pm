@@ -5,28 +5,40 @@ from agents import Agent, Runner
 import re
 
 from rcon_client import MessageService, RCONClient
-from mc_database import Database
+from mc_database import Database, UserDataService
 from utils import load_config
 
 class Actions:
     """Business logic for AI actions"""
     
-    def __init__(self):
+    def __init__(
+        self, 
+        config
+        )
+
         self.rcon_client = RCONClient(password_file="/mc-data/.rcon-cli.env")
         self.message_service = MessageService(self.rcon_client)
-        self.database = Database(db_path="/app/database/aipm.db")
-        self.config = load_config("/app/config.toml")
+
+        # Load db without init tables since mc_game_query already handles that
+        self.db = Database(
+            db_path="/app/database/aipm.db",
+            user_config=config
+            )
+
+        self.user_data_service = UserDataService(db=db)
+
+        self.config = config
 
     def handle_player_join(self, username):
         """Handle player join event"""
         print(f"🎮 Player joined: {username}")
-        self.database.add_user(username)
-        self.database.set_online(username, True)
+        self.user_data_service.add_user(username)
+        self.user_data_service.set_online(username, True)
 
     def handle_player_leave(self, username):
         """Handle player leave event"""
         print(f"👋 Player left: {username}")
-        self.database.set_online(username, False)
+        self.user_data_service.set_online(username, False)
 
     def handle_debug_command(self, username, command):
         """Handle @debug commands - SYSTEM COMMANDS ONLY"""
@@ -37,7 +49,7 @@ class Actions:
             "players": "List all online players", 
             "inv": "Show player inventory. Usage: @debug inv [playername]",
             "pos": "Show player position. Usage: @debug pos [playername]",
-            "db": "Show database statistics",
+            "database": "Show database statistics",
             "sync": "Force database sync",
             "status": "Show system status"
         }
@@ -53,7 +65,7 @@ class Actions:
         
         # System commands
         if command_lower == 'players':
-            online_users = self.database.get_online_users()
+            online_users = self.user_data_service.get_online_users()
             if online_users:
                 names = [user['minecraft_username'] for user in online_users]
                 response = f"Online players ({len(names)}): {', '.join(names)}"
@@ -64,7 +76,7 @@ class Actions:
         elif command_lower.startswith('inv'):
             # Get inventory of specified player or self
             target = command.split()[-1] if len(command.split()) > 1 else username
-            inventory = self.database.get_user_inventory(target)
+            inventory = self.user_data_service.get_user_inventory(target)
             
             if inventory:
                 items = [f"{item['item_type']} x{item['quantity']}" for item in inventory[:5]]  # First 5 items
@@ -78,7 +90,7 @@ class Actions:
         elif command_lower.startswith('pos'):
             # Get position of specified player or self
             target = command.split()[-1] if len(command.split()) > 1 else username
-            online_users = self.database.get_online_users()
+            online_users = self.user_data_service.get_online_users()
             target_user = next((u for u in online_users if u['minecraft_username'] == target), None)
             
             if target_user:
@@ -88,22 +100,22 @@ class Actions:
                 response = f"Player {target} not found or offline"
             self.message_service.send_private(username, response)
         
-        elif command_lower == 'db':
+        elif command_lower == 'database':
             try:
-                all_users = self.database.get_all_users()
+                all_users = self.user_data_service.get_all_users()
                 online_count = len([u for u in all_users if u['is_online']])
-                response = f"DB Stats: {len(all_users)} total users, {online_count} online, DB: {self.database.db_path}"
+                response = f"user_data_service Stats: {len(all_users)} total users, {online_count} online, user_data_service: {self.user_data_service.user_data_service_path}"
                 self.message_service.send_private(username, response)
             except Exception as e:
-                self.message_service.send_private(username, f"DB error: {str(e)}")
+                self.message_service.send_private(username, f"user_data_service error: {str(e)}")
         
         elif command_lower == 'sync':
             response = "Database sync triggered (not implemented yet)"
             self.message_service.send_private(username, response)
         
         elif command_lower == 'status':
-            online_users = self.database.get_online_users()
-            all_users = self.database.get_all_users()
+            online_users = self.user_data_service.get_online_users()
+            all_users = self.user_data_service.get_all_users()
             
             status_lines = [
                 f"System Status:",
@@ -128,13 +140,13 @@ class Actions:
         """Handle @aipm commands - AI INQUIRIES ONLY"""
 
         help_message = """AIPM Assistant:
-    I'm your AI project manager! Ask me:
-    • Minecraft questions: "how do I craft redstone?"
-    • Strategy advice: "what should we build first?"  
-    • Project management: "how should we organize our team?"
-    • Building tips: "best materials for a castle?"
+        I'm your AI project manager! Ask me:
+        • Minecraft questions: "how do I craft redstone?"
+        • Strategy advice: "what should we build first?"  
+        • Project management: "how should we organize our team?"
+        • Building tips: "best materials for a castle?"
 
-    Just type your question after the command!"""
+        Just type your question after the command!"""
 
         command_clean = command.lower().strip()
 
@@ -149,10 +161,10 @@ class Actions:
             return
 
         # All other commands go to AI
-        self.get_ai_pm_response(username=username, command=command)
+        self.get_ai_helper_response(username=username, command=command)
         
-
-    def get_ai_pm_response(self, username="player", command=""):
+    
+    def get_ai_helper_response(self, username="player", command=""):
         """Generate and send private AI response"""
         try:
             print(f"🤖 Processing @aipm command from {username}: '{command}'")
@@ -172,5 +184,51 @@ class Actions:
                 print("❌ Failed to send AI response")
                 
         except Exception as e:
-            print(f"❌ Error in ai_pm_response: {e}")
+            print(f"❌ Error in ai_helper_response: {e}")
             self.message_service.send_private(username, "Sorry, I'm having trouble right now. Try again later!")
+
+    
+    def handle_aipm_logic(self, round_number:int):
+        """
+        Handles the AIPM agent syncing if the current round is an AIPM one.
+        """
+        try:
+            aipm_rounds = [1, 4, 7]
+
+            if round_num in aipm_rounds:
+                # Get high level plan from AI Planner
+                plan_msg = actions.get_aipm_plan()
+
+                # Get personel specific plans from AI Manager
+                actions.send_aipm_plan(plan_msg=plan_msg)
+
+        except Exception as e:
+            raise e
+
+
+    def get_aipm_plan(self):
+        """
+        Calls the planning agent, a high level reasoning planning agent,
+        to create the optimial high level plan to complete the structure in
+        min time
+        Injects:
+         - prompt from config
+         - round data from RoundData Table
+
+        Output:
+          - High Level Plan str
+
+        High level plan is saved as a timestamped file for debugging
+        """
+        pass
+
+    def send_aipm_plan(self, high_level_plan_msg:str):
+        """
+        Given a high level plan, breaks down the plan
+        as direct instructions for each player on the team.
+        Then uses rct to announce instructions to server for 
+        players to read.
+
+        Stores instructions as timestamped file for debugging
+        """
+        pass

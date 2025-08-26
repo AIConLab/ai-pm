@@ -10,6 +10,7 @@ from typing import List
 import sys
 
 from mc_database import Database, UserDataService, RoundDataService
+from mc_actions import Actions
 from rcon_client import RCONClient
 from utils import load_config
 
@@ -275,7 +276,8 @@ def sync_server_data(
     user_data_service:UserDataService,
     round_data_service:RoundDataService,
     rcon:RCONClient,
-    config):
+    config,
+    actions=Actions):
 
     """Updated sync function with proper inventory replacement"""
     try:
@@ -286,11 +288,17 @@ def sync_server_data(
         )
 
 
-        sync_round_data_table(
+        round_num = sync_round_data_table(
             round_data_service=round_data_service,
             rcon=rcon,
             config=config
         )
+
+        # Send round num to Action class to handle AI logic
+        # if an AIPM round
+        if round_num not None:
+            actions.handle_aipm_logic(int(round_num))
+
 
     except Exception as e:
         print(f"❌ Sync error: {e}")
@@ -320,8 +328,7 @@ def main():
         user_data_service = UserDataService(db=db)
         round_data_service = RoundDataService(db=db)
 
-        # TODO: AIPM service would go here, we need to pass the round number
-        #       so planner knows when to activate
+        actions = Actions(config=config)
 
         rcon = RCONClient()
         print("✅ Database and RCON initialized")
@@ -340,6 +347,7 @@ def main():
                 round_data_service=round_data_service,
                 rcon=rcon,
                 config=config
+                actions=actions
             )
 
             time.sleep(query_interval)

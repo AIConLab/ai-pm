@@ -32,9 +32,8 @@ def main():
         print("✅ Configuration loaded successfully")
         
         # Initialize actions
-        print("🔧 Initializing actions...")
-        actions = Actions()
-        print("✅ Actions initialized")
+
+        actions = Actions(config=config)
 
         LOG_PATH = config["minecraft"]["log_path"]
         print(f"📁 Log path: {LOG_PATH}")
@@ -101,7 +100,6 @@ def main():
 
                     # TODO: round start event, round progress event
 
-        
     except KeyboardInterrupt:
         print("\n🛑 Stopping...")
 
