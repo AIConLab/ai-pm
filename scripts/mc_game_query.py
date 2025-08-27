@@ -296,7 +296,7 @@ def sync_server_data(
 
         # Send round num to Action class to handle AI logic
         # if an AIPM round
-        if round_num not None:
+        if round_num is not None:
             actions.handle_aipm_logic(int(round_num))
 
 
@@ -346,7 +346,7 @@ def main():
                 user_data_service=user_data_service,
                 round_data_service=round_data_service,
                 rcon=rcon,
-                config=config
+                config=config,
                 actions=actions
             )
 

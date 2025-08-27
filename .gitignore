@@ -116,11 +116,6 @@ output/
 *.backup
 *~
 
-# Logs
-*.log
-logs/
-log/
-
 # Config Files with Sensitive Data
 config.json
 secrets.json

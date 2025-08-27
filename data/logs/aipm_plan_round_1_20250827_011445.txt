@@ -1,0 +1,63 @@
+AIPM High-Level Plan - Round 1
+Generated at: 20250827_011445
+==================================================
+
+STRATEGY SUMMARY – ROUND 1 (Structure 1)
+
+Team roles (assign once all three players are present):  
+• Player 1 (P1) – Oak Stairs  
+• Player 2 (P2) – Light Gray Concrete  
+• Player 3 (P3) – Iron Bars  
+
+1. RESOURCE COLLECTION  
+• P1 (Stairs)  
+ – Travel: Structure ← Resource (55 m east) → Processing → Structure  
+ – At Resource: take 8 oak logs (32 planks), craft at Processing into planks → craft 20 oak stairs.  
+ – Inventory: stairs only (20).  
+• P2 (Concrete)  
+ – Travel: Structure ← Resource → Processing → Structure  
+ – At Resource: collect 25 light_gray_concrete_powder.  
+ – At Processing: fill 1 bucket with water.  
+ – Inventory: 25 powder + 1 water bucket.  
+• P3 (Iron Bars)  
+ – Travel: Structure ← Resource → Structure  
+ – At Resource: pick 5 “minecraft:iron_bars([east=false,…,west=false])”.  
+ – Inventory: 5 iron bars.  
+
+All three begin collection simultaneously.  
+
+2. PROCESSING WORKFLOW  
+• Only P1 and P2 use Processing area:  
+ – P1: crafting_table → planks → stairs (1 trip).  
+ – P2: furnace area bucket → water (instant).  
+• No smelting required.  
+
+3. BUILD EXECUTION PLAN  
+Milestones (from T=0 when first block placed):  
+ M1 – Resources on‐site  
+ M2 – Oak stair perimeter complete  
+ M3 – Concrete fill complete  
+ M4 – Iron bars in position  
+ M5 – Final verification & corrections  
+
+Sequence & Parallelism:  
+• M1 (t≈ 20 s): all three arrive and stash inventories at build point.  
+• M2 (t≈ T+60 s):  
+ – P1 places stairs around the 4 sides (5 each, correctly facing).  
+• M3 (t≈ T+45 s overlapping):  
+ – P2 immediately pours water bucket into one corner, then lays 25 concrete powder blocks against water to instantly convert. Works inward from one edge.  
+• M4 (t≈ T+20 s):  
+ – P3 places 5 iron bars at their exact blueprint positions (coordination with P1 for no overlap).  
+• M5 (t≈ T+15 s):  
+ – All players sweep, verify orientations and counts, correct any mis‐placements.
+
+Critical‐path note: P1’s stair crafting + placement is longest single task—start it immediately. P2 and P3 complete faster; they should assist in sweep at end if idle.  
+
+4. TEAM COORDINATION & CHECKPOINTS  
+• Call “M1 ready” when all on‐site.  
+• P1 calls every 5 stairs placed (“5/20 south done,” etc.).  
+• P2 calls when powder run out or fill complete.  
+• P3 calls “bars done” immediately upon finish.  
+• Final “check” call when M5 validation is complete.  
+
+By parallelizing raw block conversion (P2), simple placement (P3), and more complex crafting + build (P1), you minimize idle time and total round duration. Good luck!

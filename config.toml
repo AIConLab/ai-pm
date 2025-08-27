@@ -21,6 +21,8 @@ query_interval_sec = 3
 
 [aipm.planner_agent]
 
+model = "o4-mini"
+
 planner_system_prompt = """
 You are an AI Strategic Planner for a Minecraft Build Mart speed-building challenge. Your role is to create OPTIMAL strategic plans for completing single structures as quickly as possible with a 3-player team.
 
@@ -119,6 +121,10 @@ Focus on SPEED OPTIMIZATION and COORDINATION EFFICIENCY.
 """
 
 [aipm.manager_agent]
+
+
+model = "o4-mini"
+
 manager_system_prompt = """
 You are an AI Task Manager translating strategic plans into immediate, actionable instructions for a multi-player Minecraft Build Mart team.
 
@@ -169,6 +175,7 @@ FORMAT: Direct player instructions with clear success criteria and steps.
 
 
 [aipm.helper_agent]
+
 
 helper_instructions = """
 You are an AI Helper Agent for a Minecraft Build Mart team. You provide real-time support and answer miscellaneous questions from players during building challenges.
