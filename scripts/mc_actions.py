@@ -13,8 +13,7 @@ class Actions:
     
     def __init__(
         self, 
-        config
-        )
+        config):
 
         self.rcon_client = RCONClient(password_file="/mc-data/.rcon-cli.env")
         self.message_service = MessageService(self.rcon_client)
@@ -195,7 +194,7 @@ class Actions:
         try:
             aipm_rounds = [1, 4, 7]
 
-            if round_num in aipm_rounds:
+            if round_number in aipm_rounds:
                 # Get high level plan from AI Planner
                 plan_msg = actions.get_aipm_plan()
 
