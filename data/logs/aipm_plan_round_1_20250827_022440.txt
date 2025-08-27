@@ -1,0 +1,64 @@
+AIPM High-Level Plan - Round 1
+Generated at: 20250827_022440
+==================================================
+
+Strategic Plan – Round 1 (Structure 1)
+
+Team roles (P1–P3) assume all spawn at structure site at T₀.  
+
+1. Resource & Tool Staging  
+  • P1 → Processing area (−69 X)  
+      – Grab 1× crafting_table, 1× water_bucket, 1× scaffolding stack  
+      – Run straight to build site, drop crafting_table & bucket in staging zone.  
+  • P2 → Resource area (+34 X)  
+      – In one sweep collect:  
+        · 8 oak_logs (for 32 planks → 20 stairs)  
+        · 1 stack light_gray_concrete_powder (need 25)  
+        · 5 iron_bars ([all false])  
+      – Return direct to build site.  
+  • P3 → Resource area (same trip window as P2)  
+      – Optional “runner” to back up P2 if mis-stack or snag. Otherwise proceed to site empty-handed as third builder.  
+
+   ­— Travel times:  
+     P1 Processing→Site ~45 s  
+     P2/3 Resource→Site ~55 s  
+
+2. On-Site Processing & Prep (T≈55–80 s)  
+  • P1 sets up crafting_table & places water bucket on staging slab.  
+  • P2 dumps all powder & iron_bars into staging chest or floor-stack.  
+  • P1 crafts stairs on table:  
+      – Logs→planks via 2×2 grid (8 logs→32 planks instant)  
+      – 5× stair recipes (6 planks→4 stairs) = 20 stairs total (~5 s per craft ×5 =25 s)  
+      – Hands stair stacks to P2 or P3 as crafted.  
+  • P2 converts concrete powder → block:  
+      – Lay powder in 5×5 pad, use water_bucket → concrete blocks, break into inventory (~20 s).  
+
+3. Build Execution & Parallel Placement (T≈80 s onward)  
+  • P3 (Lead Builder) reads blueprint and lays out footprint with temporary block markers or ground-level guidelines.  
+  • P2 & P1 feed P3:  
+      – P1 hands over stairs as needed.  
+      – P2 hands over concrete blocks and iron bars.  
+  • All three place blocks in lock-step:  
+      – P3 focuses on orientation-critical pieces (stairs & iron_bars).  
+      – P1/P2 fill light_gray_concrete.  
+      – Use scaffolding for any overhead placement.  
+
+4. Critical Path & Milestones  
+  Milestone 1 (T≈55 s) – All raw materials & kit staged at site.  
+  Milestone 2 (T≈80 s) – All stairs crafted & concrete blocks ready.  
+  Milestone 3 (T≈85 s) – First block placed; continuous pipeline begins.  
+  Milestone 4 (T≈120 s) – 50 % of blocks placed (checked against blueprint).  
+  Milestone 5 (T≈150 s) – All orientation-sensitive elements (25 stairs, 5 iron_bars) placed.  
+  Final check & touch-ups (T≈160 s target).  
+
+5. Communication Checkpoints  
+  • “Resources staged” @ 55 s  
+  • “Processing done” @ 80 s  
+  • “50 % built” @ 120 s  
+  • “Stairs/Iron done” @ 150 s  
+
+Summary of Optimizations  
+  – One‐trip harvest of all raw materials (P2)  
+  – One‐trip tool deployment and on-site processing (P1)  
+  – Dedicated builder (P3) w/ two feeders to sustain maximum place-rate  
+  – Milestone‐based pacing to avoid idle time and bottle-necks.

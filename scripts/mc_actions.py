@@ -225,6 +225,9 @@ class Actions:
             else:
                 print(f"ℹ️  Round {round_number} is not an AIPM round (1,4,7)")
 
+                # Reset last planned
+                self.last_planned_round = None
+
         except Exception as e:
             print(f"❌ Error in AIPM logic for round {round_number}: {e}")
             import traceback
