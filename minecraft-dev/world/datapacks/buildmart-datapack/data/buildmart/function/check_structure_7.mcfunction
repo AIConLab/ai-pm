@@ -6,11 +6,11 @@
 # Initialize check
 scoreboard players set #valid bm_status 1
 
-# Count peony (check only lower half - need exactly 4 flowers total)
-# When a tall flower is placed, both upper and lower halves are created automatically
-execute store result score #peony bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:peony[half=lower]
-execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:peony[half=lower] replace minecraft:barrier
-execute unless score #peony bm_timer matches 4 run scoreboard players set #valid bm_status 0
+# Count total peony blocks (need exactly 8 total - 4 flowers = 4 lower + 4 upper halves)
+# Count all peony blocks together to avoid breaking the tall plant connection
+execute store result score #peony bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:peony
+execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:peony replace minecraft:barrier
+execute unless score #peony bm_timer matches 8 run scoreboard players set #valid bm_status 0
 
 # Count oak_planks (need exactly 8)
 execute store result score #oak_planks bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:oak_planks
@@ -68,7 +68,7 @@ execute store result score #lantern bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecr
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:lantern[hanging=true,waterlogged=false] replace minecraft:barrier
 execute unless score #lantern bm_timer matches 12 run scoreboard players set #valid bm_status 0
 
-# Count total nether_brick_stairs blocks (need exactly 48 total - sum of all stair variants)
+# Count total nether_brick_stairs blocks (need exactly 48 total)
 execute store result score #nether_stairs bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:nether_brick_stairs
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:nether_brick_stairs replace minecraft:barrier
 execute unless score #nether_stairs bm_timer matches 48 run scoreboard players set #valid bm_status 0
