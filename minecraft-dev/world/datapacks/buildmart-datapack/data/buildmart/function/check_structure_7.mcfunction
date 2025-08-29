@@ -6,7 +6,8 @@
 # Initialize check
 scoreboard players set #valid bm_status 1
 
-# Check peony at the four corners of build area (need exactly 4)
+# Check peony at specific coordinates (need exactly 4 flowers at corners)
+# Peonies are 2-block tall flowers, so we check for lower half at ground level
 scoreboard players set #peony_count bm_timer 0
 execute if block ~-3 ~1 ~-3 minecraft:peony[half=lower] run scoreboard players add #peony_count bm_timer 1
 execute if block ~3 ~1 ~-3 minecraft:peony[half=lower] run scoreboard players add #peony_count bm_timer 1
@@ -19,12 +20,12 @@ execute store result score #oak_planks bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 min
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:oak_planks replace minecraft:barrier
 execute unless score #oak_planks bm_timer matches 8 run scoreboard players set #valid bm_status 0
 
-# Count total oak_fence blocks (need exactly 44 total - sum of all fence variants)
+# Count total oak_fence blocks (need exactly 44 total - stairs reorient incorrectly)
 execute store result score #oak_fence bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:oak_fence
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:oak_fence replace minecraft:barrier
 execute unless score #oak_fence bm_timer matches 44 run scoreboard players set #valid bm_status 0
 
-# Count total oak_fence_gate blocks (need exactly 4 total - sum of all gate variants)
+# Count total oak_fence_gate blocks (need exactly 4 total - gates reorient incorrectly)
 execute store result score #oak_fence_gate bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:oak_fence_gate
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:oak_fence_gate replace minecraft:barrier
 execute unless score #oak_fence_gate bm_timer matches 4 run scoreboard players set #valid bm_status 0
@@ -64,7 +65,7 @@ execute store result score #lantern_hanging bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:lantern[hanging=true,waterlogged=false] replace minecraft:barrier
 execute unless score #lantern_hanging bm_timer matches 12 run scoreboard players set #valid bm_status 0
 
-# Count total nether_brick_stairs blocks (need exactly 48 total - sum of all stair variants)
+# Count total nether_brick_stairs blocks (need exactly 48 total - stairs reorient incorrectly)
 execute store result score #nether_stairs bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:nether_brick_stairs
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:nether_brick_stairs replace minecraft:barrier
 execute unless score #nether_stairs bm_timer matches 48 run scoreboard players set #valid bm_status 0
