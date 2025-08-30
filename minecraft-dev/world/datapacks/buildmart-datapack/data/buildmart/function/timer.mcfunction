@@ -10,6 +10,8 @@ execute if score #round_active bm_status matches 1 if score #current current_rou
 execute if score #round_active bm_status matches 1 if score #current current_round matches 7 run function buildmart:check_structure_7
 execute if score #round_active bm_status matches 1 if score #current current_round matches 8 run function buildmart:check_structure_8
 execute if score #round_active bm_status matches 1 if score #current current_round matches 9 run function buildmart:check_structure_9
+execute if score #round_active bm_status matches 1 if score #current current_round matches 10 run function buildmart:check_structure_10
+
 
 # Update timer display in action bar
 execute if score #round_active bm_status matches 1 store result score #elapsed bm_timer run time query gametime
