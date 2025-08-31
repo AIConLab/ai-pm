@@ -21,7 +21,7 @@ services:
       EULA: "TRUE"
       TYPE: "PAPER"
       VERSION: "1.21.4"
-      MEMORY: "4G"
+      MEMORY: "6G"
       DIFFICULTY: "peaceful"
       MODE: "creative"
       MAX_PLAYERS: 20
