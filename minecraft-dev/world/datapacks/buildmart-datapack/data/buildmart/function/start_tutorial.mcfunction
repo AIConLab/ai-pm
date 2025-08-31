@@ -21,5 +21,8 @@ title @a subtitle {"text":"Tutorial Round","color":"yellow","bold":true}
 playsound minecraft:entity.player.levelup master @a ~ ~ ~ 1 0.5
 playsound minecraft:block.bell.use master @a ~ ~ ~ 1 1
 
+# Clear the action bar to prevent leftover timer display
+title @a actionbar {"text":""}
+
 # Notification that the tutorial has started
 tellraw @a ["",{"text":"[","color":"dark_gray"},{"text":"BUILD MART","color":"gold","bold":true},{"text":"] ","color":"dark_gray"},{"text":"Tutorial Round Started!","color":"green"}]
