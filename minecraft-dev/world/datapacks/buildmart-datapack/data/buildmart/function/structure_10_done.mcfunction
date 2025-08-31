@@ -23,5 +23,4 @@ particle minecraft:happy_villager ~ ~2 ~ 1 1 1 0.1 100
 # Announce and teleport
 tellraw @a ["",{"text":"[","color":"dark_gray"},{"text":"BUILD MART","color":"gold","bold":true},{"text":"] ","color":"dark_gray"},{"text":"Tutorial structure validated! ","color":"green"},{"text":"Teleporting to the next area...","color":"yellow"}]
 
-# Teleport all players to the break area
-tp @a -55.39 65 96.847
+function buildmart:end_round
