@@ -1,0 +1,106 @@
+AIPM Player Instructions - Round 1
+Generated at: 20250831_003452
+==================================================
+
+HIGH-LEVEL PLAN:
+Strategic Plan – Round 1 (Structure 1)
+
+1. RESOURCE COLLECTION PRIORITIES  
+ • Raw materials (1 roundtrip by “Shuttler” – P1):  
+   – 4 oak logs  
+   – 25 light_gray_concrete_powder  
+   – 1 iron_block  
+ • Pre-position tools at build site (initial run by P1):  
+   – 1 crafting_table  
+   – 1 water_bucket  
+
+2. PROCESSING WORKFLOW (at build site)  
+ • Setup (P1 upon return ~T+20s):  
+   – Place crafting_table + water source for concrete hardening  
+ • Conversion steps (P2 “Crafter” upon raw-mat arrival ~T+50s):  
+   1. Oak logs → planks (1 craft, 1s) → stairs (5×3plank→4stairs, 5 crafts, 5s)  
+   2. Iron_block → 9 ingots (1s) → iron bars (6ingots→16bars, 1s)  
+   3. Concrete powder → 25 concrete blocks via water hardening (~0.5s/block, 12.5s)  
+ • Total processing ≈20 s (T+50…70s)  
+
+3. BUILD EXECUTION SEQUENCE (P3 “Builder”)  
+ • Foundation (25 light_gray_concrete): begin placing as soon as first blocks emerge (~T+55s), finish by ~T+70s  
+ • Walls/outline if any (none for this simple structure)  
+ • Roof/stair ring (20 oak_stairs): place in drawing order—south, east, north, west—finish by ~T+80s  
+ • Details (5 iron_bars): install in pre-marked slots, finish by ~T+85s  
+
+4. TEAM ROLES & TASK ALLOCATION  
+ P1 “Shuttler”  
+  – T+0: sprint → processing area (–69, –84) → grab crafting_table + bucket → run to build (–20, –86) (done ~T+20s)  
+  – Immediately run → resource area (34, –83) → collect logs/powder/block → return to build (~T+50s)  
+ P2 “Crafter”  
+  – T+0…50s: wait at build (clear area, lay out 5×5 footprint markers/scaffolding)  
+  – T+50…70s: convert all raw mats into final blocks/stairs/bars at the workbench + water  
+  – Stage outputs on ground in build-order piles  
+ P3 “Builder”  
+  – T+0…50s: set up scaffold grid, mark block positions with temporary blocks  
+  – T+55…70s: begin placing concrete foundation as P2 delivers  
+  – T+70…85s: place oak stairs in prescribed orientation, then iron bars  
+  – Final check & adjust waterlogging/state (if needed) by ~T+90s  
+
+5. KEY MILESTONES & TIMING  
+ T+0 s  – Start at build site; P1 departs for toolkit  
+ T+20 s – Crafting_station & water ready  
+ T+50 s – Raw mats delivered to build site  
+ T+70 s – All processed materials on-site (stairs, bars, blocks)  
+ T+85 s – Structural block placement complete  
+ T+90 s – Final details & verification → ROUND 1 COMPLETE  
+
+Focus on eliminating idle travel: pre-stage all processing tools at build, pipeline raw → processed → built, with clear hand-offs at each ~20 s interval.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+Player jc_cr – Immediate Round 1 Tasks
+
+TIME T+0 → T+20 s  (P1 “Shuttler” & P2 “Setup” combined)
+1. Sprint to Processing Area at X:-69, Z:-84
+   • Open supply chest → withdraw  
+     – 1 crafting_table  
+     – 1 water_bucket  
+2. Return to Build Site at X:-20, Z:-86 (arrive by ~T+20 s)
+3. At build-site center:  
+   • Place crafting_table on ground  
+   • Place water from bucket into a block space immediately north of the table  
+Success Criteria (by T+20 s): crafting_table placed + water source ready.
+
+TIME T+20 → T+50 s  (P1 “Shuttler” continued)
+1. Immediately run to Resource Area at X:34, Z:-83
+2. Collect exact quantities:  
+   – 4 oak_logs  
+   – 25 light_gray_concrete_powder  
+   – 1 iron_block  
+3. Return to Build Site by T+50 s
+4. At the build-site, unload raw materials in piles south of crafting_table:
+   • Logs ×4, Powder ×25, Iron_block ×1  
+
+Success Criteria (by T+50 s): All raw mats staged next to crafting_table.
+
+TIME T+50 → T+70 s  (P2 “Crafter”)
+1. Using crafting_table & water source, process materials:
+   a. Oak_logs → planks → craft 5×(3plank→4 oak_stairs) = 20 oak_stairs  
+   b. Iron_block → 9 iron_ingots → craft iron_bars (6 ingots → 16 iron_bars)  
+   c. Harden 25 light_gray_concrete_powder one-by-one in water → 25 concrete_blocks  
+2. Stage finished items into build-order piles around workbench:
+   • Concrete blocks pile to east  
+   • Oak stairs pile to south  
+   • Iron bars pile to west  
+
+Success Criteria (by T+70 s): 25 concrete, 20 oak_stairs, ≥5 iron_bars staged.
+
+TIME T+55 → T+85 s  (P3 “Builder” – overlap allowed)
+1. T+55→70 s: Place 25 concrete_blocks in 5×5 foundation grid  
+   • Start at south-west corner of footprint  
+   • Fill rows west→east, south→north  
+2. T+70→80 s: Place 20 oak_stairs around top edge:
+   • South side (5 stairs, facing south) → East → North → West  
+   • Follow reference orientation  
+3. T+80→85 s: Install 5 iron_bars into pre-marked central slots  
+4. T+85→90 s: Final check – ensure all blocks oriented/state-correct  
+
+Overall Success (by T+90 s): Structure 1 exact replica built with all details.

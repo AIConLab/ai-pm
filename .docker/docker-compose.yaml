@@ -1,0 +1,103 @@
+#File: .docker/docker-compose.yml
+services:
+  
+  # Python base for shared image
+  py-base:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    user: "${UID:-1000}:${GID:-1000}"
+    env_file: .env
+    ports:
+      - "5000:5000"
+
+  # Listens to minecraft events and generates an appropiate response
+  event_listener:
+    extends: py-base
+    volumes:
+      - ../scripts:/app/scripts
+      - ../config.toml:/app/config.toml
+      - ../data:/app/database
+      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+    command: bash -c "python3 /app/scripts/mc_event_listener.py"
+
+  # Queries game state at fixed intervals and writes to DB
+  game_query:
+      extends: py-base
+      volumes:
+      - ../scripts:/app/scripts
+      - ../data:/app/database
+      - ../config.toml:/app/config.toml
+      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+      command: bash -c "python3 /app/scripts/mc_game_query.py"
+
+  nbt:
+    extends: py-base
+    volumes:
+      - ../scripts:/app/scripts
+      - ../data:/app/database
+      - ../config.toml:/app/config.toml
+      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+    command: bash -c "python3 /app/scripts/create_resource_area_table.py"
+
+
+  export_tables:
+    extends: py-base
+    volumes:
+      - ../scripts:/app/scripts
+      - ../data:/app/database
+      - ../config.toml:/app/config.toml
+      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+    command: bash -c "python3 /app/scripts/export_tables.py"
+
+  # Minecraft server service
+  minecraft:
+    image: itzg/minecraft-server:latest
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      VERSION: "1.21.4"
+      MEMORY: "6G"
+      DIFFICULTY: "peaceful"
+      MODE: "creative"
+      MAX_PLAYERS: 20
+      WHITELIST: |
+        Loopking
+        BT1013
+        jc_cr
+      ONLINE_MODE: "true"
+      ENABLE_COMMAND_BLOCK: "true"
+      LEVEL_TYPE: "flat"
+      GENERATOR_SETTINGS: >-
+        {
+          "layers": [],
+          "biome": "minecraft:the_void"
+        }
+      OPS: "Loopking,BT1013,jc_cr"
+      RCON_CMDS_STARTUP: |-
+            gamerule doDaylightCycle false
+            time set day
+            gamerule doWeatherCycle false
+            weather clear
+    ports:
+      - "25565:25565"
+    volumes:
+      - ../minecraft-dev:/data
+    restart: unless-stopped
+
+  # For running latex
+  latex:
+      user: "${UID:-1000}:${GID:-1000}"
+      build:
+        context: ..
+        dockerfile: .docker/Dockerfile.latex 
+      ports:
+        - "3000:3000"  # For LaTeX Workshop
+      working_dir: /project
+      command: tail -f /dev/null
+      volumes:
+       - ../paper/src:/project/src
+       - ../paper/output:/project/output
+       - ../paper/figures:/project/figures
+       - ../paper/include:/project/include
+

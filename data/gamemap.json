@@ -1,0 +1,32 @@
+[
+  {
+    "waypoint_id": 1,
+    "waypoint_name": "build_area",
+    "waypoint_type": "build",
+    "x": -20.672,
+    "y": 65.0,
+    "z": -86.143,
+    "description": "Main building and construction area",
+    "last_updated": "2025-08-23 11:16:56.145612"
+  },
+  {
+    "waypoint_id": 2,
+    "waypoint_name": "resource_area",
+    "waypoint_type": "resource",
+    "x": 34.398,
+    "y": 65.0,
+    "z": -83.75,
+    "description": "Resource gathering and mining area",
+    "last_updated": "2025-08-23 11:16:56.145799"
+  },
+  {
+    "waypoint_id": 3,
+    "waypoint_name": "processing_area",
+    "waypoint_type": "processing",
+    "x": -69.365,
+    "y": 66.0,
+    "z": -84.426,
+    "description": "Item processing and crafting area",
+    "last_updated": "2025-08-23 11:16:56.145857"
+  }
+]

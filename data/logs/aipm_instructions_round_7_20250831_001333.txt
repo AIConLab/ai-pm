@@ -1,0 +1,121 @@
+AIPM Player Instructions - Round 7
+Generated at: 20250831_001333
+==================================================
+
+HIGH-LEVEL PLAN:
+Strategic Plan – Round 7 (Structure 7)  
+Team roles: Player A (Log-&-Plank Specialist), Player B (Fixtures & Décor Specialist), Player C (Layout & Builder Lead)
+
+1. RESOURCE COLLECTION  
+• Player A → Resource area (34.4,65.0,–83.8)  
+  – Collect 80 oak_logs  
+• Player B → Resource area  
+  – Collect 12 chains + 12 lanterns (hanging)  
+  – Collect 8 peonies  
+  – Collect all 48 nether_brick_stairs (orientation-specific)  
+• Player C → Immediately run to build site (–20.7,65.0,–86.1)  
+  – Place scaffolding grid and outline footprint of 20 stripped_oak_wood “posts”  
+
+2. PROCESSING WORKFLOW (Processing area: –69.4,66.0,–84.4)  
+Players A & B converge on processing area as soon as they finish collecting.  
+• Player A (Log→Wood pipeline)  
+  1. Strip 20 oak_logs → stripped_oak_wood (netherite axe)  
+  2. Craft remaining 60 logs → 240 oak_planks (×4)  
+• Player B (Plank→Fence/Trapdoor/Gate pipeline)  
+  1. From A’s 240 planks: craft 208 planks into:  
+     – 44 oak_fence  
+     – 4 oak_fence_gate  
+     – 16 oak_trapdoor  
+     – retain 8 oak_planks as raw blocks  
+  2. Craft sticks as needed in-line (plank → sticks → fence/gate)  
+
+Parallelization tip: A strips while B crafts → switch to help once one queue empties.  
+
+3. BUILD EXECUTION (Critical Path)  
+Milestone 1 (t=0–30s):  
+• C establishes footprint + scaffolding grid;  
+• A & B at resource area.  
+Milestone 2 (t=30–90s):  
+• A finishes log haul → moves to processing;  
+• B finishes lanters/chains/peonies/stairs haul → moves to processing;  
+• C marks vertical post locations.  
+Milestone 3 (t=90–180s):  
+• A delivers 20 stripped_oak_wood → C places all “post” pillars;  
+• B delivers fences/gates/trapdoors/planks + lanterns/chains + peonies + stairs to build site.  
+Milestone 4 (t=180s–finish):  
+Team splits into zones on the same scaffold level:  
+  – Zone 1 (Posts & Frames): A installs oak_fence, oak_fence_gate between posts.  
+  – Zone 2 (Openings & Hinges): B installs oak_trapdoors (orientations) and hangs lanterns via chains.  
+  – Zone 3 (Roof & Trim): C installs all nether_brick_stairs in orientation order and places peony lower+upper.
+
+4. TEAM COORDINATION  
+• Radio “Milestone X reached” at each handoff point.  
+• Carry a few extra sticks/planks in secondary slots to avoid mid-build trips.  
+• Assign a “floater” role switch after Zone 1 finishes: redeploy helper to slowest zone.  
+• Final sweep: 1 player checks alignment, 1 checks counts, 1 places any stragglers.
+
+Key checkpoints:  
+– Resource haul complete → call “Haul Done”  
+– Processing pipeline complete → call “Ready to Build”  
+– Pillars placed → call “Pillars Up”  
+– Decorations hung + stairs in place → call “Detailing Done”  
+– Final check → call “Structure 7 Complete”  
+
+With strict adherence to these roles and milestones—and aggressive parallel processing—you’ll minimize idle time, reduce round-trip distances, and hit sub-5-minute completion.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+Player jc_cr – follow these steps without pause. Report in chat exactly when you hit each milestone.
+
+1. RESOURCE COLLECTION (t 0–30s)  
+   • Run to Resource Area at (34.4, 65.0, –83.8).  
+   • Collect:  
+     – 80 oak_logs  
+     – 12 chains  
+     – 12 lanterns (hanging)  
+     – 8 peonies  
+     – 48 nether_brick_stairs (verify orientation as you pick up)  
+   • Success criteria: Inventory holds all 5 item groups above.  
+   • On completion—type in chat: “Haul Done.”
+
+2. PROCESSING WORKFLOW (t 30–90s)  
+   • Move immediately to Processing Area at (–69.4, 66.0, –84.4).  
+   • Step A: Strip 20 oak_logs → 20 stripped_oak_wood (use your netherite axe).  
+     Success: 20 stripped_oak_wood in inventory.  
+   • Step B: Craft remaining 60 oak_logs → 240 oak_planks.  
+     Success: 240 oak_planks in inventory.  
+   • Step C: From 240 oak_planks craft:  
+     – 44 oak_fence  
+     – 4 oak_fence_gate  
+     – 16 oak_trapdoor  
+     – leave 8 oak_planks raw  
+   • Success: Inventory shows exactly 44 fences, 4 gates, 16 trapdoors, 8 planks.  
+   • On completion—type in chat: “Ready to Build.”
+
+3. FOOTPRINT & PILLARS (t 90–180s)  
+   • Run to Build Site at (–20.7, 65.0, –86.1).  
+   • Erect scaffolding grid covering the foundation area.  
+   • Mark and place all 20 stripped_oak_wood “posts” in the exact footprint.  
+   • Success: 20 posts standing in correct grid positions.  
+   • On completion—type in chat: “Pillars Up.”
+
+4. BUILD EXECUTION (t 180s–finish)  
+   a. Posts & Frames:  
+      – Install all 44 oak_fence segments and 4 oak_fence_gate between posts.  
+   b. Openings & Hinges:  
+      – Place 16 oak_trapdoor panels in their openings (correct orientation).  
+      – Hang 12 lanterns from chains at designated points.  
+   c. Roof & Trim:  
+      – Place all 48 nether_brick_stairs in orientation order to form the roof.  
+      – Plant 8 peonies (4 lower + 4 upper) in their wall‐flower pots.  
+   • Success: All fences, gates, trapdoors, lanterns, stairs, peonies placed as per reference.
+
+   • On completion—type in chat: “Detailing Done.”
+
+5. FINAL SWEEP  
+   • Walk entire structure:  
+     – Verify counts: 20 posts, 44 fences, 4 gates, 16 trapdoors, 12 chains, 12 lanterns, 48 stairs, 8 peonies.  
+     – Check alignment of every block.  
+     – Place any missing or misaligned blocks.  
+   • On final check—type in chat: “Structure 7 Complete.”

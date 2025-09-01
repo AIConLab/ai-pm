@@ -1,0 +1,112 @@
+AIPM High-Level Plan - Round 10
+Generated at: 20250831_003339
+==================================================
+
+Strategic Plan for Round 10 – Structure 10  
+Team size: 3 players (P1, P2, P3)  
+Key distances:  
+ • Structure ←→ Resource area ≈ 55 blocks  
+ • Structure ←→ Processing area ≈ 50 blocks  
+
+––––––––––––––––––––––––––––––––––––––––  
+1. Resource‐Gathering & Inventory Split  
+----------------------------------------  
+Assign roles before the round start. All three sprint from spawn to the Resource Area ([34.4, 65, –83.75]).  
+
+P1 (“Block‐&‐Bar Runner”)  
+ • Grab 7 iron_blocks (for final structure).  
+ • Grab 6 iron_bars (any orientation—they’ll place with the correct orientation).  
+
+P2 (“Trapdoor Runner”)  
+ • Grab 6 iron_trapdoor.  
+
+P3 (“Banner Runner”)  
+ • Grab 8 red_wall_banner.  
+
+Inventory check:  
+ • P1 uses 2 slots (blocks stack) + 1 slot (bars stack) = 3 slots.  
+ • P2 uses 1 slot.  
+ • P3 uses 1 slot.  
+
+Target end of this phase: all three loaded, standing at Resource Area.  
+Estimated time: ~12 s  
+
+––––––––––––––––––––––––––––––––––––––––  
+2. Transit to Build Site  
+----------------------------------------  
+– All three sprint from Resource Area → Structure ([–20.7, 65, –86.1]).  
+– No stops.  
+
+Target end of this phase: all three at structure with their loads.  
+Estimated time: ~12 s  
+
+––––––––––––––––––––––––––––––––––––––––  
+3. Parallel Build Sequence  
+----------------------------------------  
+Structure composition:  
+ • 7 iron blocks (solid shell)  
+ • 6 iron trapdoors (2 east, 1 north, 1 south, 2 east)  
+ • 6 iron bars (various)  
+ • 8 red wall banners (2 per face)  
+
+Assign building sub‐tasks:  
+
+P1 (Blocks & Bars)  
+  a. Lay out the 7 iron blocks first, constructing the shell/core.  
+  b. Place all 6 iron bars into their exact window locations, orienting each bar as per blueprint.  
+
+P2 (Trapdoors)  
+  a. Immediately after P1 places the blocks framing each trapdoor location, P2 snaps in the 6 trapdoors.  
+  b. Ensure correct facing by standing on the correct side when placing.  
+
+P3 (Banners)  
+  a. As soon as each block–face is complete, P3 attaches 2 banners per face in the required facing direction.  
+  b. Work clockwise around the structure—north → east → south → west.  
+
+Build priority (critical path):  
+ 1. Blocks (foundation & frame)  
+ 2. Bars (fixed in-frame)  
+ 3. Trapdoors (snap‐fit into open frames)  
+ 4. Banners (final decorative touches)  
+
+––––––––––––––––––––––––––––––––––––––––  
+4. Milestones & Timing  
+----------------------------------------  
+T+0 s  
+ • All players sprint to Resource Area.  
+
+T+12 s  
+ • P1, P2, P3 loaded with their materials; begin sprint to structure.  
+
+T+24 s  
+ • All at build site. Immediately begin placing.  
+
+T+24–50 s (≈26 s build window)  
+ • P1 places 7 blocks + 6 bars in parallel with  
+   P2 placing 6 trapdoors and  
+   P3 placing 8 banners.  
+
+T+50–55 s  
+ • Final verification pass: all states/orientations correct.  
+
+T+55 s  
+ • Structure complete. Submit.  
+
+––––––––––––––––––––––––––––––––––––––––  
+5. Communication Checkpoints  
+----------------------------------------  
+ • “Loaded” once at Resource Area (T+12 s)  
+ • “On-site” once at Structure (T+24 s)  
+ • “Blocks done” (P1) to signal P2/P3 to start trapdoors/banners  
+ • “Bars done” (P1) to confirm no obstructions  
+ • “Trapdoors placed” (P2) for P3 to finish banners  
+ • “Banners done” (P3) for final sync  
+
+––––––––––––––––––––––––––––––––––––––––  
+Speed-focus keys:  
+ • Zero processing needed – all materials are pre-oriented blocks.  
+ • Strict role-split to eliminate overlap.  
+ • Parallel build; no idle phases after T+24.  
+ • Sprint transportation; immediate placement.  
+
+Anticipated total time: ~55 seconds. Good luck!

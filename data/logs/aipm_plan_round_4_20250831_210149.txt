@@ -1,0 +1,99 @@
+AIPM High-Level Plan - Round 4
+Generated at: 20250831_210149
+==================================================
+
+Round 4 – Single-Structure Speed Plan (optimized for current solo play, with 2–3 player scaling)
+
+1) Resource collection priorities (from Structure ➜ Resource ➜ Processing ➜ Build)
+- One run, all materials in one carry.
+- From Resource area [34.4, 65, -83.8], grab:
+  - Iron blocks: 26 (12 for placement, 14 to convert → 126 ingots for 27 trapdoors + doors; leaves small buffer)
+  - Orange concrete powder: 19
+  - Redstone torches (from chest): 4
+- Inventory/hotbar pack for speed:
+  - Slot 1: iron blocks (for placement)
+  - Slot 2: orange concrete powder (to process)
+  - Slot 3: iron blocks (to convert to ingots)
+  - Slot 9: redstone torches (to place last)
+- Travel route to minimize time: Start at Structure [-20.7,…] ➜ sprint east to Resource (≈ +55 X) ➜ sprint west past Structure to Processing [-69.4,…] (≈ -90 X) ➜ sprint east to Structure (≈ +49 X).
+
+2) Processing workflow (fastest order, solo)
+- At Processing:
+  - Grab netherite pickaxe (from chest) for faster concrete mining.
+  - Crafting:
+    - Convert 14 iron blocks → 126 ingots (2x2 grid or crafting table).
+    - Craft 27 iron trapdoors (4 ingots each).
+    - Craft 1 batch of iron doors (6 ingots → 3 doors; you’ll use 1).
+  - Concrete:
+    - Use water source: place 19 orange concrete powder into/against flowing water, mine with netherite pickaxe to collect 19 orange concrete quickly. Keep the stream compact to minimize cursor travel.
+- Sort hotbar for build:
+  - 1: orange concrete (19)
+  - 2: iron blocks (12)
+  - 3: iron door (1)
+  - 4–7: iron trapdoors (all 27; orientation set on placement)
+  - 9: redstone torches (4)
+
+3) Build execution plan (critical path first)
+- Goal: place static blocks first, then all unpowered interactives, then power with torches last to set final states.
+- Sequence:
+  1) Place all orange concrete (19) and iron blocks (12) per blueprint footprint/walls. Use minimal movement: place in rings/rows to avoid backtracking.
+  2) Place the iron door (faces north, hinge=right). Tip: Stand south of the doorway looking north; aim/click to set hinge on the east side (right relative to facing north). Do not power yet.
+  3) Place all iron trapdoors (27) with correct facing and bottom half. Don’t worry about open state yet—iron trapdoors require power to open:
+     - Closed sets: 
+       - East-facing: 6 (open=false, powered=false)
+       - North-facing: 12 (open=false, powered=false)
+     - Will-open sets (to be powered): 
+       - East-facing: 4 (open=true, powered=true)
+       - West-facing: 4 (open=true, powered=true)
+       - South-facing: 1 (open=true, powered=true)
+  4) Place the 4 redstone torches at their blueprint positions. This simultaneously:
+     - Powers/open the 9 trapdoors that must be open (and keeps closed sets unpowered).
+     - Powers/opens the iron door (open=true, powered=true).
+  5) Verify all facings and states match exactly; adjust trapdoor orientation if any is off before placing torches. Final micro-check: counts—12 iron blocks, 19 orange concrete, 27 trapdoors with the exact split, 4 redstone torches, iron door open and powered.
+
+Critical path
+- Craft trapdoors + make concrete + final torch placement. Any delay in these three gates extends total time. Keep the torches for the very end to “lock in” correct powered/open states.
+
+4) Team coordination (current: solo; scaling to 2–3 players)
+
+Solo (current: jc_cr)
+- Run 1 (Structure ➜ Resource ➜ Processing): collect all → craft trapdoors/door → make concrete.
+- Run 2 (Processing ➜ Structure): full build per sequence above.
+- Communications: quick self-checkpoints (counts before leaving each area).
+
+If 2 players become active mid-round
+- Player A (Runner/Builder): Do current solo plan.
+- Player B (Processor/Prep):
+  - Go directly to Processing now, prep water setup, pull netherite tools, ready crafting table.
+  - As A arrives: B crafts trapdoors/door while A hardens concrete (or vice versa).
+  - Both return to Structure together; A places static blocks, B follows with trapdoors then torches.
+- Checkpoints:
+  - At Processing: confirm 27 trapdoors, 1 door, 19 concrete.
+  - At Structure: confirm trapdoor facings before torches go down.
+
+If full 3 players
+- Player 1 (Runner): Resource pickup (26 iron blocks, 19 orange concrete powder, 4 redstone torches), sprint to Processing.
+- Player 2 (Crafter): At Processing, craft trapdoors and door immediately on arrival.
+- Player 3 (Concrete/Builder): Make 19 orange concrete, grab netherite pick, then both 2 and 3 sprint to Structure with Player 1.
+- Build split:
+  - P1 lays iron blocks.
+  - P3 lays orange concrete.
+  - P2 places door and all trapdoors by facing group (closed sets first), then P1 places torches last.
+- Checkpoints:
+  - Processing done: “27 traps, door, 19 concrete” callout.
+  - Before torches: “Trapdoor facing check complete” callout.
+
+Milestones for progress tracking
+- M1 (Resource depart): 26 iron blocks, 19 orange concrete powder, 4 redstone torches in inventory.
+- M2 (Processing complete): 27 iron trapdoors, 1 iron door, 19 orange concrete in hotbar; remaining iron blocks ≥12 for placement.
+- M3 (Structure midway): All orange concrete + 12 iron blocks placed.
+- M4 (Pre-power): All trapdoors placed with correct facing and “bottom” half; iron door placed correctly (north, hinge right).
+- M5 (Finish): 4 redstone torches placed; verify all powered/open states match target; final count check.
+
+Notes to avoid time loss
+- Don’t place torches until all trapdoors are oriented; powered trapdoors are harder to reorient quickly.
+- Keep at least one spare trapdoor and a few ingots if possible (buffer).
+- Use sprint-jump in straight lines; avoid opening inventory mid-run.
+- If any trapdoor set appears mistakenly powered, remove nearby torch first, fix orientation, then re-place torch.
+
+This plan minimizes trips (one full gather/process loop), compresses processing into one stop, and locks critical states with torches at the end for a fast, clean finish.

@@ -1,0 +1,82 @@
+AIPM Player Instructions - Round 10
+Generated at: 20250831_001026
+==================================================
+
+HIGH-LEVEL PLAN:
+Resource Collection (one synchronized round‐trip to the resource area)  
+  • Player 1 → iron_block ×9  
+  • Player 2 → iron_bars ×6  
+  • Player 3 → iron_trapdoor ×6 & red_wall_banner ×8  
+    – (If trapdoors/banners are not pre-crafted: Player 3 grabs 2 extra iron_blocks + stick/dye materials, hauls them to the Processing Area, crafts 6 trapdoors and 8 banners on a single furnace/crafting-table cycle, then heads to the Structure.)  
+  • Departure window: all three leave spawn ≤5 s apart → gather in ≤15 s total  
+
+Processing Workflow  
+  • Ideally none (all items pre-crafted).  
+  • Fallback (if raw materials only):  
+    – P3 hauls 2 iron_blocks → Processing Area (≈20 s travel), crafts 18 iron_ingots in blast furnace (30 s), crafts 6 trapdoors (1×crafting table), dyes/wool → 8 banners in parallel.  
+    – Total P3 processing time ≈60 s. Meanwhile P1&P2 head straight to the Structure with their loads.  
+
+Build Execution Sequence (at Structure)  
+  1. Foundation & shell (P1)  
+     • Lay out 7 iron_blocks in the exact footprint; build up walls to required height.  
+     • Target time: 30 s  
+  2. Iron bars installation (P2)  
+     • Pre-stage bars on ground perimeter, then place in designated block holes/orientations.  
+     • Can begin as soon as the first ring of blocks is in place.  
+     • Target time: 20 s  
+  3. Banners & trapdoors (P3)  
+     • As soon as adjacent block faces are available, affix wall banners in correct facing order (N×2, W×2, E×2, S×2), then snap in trapdoors (E×4, N×1, S×1).  
+     • Target time: 20 s  
+
+Critical Path & Parallelism  
+  • P1’s block frame unlocks P2’s bars  
+  • P2’s bars unlock P3’s banners/trapdoors  
+  • Total build overlap: ~70 s  
+
+Player Task Allocation  
+  • P1 (Frame Specialist): iron_blocks → Structure → build shell  
+  • P2 (Bar Specialist): iron_bars → Structure → install bars as soon as blocks permit  
+  • P3 (Detail Specialist): trapdoors & banners → Structure → place decorative/functional elements  
+
+Communication Checkpoints & Milestones  
+  T+0 s: Depart spawn  
+  T+15 s: All items in inventory; depart resource (or P3 departs Processing if needed)  
+  T+45 s: P1&P2 arrive Structure; P1 begins foundation, P2 stages bars  
+  T+75 s: Foundation complete → P2 places bars, P3 arrives with details  
+  T+95 s: Bars complete → P3 places banners/trapdoors  
+  T+115 s: Final check vs. blueprint → submit  
+
+By funneling all resource collection into a single synchronized trip, pipelining any minor processing solely on Player 3, and overlapping build phases as soon as dependencies clear, total round time is minimized.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+jc_cr (all‐roles):
+
+Phase 1 – Resource Collection (T 0–15 s)  
+• Depart spawn immediately, arrive at Resource Area by T+10 s.  
+• At Resource Area:  
+  - Break and collect 9 iron_block  
+  - Break and collect 6 iron_bars  
+  - Break and collect 6 iron_trapdoor  
+  - Break and collect 8 red_wall_banner  
+• Success criteria by T+15 s in inventory:  
+  – 9 iron_block, 6 iron_bars, 6 iron_trapdoor, 8 red_wall_banner  
+• If trapdoors or banners aren’t available: also collect  
+  – +2 iron_block, +2 sticks, +10 red wool (or red dye+wool)
+
+Phase 2 – Processing (only if raw mats collected) (T 15–75 s)  
+• Haul raw to Processing Area (blast furnace + crafting table)  
+• At blast furnace: smelt 2 iron_block → 18 iron_ingot (≈30 s)  
+• At crafting table (parallel):  
+  - Craft 6 iron_trapdoor (2 ingots + 1 stick each)  
+  - Craft 8 red_wall_banner (6 wool + 1 stick each)  
+• Success criteria by T+75 s in inventory:  
+  – 6 iron_trapdoor, 8 red_wall_banner plus your 9 iron_block & 6 iron_bars
+
+Phase 3 – Transit to Build Area (T 75–90 s)  
+• Load all 4 item types and head straight to Structure 10  
+• Arrive by T+90 s ready for shell build (P1), bar install (P2) and detail placement (P3)  
+
+Tank‐check at each handoff: see that you’re carrying the exact counts before you leave each area.  
+Good luck—on to the build!

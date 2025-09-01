@@ -1,0 +1,102 @@
+AIPM High-Level Plan - Round 1
+Generated at: 20250831_212809
+==================================================
+
+Summary (goal): finish Structure 1 fastest with 3 players. Key constraints: 25 light_gray_concrete, 20 oak stairs (5 of each facing), 5 isolated iron_bars. Minimize trips by collecting everything in 1 pass per player, parallelize crafting of stairs and conversion of concrete powder, builder starts placing concrete as soon as first delivered.
+
+1) RESOURCE COLLECTION STRATEGY
+- Immediate pickup (no processing required):
+  - light_gray_concrete_powder: collect 25 (grab 30 for buffer if inventory space allows). Powder is in resource area.
+  - iron_bars: collect 5 matching bars if present. If you can’t find the all-false variant, take any iron_bars variant and/or 1 iron_block as a backup to craft bars.
+- Needs processing:
+  - oak_stairs: not present ready—resource area has oak_log. You must craft planks → stairs.
+- Optimal single-trip totals (per team):
+  - Oak logs: 8 logs produce 32 planks (needed 30 planks for 20 stairs). Take 9 logs for safety if you can.
+  - Light_gray_concrete_powder: 25 (30 buffer)
+  - Iron bars: 5 (or 1 iron_block as plan B)
+  - Optional: scaffolding (from processing area) if team wants faster vertical placement — grab at processing area, not resource.
+- Optimal collection sequence to minimize walking:
+  1. All 3 spawn/start sprint to resource area simultaneously.
+  2. Each player takes a dedicated subset so only one player visits processing area to craft/convert while others start moving materials toward the build site:
+     - Player R (Runner): collects oak_logs (8–9), all light_gray_concrete_powder (25–30), iron_bars (5) or iron_block backup. Immediately heads to Processing area.
+     - Player P (Processing/Support): stays at Processing area (or arrives second) at the crafting table/water station ready to process incoming materials.
+     - Player B (Builder): grabs minimal items needed to start placement immediately (e.g., 1 stack of powder or a few slabs of concrete if any ready) or positions at structure to set anchor points. If no processed materials available, Player B goes to resource and brings extra powder/stairs backup to structure zone.
+- Inventory management:
+  - Runner keeps heavy-stackable items in single hotbar slots (powder in one slot, logs in another).
+  - Processor reserves hotbar slots for stairs and concrete output (2–3 hotbar slots).
+  - Builder keeps placement items in all 9 hotbar slots (concrete + stairs + iron bars) and one slot for scaffolding.
+
+2) PROCESSING WORKFLOW (who does what, when)
+- What needs processing:
+  - Oak_logs → oak_planks → oak_stairs (crafting table).
+  - Light_gray_concrete_powder → light_gray_concrete (water contact).
+  - If iron_bars not match required state: iron_block → 9 iron_ingots (crafting) → iron_bars (craft 6 ingots → 16 bars) as backup.
+- Processing order & timing (critical path = stairs + concrete conversion):
+  1. Immediately convert concrete powder to concrete: Processor places a single-row water trough (use processing area water/bucket) and dumps/places all powder blocks onto the water. Conversion is instantaneous and fast. Put concrete blocks into a single chest slot or carried stacks for Builder pickup. This should be done first because concrete is the largest block count to place and builder should not wait.
+  2. Parallel: craft stairs from logs. Each 6 planks → 4 stairs. Processor crafts planks from logs (1 log = 4 planks), then craft stairs in batches. With 8 logs (32 planks) you craft five batches (needs 30 planks) to produce 20 stairs. Keep stairs in hotbar for quick handoff.
+  3. Iron bar backup: If necessary, Processor crafts iron_ingots from iron_block (crafting bench) and crafts iron_bars; otherwise skip.
+- Player assignment at processing:
+  - Processor (P): stays at processing area, converts all powder to concrete, crafts stairs in continuous batches, prepares stacks for Builder to carry directly.
+  - Runner (R): fetches materials from resource, delivers to Processor quickly, returns to structure to carry processed bundles or to help place blocks.
+  - Builder (B): stages at structure to receive first deliveries. As soon as concrete arrives, Builder begins placement in parallel with Processor still crafting stairs.
+
+3) BUILD EXECUTION PLAN (placement order, parallel tasks)
+- Construction sequence for speed:
+  1. Layout/anchor: Builder places any alignment markers (two distinct corner blocks) immediately on first arrival to ensure orientation for stairs (so stairs face correct directions).
+  2. Concrete first: place the 25 light_gray_concrete blocks first (large contiguous area/structural elements). This provides stable surfaces and is fastest to place. Builder should place as Processor is still producing stairs.
+  3. Stairs second: place oak_stairs in required faces (5 per direction). Because these are directional, Builder must place them with care — have stair counts and facing noted. Do these while other players finish off concrete or iron bars.
+  4. Iron bars last: place the 5 iron_bars as isolated bars (ensure no neighboring connecting blocks so blockstate is all-false). Place last to avoid accidental connections while placing surrounding blocks.
+- Parallel work opportunities:
+  - While Processor crafts stairs, Builder places converted concrete.
+  - Runner shuttles processed stacks from Processing → Structure continuously, and can place too when deliveries are caught up.
+  - When stairs are being crafted in multiple batches, hand off completed stairs in small stacks (4–8) to Builder for immediate placement (keep stairs in hotbar).
+- Critical path:
+  - Concrete conversion (fast but must be done before heavy placement).
+  - Crafting stairs (multiple craft steps) — this typically dominates time; make sure Processor focuses exclusively on this while Runner shuttles processed concrete to Builder.
+
+4) TEAM COORDINATION (roles, comms, milestones)
+- Roles (3 players):
+  - Player P (Processor/Crafter): Starting position — Processing area. Main job: convert powder to concrete, craft stairs, make iron bars if needed. Keep items in hotbar for quick handoff.
+  - Player R (Runner/Logistics): Starting position — Resource area. Main job: collect resource stack (logs, powder, iron bars/iron_block), deliver to Processor quickly, shuttle processed stacks to Builder, act as backup placer.
+  - Player B (Builder/Finisher): Starting position — Structure location. Main job: place concrete as soon as first stacks arrive, place stairs with correct facing, place iron bars, final verify.
+- Communication checkpoints (use short calls):
+  - “Resource loaded” (Runner → Processor): Runner has delivered logs/powder/iron.
+  - “Powder converted” (Processor → Builder & Runner): concrete ready; send first stack.
+  - “Stairs batch X done” (Processor → Builder): indicate how many stairs ready (e.g., “Batch1:4, Batch2:8”).
+  - “Placing half” (Builder → Team): 50% concrete/stairs placed.
+  - “Iron bars ready/placed” (Processor/Builder): final step.
+  - “Check” (Builder): verify orientation counts and isolated iron_bars, then call “Done”.
+- Milestones (with quick acceptance checks):
+  1. M1 — Materials at Processing: logs + powder + iron delivered (confirm).
+  2. M2 — Concrete converted and first 10 concrete delivered to Builder (start placing).
+  3. M3 — Stairs finished (20) and being delivered in handable batches to Builder.
+  4. M4 — Concrete 100% placed.
+  5. M5 — Stairs 100% placed with correct facings and counts.
+  6. M6 — Iron bars placed and final check passed.
+- Small verification checklist before finish:
+  - Concrete blocks = 25 (count).
+  - Oak stairs each facing count: south 5, east 5, west 5, north 5.
+  - Iron bars 5 with all-false connections (no adjacent connectable blocks).
+
+5) Quick contingency rules
+- If the exact iron_bars state isn’t available: use iron_block → craft ingots → craft iron_bars at Processor. Priority: don’t delay concrete; maker of iron bars works only after first concrete batch is converted and stairs crafting is in pipeline.
+- If Processor falls behind on stairs crafting: Runner drops extra logs directly at structure with spare crafting table? (less ideal) — better keep Processor dedicated to crafting.
+- If a player finishes early, they should help the Builder place blocks or shuttle small stacks to reduce the Builder’s walking/time.
+
+Execution cadence (practical sequence to start round)
+1. T=0: All run to resource.
+   - R collects: 9 oak_logs, 30 light_gray_concrete_powder, 5 iron_bars or 1 iron_block backup.
+   - P moves to processing table and water trough (ready).
+   - B moves to structure and places markers.
+2. R → P: deliver logs/powder/iron to Processor ASAP.
+3. P: Immediately convert powder into concrete pool; fill inventories for Builder; concurrently start crafting stairs from logs.
+4. R: shuttle first concrete stacks to Builder; help carry more as P finishes stairs batches.
+5. B: place concrete immediately; when stairs arrive, place them with orientation; place iron bars last; call final check.
+
+Final optimizations (speed tips)
+- Use sprint + boatless sprint on flat ground between sites. Short cuts on terrain: keep straight-line runs (resource → processing → structure).
+- Keep all processed items in hotbar (quick access) for instant placement.
+- Handoff method: Processor places completed stacks in single chest at Processing area for Runner pickup only if handoff slows you; otherwise Runner takes directly from Processor’s hands to avoid chest interactions.
+- Pre-agree on exact block coordinates/facing sequence so Builder never hesitates. Builder should get counts printed on sign or told numerically before placement.
+
+If you want, I can convert this into an explicit per-player step-by-step 30–second tick-by-tick plan for a perfect run (who moves at each second and which slot to hold).
