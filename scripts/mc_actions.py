@@ -176,7 +176,7 @@ class Actions:
             
             agent = Agent(
                 name="MinecraftProjectManager", 
-                instructions=self.config["aipm"]["manager_agent"]["helper_instructions"]
+                instructions=self.config["aipm"]["helper_agent"]["helper_instructions"]
             )
             
             result = Runner.run_sync(agent, f"Player {username} asks: {command}")
@@ -199,7 +199,8 @@ class Actions:
         Only generates plan once per round.
         """
         try:
-            aipm_rounds = [1, 4, 7]
+            # 10 is the tutorial round
+            aipm_rounds = [1, 4, 7, 10]
 
             if round_number in aipm_rounds:
                 # Check if we've already generated a plan for this round

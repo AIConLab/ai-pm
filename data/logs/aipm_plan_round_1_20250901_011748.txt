@@ -1,0 +1,111 @@
+AIPM High-Level Plan - Round 1
+Generated at: 20250901_011748
+==================================================
+
+Summary (goal): deliver 20 oak stairs (5 each facing N/E/S/W), 25 light_gray_concrete blocks and 5 iron bars to the build at [-20.672,65,-86.143] as fast as possible with a 3-player team. Key constraints: oak stairs must be crafted (crafting table only in Processing), concrete must be hardened (water available in Processing but can be carried), iron bars are available pre-made in Resource.
+
+High‑level strategy
+- Minimize trips by grouping items so each required item type is moved as few times as possible.
+- Do processing (crafting stairs) at Processing; convert concrete powder to solid at the build site using a single water bucket brought from Processing.
+- Parallelize: 1 dedicated crafter at Processing, 2 shuttlers moving Resource ↔ Build. Convert concrete at Build while crafter makes stairs.
+
+1) Resource collection strategy
+Immediate collection vs processing
+- Immediate pick-up from Resource (no Processing required): 
+  - light_gray_concrete_powder (25) — pick up and carry directly to Build to be hardened there.
+  - iron_bars (five with all sides false) — pick and carry directly to Build.
+- Processing required:
+  - oak_stairs (not present) — need oak_logs -> planks -> stairs at Processing. Gather oak_log from Resource (8 logs needed to get 32 planks → produce 20 stairs).
+
+Optimal collection sequence to minimize trips
+- Single bulk runs where possible:
+  - One player collects all 25 concrete powder in one stack and carries it to Build (one trip).
+  - One player collects all 5 iron_bars (one stack) while en route to/from bucket/water.
+  - One player collects 8 oak_logs in one trip from Resource and brings them to Processing for immediate crafting.
+- Avoid Resource → Processing → Resource loops. Do Resource → Processing only when you need to craft (oak logs only). Otherwise go Resource → Build.
+
+Inventory management rules
+- Concrete powder: one player should carry all 25 in one stack (takes 1 slot).
+- Iron bars: one stack (1 slot).
+- Oak_logs: collect exactly 8 logs (1 slot).
+- Water bucket: one bucket carried by the converter; keep it with the converter until all powder is hardened.
+- Keep at least one empty hotbar slot for placing blocks quickly; avoid excess items that force extra trips.
+
+2) Processing workflow
+Materials requiring processing
+- Oak logs → oak planks → oak stairs (crafting at Processing).
+- Light_gray_concrete_powder → light_gray_concrete (harden via water) — conversion can be done at Build with water bucket.
+
+Processing order and timing
+- Immediate priority: get water bucket to Build early so powder can be hardened as soon as powder arrives.
+- Start P1 (Crafter) as soon as they reach Processing with logs and begin crafting stairs while P2 and P3 are shuttling materials. Crafting 5 batches (6 planks → 4 stairs) is small; can be completed while other deliveries are in flight.
+- Convert concrete powder at Build as soon as powder is stacked and a water bucket is present — convert full stacks in place to avoid extra carrying.
+
+Player assignment for processing tasks
+- P1 (Crafter/Processing lead): responsible for oak_log collection (one trip to Resource), plank conversion and crafting stairs at Processing. Remain at/near Processing until stairs are finished, then run to Build with finished stairs.
+- P2 (Concrete hauler): pick up all light_gray_concrete_powder at Resource and deliver directly to Build. Wait/stack at Build for water bucket to arrive, then convert powder in-place to blocks.
+- P3 (Bucket & Iron-bar courier / Builder support): pick up water bucket at Processing (fill there) and run immediately to Build to enable conversion. On the way (or after water dropoff) collect 5 iron_bars from Resource and deliver them to Build; then assist with placing iron_bars and helping place concrete/stairs.
+
+3) Build execution plan (fastest sequence)
+Construction priority
+1. Harden concrete powder into light_gray_concrete at Build to create stable surfaces for stair placement. (Concrete conversion is non-destructive and quick in place.)
+2. Place light_gray_concrete blocks forming the base/positions that stairs will attach to.
+3. Place oak stairs (direction-specific) once foundation blocks are set.
+4. Place iron_bars (they are small and precise — place after surrounding blocks to avoid collisions).
+
+Parallel work opportunities
+- While P1 is crafting at Processing, P2 & P3 do Resource ↔ Build runs and start populating the build site (P2 unloads powder, P3 brings bucket & iron_bars).
+- Once powder is hardened, P2 and P3 start placing concrete while P1 runs to Build with stairs. Two placers can work on concrete placement simultaneously (one focuses on the main large area, the other on positions where stairs will be placed).
+- When P1 arrives, they place stairs while P2/P3 finish concrete and place iron bars. If stairs fit in one hand, P1 can place all stairs uninterrupted while others finalize.
+
+Critical path identification
+- Long-lead item: oak stairs (must be crafted at Processing). P1’s craft + run time is critical path.
+- Enabling step: water bucket at Build so that powder can be hardened as soon as it arrives — if delayed, powder sits and forces idle time for placers.
+- Therefore: earliest possible delivery of water bucket and earliest start of crafting are the two highest priorities.
+
+4) Team coordination (3 players)
+Role assignments (use player names on match start)
+- Player A (Crafter) — P1 (oak stairs):
+  - Route: Structure → Resource (get 8 oak_logs) → Processing (craft stairs) → Build (deliver & place).
+  - Stay at Processing while crafting to respond to re-crafts/repairs or orientation adjustments.
+- Player B (Concrete hauler) — P2:
+  - Route: Structure → Resource (get 25 light_gray_concrete_powder) → Build (drop and wait).
+  - After delivery, place powder in planned positions (or hand to P3 for coordinated conversion/placement).
+- Player C (Bucket & iron-bar courier / placer) — P3:
+  - Route: Structure → Processing (pick up bucket and fill) → Build (deliver water and stand ready to convert/harden powder) → Resource (pick up iron_bars) → Build (deliver iron_bars and help place).
+  - After bucket delivered, assist P2 in converting entire stack(s) of powder to concrete; then begin placing iron bars.
+
+Communication checkpoints (short, timed)
+- T0 (start): “Start — P1 to Resource, P2 to Resource, P3 to Processing (bucket).”
+- After initial pickups: P3 calls “Bucket ready, heading Build” so P2 knows it’s safe to head to Build with powder.
+- When P2 arrives with powder: “Powder on-site, awaiting water” (or “converting now” if water arrived).
+- P1 calls when stairs are crafted: “Stairs ready, en route” — placers prepare foundations.
+- When concrete hardened and base placement done: “Base ready — P1 place stairs; P3 place iron bars.”
+- Final check: “Done? Match reference?” — quick 10–15 second verification.
+
+Milestones (progress tracking)
+- M0 (0–10s): All players move — P3 grabbing bucket, P1 & P2 heading to Resource.
+- M1 (~20–40s depending on travel): P3 at Build with filled bucket (water available onsite).
+- M2 (~40–80s): P2 arrives at Build with powder; conversion begins immediately.
+- M3 (while conversion is ongoing): P1 finishes crafting stairs at Processing and departs to Build.
+- M4: Concrete hardened and placed to required footprint; P1 arrives and places stairs; P3 places iron_bars.
+- M5: Final verification and orientation adjustments; completion.
+
+Optimizations / small tips for speed
+- Pre-plan hotbar layout: hammer-shaped/hotkey order — concrete stack in hotbar slot 1, stairs in slot 2, iron bars in slot 3, bucket in slot 4, empty slot for scaffolding/quick place.
+- Convert entire powder stack in place by pouring water on the stack and sweeping through; don’t convert powder into blocks at Processing (extra travel).
+- P1 should craft all 20 stairs in one crafting run (use 8 logs -> 32 planks -> craft five 6-plank recipes) so stairs are ready in one package instead of repeated short runs.
+- Use sprint + straight routing (shortest path) between known coordinates; avoid detours through Processing except for the assigned tasks.
+- If one player finishes early, they should immediately become a placer/final checker.
+
+Concise check-list to start immediately
+1. P3: go to Processing, pick up bucket and fill with water, run to Build and wait (drop water so powder can be hardened).
+2. P1: go to Resource, collect 8 oak_logs, go to Processing, craft 20 oak_stairs, then run to Build with stairs.
+3. P2: go to Resource, pick up 25 light_gray_concrete_powder, run to Build and wait for P3 to arrive with water; once water is there, convert powder in-place to blocks and begin placing concrete.
+4. Once concrete placements are done, P1 places stairs in direction-specific positions and P3 places the 5 iron_bars.
+5. Final verify orientation & counts, touch up any misplacements.
+
+This plan minimizes total walking by:
+- limiting the number of Resource→Processing→Build round-trips (only oak logs require Processing),
+- converting concrete at the Build site with a single bucket run,
+- parallelizing concretization and stair crafting/placement work streams.

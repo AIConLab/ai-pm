@@ -1,0 +1,132 @@
+AIPM Player Instructions - Round 10
+Generated at: 20250831_001513
+==================================================
+
+HIGH-LEVEL PLAN:
+Strategic Plan for Round 10 – 3-Player Team
+
+1. Summary of Requirements  
+ • Iron blocks: 7 for build + 2 to convert → total 9 blocks  
+ • Iron trapdoors: 6 (craft from ingots)  
+ • Iron bars: 6 individually oriented pieces (all available pre-crafted)  
+ • Red wall banners: 8 (craft from wool + sticks + red dye)  
+
+Build site is at [-20.7, 65.0, -86.1]. Resource area at [34.4, 65.0, -83.8]. Processing area (for dye & crafting table) at [-69.4, 66.0, -84.4].
+
+2. Resource Collection Plan  
+• Player A (“Iron Runner”)  
+  – From spawn to Resource area: collect  
+    · 9 × iron_block  
+    · 6 × iron_bars (take the six exact orientations)  
+  – Return direct to Build site, deposit in a temporary chest (or on-ground pile).  
+• Player B (“Wool & Wood”)  
+  – To Resource area: collect  
+    · 48 × white_wool  
+    · 1 × oak_log (for plank→sticks)  
+  – En route to Build site, at a safe midway spot craft:  
+    · Planks → sticks (4 planks → 8 sticks)  
+  – Deliver wool + sticks to the Build site.  
+• Player C (“Dye & Table”)  
+  – Direct to Processing area: grab  
+    · ≥8 × red_dye (from chest)  
+    · 1 × crafting_table  
+  – Proceed direct to Build site.  
+
+3. Processing & Crafting Workflow (at Build site)  
+All crafting is done on-site to eliminate extra travel. Upon arrival:  
+• Player A (or B) places the crafting_table in a corner of the build footprint.  
+• Craft and distribute:  
+  – 2 iron_blocks → 18 iron_ingots  
+  – 18 iron_ingots → 6 iron_trapdoors (craft in 3×2 grid)  
+  – 48 wool + 8 sticks → 8 red_banners → orient on wall as red_wall_banner  
+• Distribute trapdoors and banners to the placer.  
+
+4. Build Execution & Task Allocation  
+Phase 1 – Foundation & Frame (parallel)  
+• Player A: Begin placing the 7 iron_blocks in blueprint positions.  
+• Player B: Lay out the 6 iron_bars in correct orientation spots.  
+   (Both work clockwise from one corner to avoid overlap.)  
+
+Phase 2 – Detail Installation (once Phase 1 has at least two-thirds complete)  
+• Player C:  
+   1) Craft trapdoors & banners (5–10 s)  
+   2) Hand off to Player B for banner placement and Player A for trapdoors.  
+• Player A: Install 6 iron_trapdoors into their exact facings.  
+• Player B: Mount 8 red_wall_banners into their specified facings.  
+
+Phase 3 – Final QA & Touch-ups  
+• All three sweep remaining blocks for mis-placements.  
+• Correct any orientation errors (bars/trapdoors/banners).  
+
+5. Critical-Path & Milestones  
+Milestone 1 (t + 0:00–0:30)  
+ • All three depart spawn, resource gathering in parallel.  
+Milestone 2 (t + 0:30–1:00)  
+ • P A & P B arrive at resource area; P C at processing area.  
+Milestone 3 (t + 1:00–1:30)  
+ • All three en route or arriving at build site; resources staged.  
+Milestone 4 (t + 1:30–2:30)  
+ • Phase 1 complete: iron_blocks + iron_bars fully placed.  
+Milestone 5 (t + 2:30–3:00)  
+ • Trapdoors & banners crafted and placed.  
+Milestone 6 (t + 3:00–3:15)  
+ • QA pass, finish.  
+
+6. Communication & Checkpoints  
+ • “Resource clear” call when each player finishes gathering.  
+ • “Resources down” when all materials are at build site.  
+ • “Frame 2/3” when 2/3 of blocks and bars are up—cue detail crafting.  
+ • “Final check” when trapdoors/banners installed.  
+
+By pipelining all crafting at the build site, splitting the three gather tasks, and parallelizing foundation vs. detailing, this plan minimizes dead time and travel and hits a tight 3 minute target.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+Player jc_cr:
+
+Milestone 1 (0:00–0:45) – Full Resource Grab  
+1. Run to Resource Area at X 34.4 Y 65.0 Z –83.8.  
+2. Break and collect:  
+   • 9× iron_block  
+   • 6× iron_bars (take each orientation)  
+   • 48× white_wool  
+   • 1× oak_log  
+3. Once inventory holds all, type in chat: “Resource clear.”
+
+Milestone 2 (0:45–1:15) – Dye & Table Pickup  
+1. Travel to Processing Area at X –69.4 Y 66.0 Z –84.4.  
+2. Open chest; take:  
+   • 8× red_dye  
+   • 1× crafting_table  
+3. Chat “Resources down.”
+
+Milestone 3 (1:15–1:30) – Stage at Build Site  
+1. Move to Build Site at X –20.7 Y 65.0 Z –86.1.  
+2. Deposit all gathered blocks/items into the temporary chest or neat on-ground pile.  
+3. Place the crafting_table in the SW corner of the  footprint.  
+
+Milestone 4 (1:30–2:00) – On-Site Crafting  
+1. Convert 2× iron_block → 18× iron_ingot  
+2. Craft 6× iron_trapdoor (3×2 grid) from 18× iron_ingot  
+3. From 1× oak_log → 4× oak_planks → 8× sticks  
+4. Craft 8× red_banner (6× wool + 1× stick + 1× red_dye each)  
+5. Re-orient each banner on wall to become red_wall_banner  
+6. Chat “Crafting complete.”
+
+Milestone 5 (2:00–3:00) – Build & Install  
+Phase 1 – Foundation & Frame  
+ • Place all 7× iron_block in blueprint positions (clockwise from NW corner).  
+ • Place all 6× iron_bar in correct orientation spots (continue clockwise).  
+When you’ve placed at least 5 of 7 blocks and 4 of 6 bars, chat “Frame 2/3.”
+
+Phase 2 – Details  
+ • Install 6× iron_trapdoor in exact facings.  
+ • Mount 8× red_wall_banner in specified facings.  
+Chat “Final check” when done.
+
+Milestone 6 (>3:00) – QA & Touch-Ups  
+ • Walk entire footprint; correct any misplaced block/bar/trapdoor/banner.  
+ • Confirm orientations match reference.  
+
+Success = complete build by 3:15 with zero missing/mis-rotated elements. Good luck!
