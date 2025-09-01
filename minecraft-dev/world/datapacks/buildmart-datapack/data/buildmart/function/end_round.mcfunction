@@ -40,3 +40,5 @@ tellraw @a ["",{"text":"Round ","color":"green"},{"score":{"name":"#current","ob
 
 # Advance to next round
 scoreboard players add #current current_round 1
+
+# setworldspawn -55.39 65 96.847
