@@ -1,0 +1,230 @@
+[
+  {
+    "item_id": 40,
+    "item_type": "minecraft:glass",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.483632"
+  },
+  {
+    "item_id": 41,
+    "item_type": "minecraft:orange_concrete_powder",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.490283"
+  },
+  {
+    "item_id": 42,
+    "item_type": "minecraft:diorite_stairs",
+    "item_attributes": "[facing=north,half=bottom,shape=straight,waterlogged=false]",
+    "last_updated": "2025-08-20 02:59:08.490781"
+  },
+  {
+    "item_id": 43,
+    "item_type": "minecraft:deepslate",
+    "item_attributes": "[axis=y]",
+    "last_updated": "2025-08-20 02:59:08.491135"
+  },
+  {
+    "item_id": 44,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=true,north=false,south=true,waterlogged=false,west=true]",
+    "last_updated": "2025-08-20 02:59:08.491237"
+  },
+  {
+    "item_id": 45,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=true,south=false,waterlogged=false,west=true]",
+    "last_updated": "2025-08-20 02:59:08.491513"
+  },
+  {
+    "item_id": 46,
+    "item_type": "minecraft:lantern",
+    "item_attributes": "[hanging=false,waterlogged=false]",
+    "last_updated": "2025-08-20 02:59:08.491741"
+  },
+  {
+    "item_id": 47,
+    "item_type": "minecraft:ochre_froglight",
+    "item_attributes": "[axis=y]",
+    "last_updated": "2025-08-20 02:59:08.491797"
+  },
+  {
+    "item_id": 48,
+    "item_type": "minecraft:smooth_stone",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.491835"
+  },
+  {
+    "item_id": 49,
+    "item_type": "minecraft:redstone_torch",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:59:08.491885"
+  },
+  {
+    "item_id": 50,
+    "item_type": "minecraft:deepslate_bricks",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.491921"
+  },
+  {
+    "item_id": 51,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=true,south=true,waterlogged=false,west=true]",
+    "last_updated": "2025-08-20 02:59:08.491970"
+  },
+  {
+    "item_id": 52,
+    "item_type": "minecraft:waxed_oxidized_cut_copper_stairs",
+    "item_attributes": "[facing=north,half=bottom,shape=straight,waterlogged=false]",
+    "last_updated": "2025-08-20 02:59:08.492007"
+  },
+  {
+    "item_id": 53,
+    "item_type": "minecraft:light_gray_concrete_powder",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.492060"
+  },
+  {
+    "item_id": 54,
+    "item_type": "minecraft:gray_concrete_powder",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.492094"
+  },
+  {
+    "item_id": 55,
+    "item_type": "minecraft:nether_brick_stairs",
+    "item_attributes": "[facing=north,half=bottom,shape=straight,waterlogged=false]",
+    "last_updated": "2025-08-20 02:59:08.492162"
+  },
+  {
+    "item_id": 56,
+    "item_type": "minecraft:white_concrete_powder",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.492212"
+  },
+  {
+    "item_id": 57,
+    "item_type": "minecraft:oak_log",
+    "item_attributes": "[axis=y]",
+    "last_updated": "2025-08-20 02:59:08.492248"
+  },
+  {
+    "item_id": 58,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=true,north=true,south=false,waterlogged=false,west=false]",
+    "last_updated": "2025-08-20 02:59:08.492299"
+  },
+  {
+    "item_id": 59,
+    "item_type": "minecraft:quartz_block",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.492334"
+  },
+  {
+    "item_id": 60,
+    "item_type": "minecraft:iron_block",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.492386"
+  },
+  {
+    "item_id": 61,
+    "item_type": "minecraft:end_rod",
+    "item_attributes": "[facing=up]",
+    "last_updated": "2025-08-20 02:59:08.492420"
+  },
+  {
+    "item_id": 62,
+    "item_type": "minecraft:stone",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.492472"
+  },
+  {
+    "item_id": 63,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=true,north=true,south=true,waterlogged=false,west=false]",
+    "last_updated": "2025-08-20 02:59:08.492505"
+  },
+  {
+    "item_id": 64,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=true,north=true,south=true,waterlogged=false,west=true]",
+    "last_updated": "2025-08-20 02:59:08.492589"
+  },
+  {
+    "item_id": 65,
+    "item_type": "minecraft:white_wool",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.492663"
+  },
+  {
+    "item_id": 66,
+    "item_type": "minecraft:pale_oak_log",
+    "item_attributes": "[axis=y]",
+    "last_updated": "2025-08-20 02:59:08.492737"
+  },
+  {
+    "item_id": 67,
+    "item_type": "minecraft:chest",
+    "item_attributes": "[facing=north,type=single,waterlogged=false]",
+    "last_updated": "2025-08-20 02:59:08.492826"
+  },
+  {
+    "item_id": 68,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=true,north=false,south=true,waterlogged=false,west=false]",
+    "last_updated": "2025-08-20 02:59:08.492908"
+  },
+  {
+    "item_id": 69,
+    "item_type": "minecraft:yellow_concrete_powder",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.492989"
+  },
+  {
+    "item_id": 70,
+    "item_type": "minecraft:glowstone",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.493092"
+  },
+  {
+    "item_id": 71,
+    "item_type": "minecraft:bricks",
+    "item_attributes": null,
+    "last_updated": "2025-08-20 02:59:08.493157"
+  },
+  {
+    "item_id": 72,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=true,north=true,south=false,waterlogged=false,west=true]",
+    "last_updated": "2025-08-20 02:59:08.493209"
+  },
+  {
+    "item_id": 73,
+    "item_type": "minecraft:dark_oak_log",
+    "item_attributes": "[axis=y]",
+    "last_updated": "2025-08-20 02:59:08.493246"
+  },
+  {
+    "item_id": 74,
+    "item_type": "minecraft:peony",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:59:08.493298"
+  },
+  {
+    "item_id": 75,
+    "item_type": "minecraft:chain",
+    "item_attributes": "[axis=y,waterlogged=false]",
+    "last_updated": "2025-08-20 02:59:08.493334"
+  },
+  {
+    "item_id": 76,
+    "item_type": "minecraft:iron_bars",
+    "item_attributes": "[east=false,north=false,south=true,waterlogged=false,west=true]",
+    "last_updated": "2025-08-20 02:59:08.493388"
+  },
+  {
+    "item_id": 77,
+    "item_type": "minecraft:lantern",
+    "item_attributes": "from chest",
+    "last_updated": "2025-08-20 02:59:08.493424"
+  }
+]

@@ -1,0 +1,108 @@
+AIPM Player Instructions - Round 1
+Generated at: 20250831_000929
+==================================================
+
+HIGH-LEVEL PLAN:
+Strategic Plan for Round 1 – Structure 1
+
+1. Overview & Critical Path  
+– We must fetch and prepare three block groups in parallel, then assemble on-site:  
+  • Oak stairs (20 total, 5 per facing)  
+  • Light-gray concrete (25 blocks)  
+  • Iron bars (5)  
+– Bottleneck: concrete conversion and stair crafting. These must run concurrently with resource hauling.  
+
+2. Player Roles & Zones  
+– P1 (Stair Specialist)  
+  • Zone: Resource → Processing (crafting table) → Build site  
+  • Task: Collect oak logs → craft planks → craft stairs → deliver stairs  
+– P2 (Concrete Specialist)  
+  • Zone: Resource → Processing (water source) → Build site  
+  • Task: Collect concrete powder → convert to concrete blocks → deliver blocks  
+– P3 (Bar Specialist & Site Prep)  
+  • Zone: Resource → Build site  
+  • Task: Collect iron bars → run site-prep (scaffolding, staging) → deliver bars  
+
+3. Resource Collection Sequence (all start at Resource Area X34.398,Z-83.75)  
+– P1:  
+  1. Grab 8 oak_logs  
+  2. Hotbar/sprint to Processing (–69.365,-84.426)  
+– P2:  
+  1. Grab 25 light_gray_concrete_powder + empty bucket  
+  2. Sprint to Processing  
+– P3:  
+  1. Grab 5 iron_bars (any orientation)  
+  2. Direct to Build site (–20.672,-86.143), start scaffolding setup  
+
+4. Processing Workflow (parallel)  
+– P1 at crafting table:  
+  • Log → 32 planks → craft 20 oak stairs (need 30 planks)  
+  • As stairs finish, load into inventory (stack in slot 1)  
+– P2 at water source:  
+  • Place 25 powder on floor in one layer  
+  • Use bucket (water) to convert all to concrete blocks  
+  • Break up blocks, stack into inventory (slot 1)  
+– P3 idle until arrival on site—prepares staging area (mark floor footprint, place scaffolding)  
+
+5. Delivery & Build Sequence  
+– As soon as P1 crafts a stack of stairs, run to Build site, hand off to P3 and/or begin placing  
+– As soon as P2 converts blocks, run to site, hand off to P3 and/or begin placing  
+– P3 organizes delivered materials around the footprint for immediate access  
+
+6. Construction Milestones & Parallelism  
+Milestone A (t0+0–15 s)  
+  • All players reach Resource area and begin collection  
+Milestone B (t0+15–45 s)  
+  • P1 and P2 arrive at Processing; P3 arrives at Build site, sets scaffold (height + access)  
+Milestone C (t0+45–75 s)  
+  • P1 completes stairs; P2 completes concrete; both en route to site  
+Milestone D (t0+75–120 s)  
+  • Bulk placement:  
+    – P1 places all oak stairs around perimeter (assign directions by group of 5)  
+    – P2 places all 25 light-gray concrete in the core  
+    – P3 installs 5 iron bars into their exact positions  
+Milestone E (t0+120–135 s)  
+  • Final check (orientation, waterlogged flags=false) → Complete  
+
+7. Communication Checkpoints  
+– “Logs/powder/bars collected” → P1/P2/P3 start moving to processing/site  
+– “Stairs ready” → P1 departing → P3 pause site-prep and mark stair slots  
+– “Concrete ready” → P2 departing → P3 pause if conflict on scaffolding  
+– “All materials on site” → Rapid fill, call out missing blocks  
+
+8. Inventory & Hotbar Setup  
+– Slot 1: primary output (stairs, blocks, bars)  
+– Slot 2–4: tool (axe for logs, pick for iron, shovel if needed)  
+– Slot 5: bucket (P2), scaffolding (P3)  
+– Remaining: empty to stage just-in-time delivery  
+
+Key to speed: maximal overlap—while P1/P2 process, P3 primes the site. Tight hand-offs eliminate return trips. Follow the milestones rigorously for sub-2-minute completion.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+jc_cr (acting as P1 – Stair Specialist):
+1. Move immediately to Resource Area (X = 34.398, Z = –83.75).  
+2. Chop down and collect exactly 8 oak_logs.  
+   • Success = inventory contains 8 oak_logs.  
+3. Hotbar-slot 2: equip any axe; clear slot 1 for output.  
+4. Sprint to Processing Table at (X = –69.365, Z = –84.426).  
+   • Success = you are standing at the crafting table with 8 logs in inventory.
+
+P2 (Concrete Specialist – to be occupied by next available player):
+1. Upon joining, teleport or run to Resource Area (34.398, –83.75).  
+2. Collect 25 light_gray_concrete_powder and 1 empty bucket.  
+   • Success = inventory slots 1 = powder (25), slot 5 = bucket.  
+3. Proceed to Water Source at (–69.365, –84.300).  
+   • Ready to lay out powder in one layer and convert to blocks.
+
+P3 (Bar Specialist & Site Prep – to be occupied by next available player):
+1. Upon joining, collect 5 iron_bars at Resource Area (34.398, –83.75).  
+   • Success = inventory slot 1 = 5 iron_bars.  
+2. Run directly to Build Site (X = –20.672, Z = –86.143).  
+3. Begin scaffolding setup around the planned footprint (mark corners).  
+   • Success = footprint marked and 5 scaffolding blocks placed for easy access.
+
+Next Checkpoint:
+• jc_cr posts “Logs collected” → immediately start planks→stairs crafting.  
+• P2/P3 to post “Powder collected” / “Bars collected” as soon as they finish their Resource-area runs.

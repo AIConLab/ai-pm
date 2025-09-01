@@ -1,0 +1,95 @@
+AIPM High-Level Plan - Round 4
+Generated at: 20250831_213546
+==================================================
+
+Summary (fast): split work into 3 roles — Runner A (iron supply + staging), Runner B (concrete powder + torches), Processor/Distributor (convert iron_blocks → ingots, craft iron door) — Builder stays at the structure and places blocks as they arrive. Key bottleneck = converting iron_blocks to ingots and crafting 27 trapdoors; use inventory crafting to parallelize trapdoor production once ingots are available. Route planning: resource -> structure -> processing to avoid extra back-and-forth.
+
+1) Resource collection priorities
+- Immediate collection (no processing required / stage at structure or processing):
+  - Iron_block x25 total (see reasoning below): collect all from resource area in one trip if possible (25 < 64 stack).
+    - 12 iron_blocks are final placed blocks — stage these directly at the structure.
+    - 13 iron_blocks are sacrificial to convert into ingots for trapdoors + door — bring these to processing.
+  - Orange_concrete_powder x19 — must be converted to orange_concrete (see processing). Bring these to the processing area in one load.
+  - Redstone_torch x4 — take from resource chests and stage at structure (or give to builder).
+- Why 25 iron_blocks: trapdoors and an iron door require iron ingots. Rough calculation: 27 trapdoors + 1 door need ~110 iron ingots; 1 iron_block → 9 ingots → need 13 iron_blocks for ingots. Add the 12 iron_blocks to place = 25 total.
+- Inventory management:
+  - One runner can carry all 25 iron_blocks and 19 powder in two stacks (25 and 19) — but avoid mixing staging. Use two runners to avoid single-point delay:
+    - Runner A: all iron_blocks (25). On the way back from resource, drop 12 at structure, continue to processing with 13.
+    - Runner B: orange_concrete_powder x19 + redstone_torches x4 + any redstone (if needed) → processing.
+  - Keep slot reservations:
+    - Each runner keeps 1 hotbar slot free for the water bucket (processing) and 1 slot for redstone torches to avoid clutter.
+    - Distribute ingots/trapdoors into 1–2 hotbar stacks for the builder for quick placement.
+
+2) Processing workflow (order & timing)
+- What must be processed:
+  - Iron_block → 9 iron_ingots (crafting table; requires 3x3).
+  - Iron_ingots → iron_trapdoor (inventory 2x2 or 3x3 craft), and iron_door (requires crafting table).
+  - Orange_concrete_powder → orange_concrete (use water bucket on powder, then break/collect concrete).
+- Processing order & parallelization:
+  1. When Runner A delivers 13 iron_blocks to processing, Processor converts all 13 → 117 ingots using the crafting table (batch crafting; quick).
+  2. Processor crafts the 1 iron_door using the crafting table (only one uses the table).
+  3. Processor divides the ingots into stacks and hands them to players (or drops stacks in chest/ground) for trapdoor crafting. Iron trapdoors can be crafted in the player's 2x2 inventory grid — so multiple players craft trapdoors in parallel (big speedup).
+  4. While ingots are being split, Runner B uses the water bucket + processing water to convert orange powder → concrete. Convert in a 1×19 line or a small pad and break to collect. Refill bucket as needed (processing area has water and bucket).
+- Player assignment at processing:
+  - Processor (role): stay at processing until ingots are converted and iron door crafted — splitting/delivering ingots to teammates.
+  - Runner B can assist converting powder to concrete while Processor handles iron conversions.
+  - As soon as players have ingots, they should begin crafting trapdoors into hotbar stacks and immediately shuttle them to the builder.
+
+3) Build execution plan (fastest sequence & parallel work)
+- Construction sequencing:
+  1. Stage 12 iron_blocks at the structure immediately (Runner A drops them). Builder starts placing iron_block structural pieces right away — this is useful because these blocks are both required and do not depend on processing.
+  2. While iron block shell is being placed, Runner B and Processor convert powder → concrete and craft the iron door. Builder receives and places orange concrete as it arrives; do orange surfaces after core iron_block skeleton to avoid obstruction.
+  3. Trapdoors (27) should be crafted in parallel by the two non-builder players and delivered in batches to the builder for rapid placement; the builder installs trapdoors once the iron-block framework is present in the area they go.
+  4. Redstone torches (4) placed last where the blueprint requires (they’re immediate items).
+- Parallel opportunities:
+  - Player at structure (Builder) places iron_blocks and begins placing orange concrete in regions that are already filled or accessible.
+  - Two other players (Processor + Runner B) work at processing to convert ingots/powder, craft trapdoors in parallel, and ferry completed items to builder.
+  - While one player ferries a batch to the builder, the other continues crafting trapdoors/pouring concrete.
+- Critical path:
+  - Conversion of 13 iron_blocks → ingots and crafting 27 trapdoors is the bottleneck. Parallel crafting of trapdoors by multiple players after ingots are available is essential to minimize time.
+  - Concrete conversion is fast and can be overlapped with ingot conversion.
+
+4) Team coordination, tasks & milestones
+- Role allocation (3-player):
+  - Player 1 (Runner A / Iron Stager): run to resource area, pick up 25 iron_blocks. Route: resource → structure (drop 12) → processing (deliver 13). After delivering, come back to structure to help place iron_blocks and craft trapdoors if needed.
+  - Player 2 (Runner B / Concrete & Torches): pick up orange_concrete_powder x19 and redstone_torches x4 from resource → processing. Convert powder → concrete (use water bucket). Help deliver concrete and torches to structure. Also help craft trapdoors from distributed ingots.
+  - Player 3 (Processor / Builder): start at structure as the builder (if starting position near structure). If starting elsewhere, go to processing first to be ready when iron_blocks arrive. Processor converts iron_blocks → ingots using crafting_table, crafts iron door, splits ingots and hands them off. Builder places blocks, installs trapdoors/door/torches as they arrive.
+- Communication checkpoints (short, specific):
+  - "Iron collected" — Runner A after departing resource with 25 iron_blocks.
+  - "12 iron staged" — Runner A after staging at structure (builder can start).
+  - "13 iron at processing" — Processor converts immediately.
+  - "Ingots ready / handing out" — Processor to others (start crafting trapdoors).
+  - "Concrete ready xN" — Runner B to builder on delivery.
+  - "Trapdoors delivered batch n" — players sending counts so builder can plan placements.
+  - "Finish check" — Builder signals when last placements are done; teammates do quick inventory check then final clean/align.
+- Milestones with targets (time-box each if you use a clock):
+  1. T+0–0:30s — Both runners arrive back at structure/processing with first stage (12 iron staged; powder & torches at processing).
+  2. T+0:30–1:00 — Processor finishes converting 13 iron_blocks → ingots and crafts iron door; begins distributing ingots.
+  3. T+1:00–1:40 — All players craft trapdoors in parallel and first batch is delivered; builder has completed skeleton iron-block placements and begins trapdoor placement.
+  4. T+1:40–2:30 — Orange concrete converted and delivered; builder finishes concrete placements and door/trapdoor placements.
+  5. Final T+2:30–3:00 — Place redstone torches, final orientation/power states, quick full-check vs blueprint and finish.
+  (Adjust times to your team speed — these are targets for coordination; the critical path is ingot→trapdoor crafting.)
+
+5) Quick contingency / solo fallback (current state: only jc_cr active)
+If only one player (jc_cr) is available, do this streamlined route:
+- Single-player route: resource → structure → processing → structure loop.
+  1. Run to resource, get 25 iron_blocks + 19 orange_powder + redstone_torches. (All in one trip if inventory fits; if not, do two controlled trips.)
+  2. On return, drop 12 iron_blocks at structure to start immediate placements.
+  3. Go to processing, convert 13 iron_blocks → ingots, craft iron door at crafting table.
+  4. Convert orange powder → concrete at processing water.
+  5. Craft trapdoors in inventory (this is serial and the main time sink) and place them as you move between processing and structure — try to craft a batch, run to structure, place them, return. Optimize by crafting as many trapdoors as you can carry before each trip to reduce travel.
+  6. Final placements and checks.
+- Solo tip: prioritize staging and immediate placement of the 12 iron_blocks and convert concrete early. Expect trapdoor crafting to dominate solo time.
+
+6) Short checklist before go signal
+- Confirm two runners know route order: resource → structure (drop) → processing (deliver remaining).
+- Reserve hotbar slots: water bucket, hotbar stacks for trapdoors, building block, and a stack for door items/torches.
+- Processor confirms crafting_table access and bucket placement at water.
+- Builder is ready at structure with schematic area cleared and knows the order of block placement for the blueprint.
+
+Resulting priorities (one-line):
+- Single most important: get 13 iron_blocks to processing immediately so ingots and trapdoors can be produced in parallel.
+- Second: stage 12 iron_blocks at structure so builder can start instantly.
+- Third: convert orange powder early and deliver concrete while trapdoors are being made.
+
+If you want, I can convert this plan into an exact step-by-step timed sprint for your three specific players (with who moves when at 10–15 second granularity) — tell me your team average walk/run and craft speed and I’ll produce a minute-by-minute script.
