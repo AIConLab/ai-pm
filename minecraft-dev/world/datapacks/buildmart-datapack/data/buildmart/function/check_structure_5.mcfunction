@@ -6,11 +6,6 @@
 # Initialize check
 scoreboard players set #valid bm_status 1
 
-# Count light_gray_concrete (need exactly 16)
-execute store result score #light_concrete bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:light_gray_concrete
-execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:light_gray_concrete replace minecraft:barrier
-execute unless score #light_concrete bm_timer matches 16 run scoreboard players set #valid bm_status 0
-
 # Count iron_block (need exactly 49)
 execute store result score #iron_block bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:iron_block
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:iron_block replace minecraft:barrier
@@ -52,15 +47,19 @@ execute store result score #stairs_w bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minec
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:deepslate_tile_stairs[facing=west,half=bottom,shape=straight,waterlogged=false] replace minecraft:barrier
 execute unless score #stairs_w bm_timer matches 18 run scoreboard players set #valid bm_status 0
 
-# Count end_rod [facing=east] (need exactly 2)
+# Count end_rod [facing=east] 
 execute store result score #end_rod_e bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:end_rod[facing=east]
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:end_rod[facing=east] replace minecraft:barrier
-execute unless score #end_rod_e bm_timer matches 2 run scoreboard players set #valid bm_status 0
 
-# Count end_rod [facing=west] (need exactly 2)
+# Count end_rod [facing=west]
 execute store result score #end_rod_w bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:end_rod[facing=west]
 execute run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:end_rod[facing=west] replace minecraft:barrier
-execute unless score #end_rod_w bm_timer matches 2 run scoreboard players set #valid bm_status 0
+
+# Check total end rods (east + west = 4, allows any combination)
+scoreboard players operation #end_rods_total bm_timer = #end_rod_e bm_timer
+scoreboard players operation #end_rods_total bm_timer += #end_rod_w bm_timer
+execute unless score #end_rods_total bm_timer matches 4 run scoreboard players set #valid bm_status 0
+
 
 # Count pale_oak_trapdoor [facing=south,half=bottom,open=true,powered=false,waterlogged=false] (need exactly 2)
 execute store result score #trapdoor_s bm_timer run fill ~-3 ~1 ~-3 ~3 ~7 ~3 minecraft:barrier replace minecraft:pale_oak_trapdoor[facing=south,half=bottom,open=true,powered=false,waterlogged=false]
