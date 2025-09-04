@@ -1,0 +1,112 @@
+AIPM High-Level Plan - Round 1
+Generated at: 20250902_013853
+==================================================
+
+Summary (goal): get 25 light_gray_concrete + 20 oak stairs (4 directions, 5 each) + 5 iron bars to the build site and place them exactly. Minimize trips and idle time by funneling raw gathering → processing → a 1–2 delivery runs to the structure while the builder places continuously.
+
+Key distances (for route planning)
+- Structure ↔ Resource ≈ 55 blocks
+- Structure ↔ Processing ≈ 49 blocks
+- Resource ↔ Processing ≈ 104 blocks (long — avoid repeated back-and-forth between those two)
+
+1) Resource collection priorities
+- Immediate/first pickup (from Resource area):  
+  - oak_log x8 (to make 32 oak planks → 20 stairs)  
+  - light_gray_concrete_powder x25 (must be converted to concrete)  
+  - iron_bars x5 (take the variant that exactly matches the required state — check the variant string on hover and pick the matching shelf item)
+- No other resources needed.
+- Why: logs + powder + bars all available at Resource; stairs and concrete require only light processing (crafting and water conversion) so gather raw materials in one sweep.
+
+Inventory note
+- Item counts are small: 25 concrete + 20 stairs + 5 bars = ~50 blocks. Stairs, concrete, bars are stackable — entire load fits into 2–3 slots. So a single gatherer can carry everything from Resource → Processing in one run, then two players can carry finished goods to structure with one delivery each.
+
+2) Processing workflow (critical path)
+- Required processing steps:
+  - Convert light_gray_concrete_powder → light_gray_concrete (contact with water source block)
+  - Craft oak_logs → oak_planks → oak_stairs at a crafting table
+  - No smelting required
+- Where: use Processing area (has crafting_table, water, bucket)
+- Processing order & timing:
+  1. Gatherer brings raw items to Processing.
+  2. Processor uses the water source to rapidly convert all 25 powder blocks to concrete. Fast method: place powder blocks adjacent to the water source so they convert instantly; do them in stacks so no extra movements.
+  3. Processor turns 8 oak logs → planks (one-click) then crafts stairs: use 6 planks per craft for 4 stairs. Do the five crafts back-to-back to produce 20 stairs.
+  4. Verify iron_bars variant matches required; if not exact variant is available in Processing chests, swap there; otherwise use the exact shelf item from Resource (harvester should have taken the matching variant).
+- Parallelization: conversion and crafting can be done by one processor while builder begins on-site with any early-delivered material.
+
+Player assignment (3-player ideal; fallback for 2 players included)
+- P1: Harvester (Resource → Processing)
+  - From structure start-line run to Resource, pick oak_log x8, light_gray_concrete_powder x25, iron_bars x5 (matching variant).
+  - Return directly to Processing and hand materials to P2.
+  - After handing off, P1 helps carry processed blocks to structure for build.
+- P2: Processor / Secondary carrier (stay at Processing)
+  - Be waiting at Processing for P1 arrival.
+  - Immediately convert all powder → concrete and craft all stairs.
+  - Split finished inventory for delivery: take ~half the concrete + sufficient stairs and bars to structure.
+  - Stay at Processing until P1 returns with rest of processed goods (if needed).
+- P3: Builder / On-site lead (stay at Structure)
+  - Go immediately to structure and start site prep (mark footprints, place scaffolding if needed).
+  - Begin placing blocks as soon as first deliveries arrive.
+  - Direct orientation of stairs (counts per direction) to avoid rework; announce orientation assignments and final-check sequence.
+
+If only 2 players available (current status): combine P1+P2 duties.
+- One player must be Harvester+Processor: Resource → Processing → convert/craft → run to structure with half load.
+- The other player acts as Builder + carrier: move to structure early, collect delivered load and build; when Processor returns with second load, both finish build.
+- Expect ~1 extra trip total vs. 3-player plan (still optimal given staffing).
+
+3) Build execution plan (fastest placement sequence)
+- Pre-build: Builder pre-mark exact positions for 25 concrete and stair footprint, assign quadrant responsibilities:
+  - Split vertical/horizontal contiguous blocks so two placers never collide (e.g., builder centers, carriers place left/right blocks).
+- Placement order (to minimize handling/turning & rework):
+  1. Place concrete bulk first — fill continuous areas so subsequent stair placements have solid neighbors.
+  2. Place iron bars next in their exact positions (they are thin; place quickly when reach them in sequence).
+  3. Place stairs last: stairs need correct facing. Place stairs after adjacent concretes exist so you can orient easily.
+- Parallel placement opportunities:
+  - While Processor converts/crafts, Builder can lay down any foundation lines with blocks delivered first (e.g., drop first stack of concrete and start). When second delivery arrives continue filling from the other side — two placers working symmetrically reduces collision.
+- Critical path:
+  - Harvester→Processing→craft/convert is the critical chain before any blocks can be fully ready to place. Compress this chain by having Processor waiting at Processing and P1 not stopping at structure first.
+
+4) Communication and milestones (checkpoints)
+- Immediate voice/text calls to use (short cues only): "Resource", "Processing ready", "Load 1 out", "Load 2 out", "50% done", "Final 10 blocks", "Verify"
+- Milestones:
+  - M1 (T+short): P1 arrives at Resource with empty inventory and confirms collected counts (8 logs, 25 powder, 5 bars).
+  - M2: P1 arrives at Processing and announces "Materials in" — P2 starts convert/craft immediately.
+  - M3: Processing complete and first delivery loaded — P2 says "Load 1 out" and P1/P2 head to Structure (both should leave within 1–2s of readiness).
+  - M4: Builder confirms "Foundation placed / 50% done" after first load placed.
+  - M5: Second delivery arrives — finalize placements: bars and oriented stairs. Builder announces "Final pass" for verification of orientation and exact counts.
+  - M6: Team does a 30-second fast verification sweep (one player runs checking states while others hold last blocks) then call completion.
+
+Exact task allocation step-by-step (3-player)
+- Start positions: all at Structure. At GO:
+  - P1 → Resource (grab 8 logs, 25 powder, 5 correct iron bars) → run to Processing.
+  - P2 → go immediately to Processing and wait by water + crafting table (so P1’s arrival has no delay).
+  - P3 → remain at Structure and mark placements; prepare scaffolding and clear placements.
+- When P1 delivers:
+  - P2 converts powder → concrete and crafts stairs (execute as batch).
+  - While P2 processing, P3 is ready and will accept first delivery of finished items as soon as P2 has them. P2 and P1 carry processed goods to Structure in one coordinated run: both depart Processing together to minimize handoffs.
+- At Structure:
+  - P3 leads build sequence, P1 + P2 place blocks according to preassigned zones (e.g., P1 left half, P2 right half, P3 center and finishing stairs).
+  - Place concrete first, bars next, stairs last.
+- Final verification by P3 while P1/P2 tidy inventory and confirm no wrong block states.
+
+Timing tips to minimize wasted seconds
+- Do not make Resource ↔ Processing repeated shuttles. Gather all raw materials in one go.
+- Processor must be positioned at Processing before harvester arrives to eliminate waiting.
+- Use two carriers from Processing → Structure in one run (both leave as soon as first batch ready).
+- Use short, standardized verbal cues only — avoid long sentences.
+- Builder should always place continuously; if they run out of one block type, switch to a different zone they still have blocks for (avoid idle).
+
+Quick checklist before GO
+- Confirm Processor is at Processing and sees water + crafting table.
+- Harvester confirms the resource shelf has the exact iron_bars variant required.
+- Builder confirms build footprint is marked at structure.
+
+What to do if mismatch (iron_bars variant not exact)
+- Harvester: pick the closest variant and deliver it to Processing. Processor checks if any variant in Processing chests matches. If none match exactly, pick the variant that will visually match at placement; if verification will fail in judging, call immediate swap — but priority is to grab matching variant from Resource (so check carefully at Resource).
+
+Wrap-up (what this plan optimizes)
+- Minimizes long Resource↔Processing repeat trips by batching all raw-gathering in one sweep.
+- Keeps the processing step ready to run (processor waiting) to reduce idle time.
+- Uses two carriers to do a single coordinated delivery to the structure so Builder can place continuously.
+- Clear milestones and short cues prevent miscoordination.
+
+If you want, I can convert this into a second-by-second run script with exact movement order and short voice cues tailored to your runs and team speeds (useful for practice runs).
