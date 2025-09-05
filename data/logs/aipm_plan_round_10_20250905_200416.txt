@@ -1,0 +1,94 @@
+AIPM High-Level Plan - Round 10
+Generated at: 20250905_200416
+==================================================
+
+Below is a compact, high‑efficiency plan for a 3‑player team to finish Structure 10 as fast as possible. It assumes standard inventory sizes and the given resource/processing locations. Focus: minimize trips, keep builders always building, and make the Processor the single bottleneck who does all crafting in one stop.
+
+Quick summary of items needed (explicit counts used in plan)
+- Iron blocks total to collect: 9 (7 placed in build + 2 to convert to ingots for trapdoors)
+- Iron bars: 6 (take matching orientation variants from resource area)
+- Iron trapdoors: 6 (must be crafted from iron ingots — 4 ingots → 2 trapdoors each craft; need 12 ingots → convert 2 iron_blocks into ingots)
+- Red wall banners: 8 (make from white_wool + sticks then recolor with red_dye)
+- White wool: 48 (6 wool × 8 banners)
+- Sticks: 8 (1 per banner; craft from planks — logs available)
+
+1) RESOURCE COLLECTION STRATEGY
+- Immediate collection (no processing needed):
+  - Iron blocks (collect 9 total)
+  - Iron bars (6) — pick variants that match the required orientations when possible to avoid re-orienting at build
+  - Extra spare blocks: +1 iron_block (if inventory allows) as a contingency
+- Collected for processing (one player only):
+  - 2 iron_blocks (for ingots → trapdoors)
+  - 48 white_wool
+  - 2 logs (to craft planks → sticks) OR collect planks/sticks if available
+  - (Optional) a few extra wool/sticks for mistakes
+- Optimal collection sequence (minimize trips):
+  - Players A & B: each collect majority of iron_blocks + each take half the iron_bars, then go straight to the structure and begin building.
+  - Player C (Processor/Runner): collect the 2 iron_blocks + all white_wool + logs/sticks (and any leftover bars if needed) in one trip, then go directly to the processing area to craft everything in one stop.
+- Inventory distribution example:
+  - Player A: 5 iron_blocks, 3 iron_bars
+  - Player B: 4 iron_blocks, 3 iron_bars (+ any scaffolding if needed)
+  - Player C: 2 iron_blocks (for conversion), 48 white_wool, 2 logs (or 8 sticks if pre-crafted) — everything needed for banners & trapdoors
+
+2) PROCESSING WORKFLOW (order + who)
+- All processing done by Player C at the Processing Area (single processor avoids duplicated trips).
+- Steps and timing:
+  1. At processing table: convert 2 iron_blocks → 18 iron_ingots (place blocks in crafting grid; yields 9 each).
+  2. Craft iron trapdoors: perform the trapdoor recipe 3 times (4 ingots → 2 trapdoors) to get the required 6 trapdoors. This is fast; do all three crafts back-to-back.
+  3. Craft sticks from logs → planks → sticks (2 logs → 8+ sticks easily).
+  4. Craft 8 white banners: 8 × (6 white_wool + 1 stick) → produce 8 white banners. (Crafting is instant.)
+  5. Recolor banners: combine each white banner + red_dye → red banner (processing area has red_dye). Make them wall‑banners in place later (orientation done on placement).
+- Timing note: all crafting is local at processing area; Player C should batch everything in one processing stop to avoid repeat travel. Expect processing walk + crafting + run to structure to be the critical path.
+
+3) BUILD EXECUTION PLAN (fastest order + parallelization)
+- Build critical path: iron block frame → iron bars → trapdoors/banners final placement.
+- Construction sequence:
+  1. Structural block placement (parallel): Players A & B immediately place the 7 iron_blocks (and any support blocks) to create the attachment points for bars, trapdoors, banners. They should split the structure into clear halves: A handles left/half, B handles right/half so no overlap.
+  2. Iron bars (parallel): While blocks are being placed (or immediately after), A & B place the 6 iron_bars into their exact positions. If bars are already oriented correctly from the resource area, placement is quick.
+  3. Final fittings (sequential but quick): Player C arrives with trapdoors and red banners. Player C coordinates with whichever builder is closest to place trapdoors with correct facing attributes (east/north/south) — trapdoors must be oriented as specified on placement. Player C can also apply banners (wall banners must face proper direction), or hand them to the closest builder if placing on the opposite side is faster.
+  4. Final cleanup & verification (single pass): One player walks the structure verifying orientation & exactness.
+- Parallel work opportunities:
+  - A and B continuously place iron_blocks and iron_bars in parallel (primary parallel work).
+  - Player C processing is parallel to that; builders should not wait—start block/bar work immediately.
+  - Once Player C arrives with trapdoors/banners, placement can be parallel: C places trapdoors while A/B place banners and final adjustments.
+- Critical path identification:
+  - Critical path: Player C’s resource → processing → travel → placement of trapdoors & banners. Everything else should be done before C’s arrival so final placement completes fast.
+  - Avoidance: Do not send builders to processing unless there is idle time — processing is far; keep them building.
+
+4) TEAM COORDINATION (roles, comms, milestones)
+- Roles (3 players):
+  - Player A: Builder 1 — collects 5 iron_blocks + 3 iron_bars → goes straight to structure → places iron_blocks and half of iron_bars → after C arrives, place assigned banners/trapdoors on assigned side.
+  - Player B: Builder 2 — collects 4 iron_blocks + 3 iron_bars → goes straight to structure → mirrors Player A on other half.
+  - Player C: Processor/Runner — collects 2 iron_blocks (for ingots), 48 white_wool, logs → runs to processing area → crafts trapdoors & banners → runs to structure and completes trapdoors & banners placement and final tweaks.
+- Communication checkpoints (short, exact phrases):
+  - “Collected” — when each player finishes resource pickup.
+  - “A/B at build” — builders confirm they began placing.
+  - “C at processing / crafting” — processor announces start of crafting.
+  - “C out with banners/trapdoors” — processor leaving processing for structure.
+  - “Ready for placement [east/north/south]” — when C arrives, call out where trapdoors/banners will be placed.
+  - “Final check” — once done, a quick sweep for exactness.
+- Milestones (use these as timers/checkpoints)
+  - M1 (T+0): A/B depart resource → begin placing blocks within 10s of arrival at structure.
+  - M2 (T+0 + few secs): C arrives at processing — starts crafting (goal: finished crafting within ~20–45s depending on sprint times).
+  - M3 (Before M4): A & B have all iron_blocks and iron_bars placed or nearly done.
+  - M4 (C arrival at structure): C arrives with trapdoors + banners — place final pieces immediately (this should finish the structure).
+  - M5 (Immediate): Final verification and corrections (max 10s).
+- Contingency: if C is delayed, builders should pre-place bar anchor points and keep the structure waiting for items to be attached; do not send a builder to process unless both builders are done and idle.
+
+Other micro-optimizations
+- Choose iron_bar variants pre-matched to the orientation required to avoid rotating in-place.
+- Builders should carry quick scaffolding if needed (scaffolding available in processing area; but bringing minimal scaffolding from resource area is optional).
+- Player C should carry banners in hotbar and trapdoors in hotbar to speed placement on arrival.
+- Use sprint + diagonal runs between resource/processing/build to save seconds; minimize idling at furnaces/crafting tables.
+
+Concise execution checklist (to run at start)
+1. Assign roles (A/B builders, C processor).
+2. A picks 5 iron_blocks + 3 bars → go to structure.
+3. B picks 4 iron_blocks + 3 bars → go to structure.
+4. C picks 2 iron_blocks + 48 wool + 2 logs → go to processing.
+5. A/B place iron_blocks and iron_bars immediately and in parallel.
+6. C crafts trapdoors (2 blocks → 18 ingots → 3 crafts → 6 trapdoors), crafts sticks, crafts 8 white banners, recolors banners to red.
+7. C runs to structure, places trapdoors (orient as required) while A/B place banners.
+8. Final check, adjust, finish.
+
+If you want, I can convert this into a timed second-by-second script for all three players (with estimated running times between coordinates) or a quick in‑game hotbar/inventory packing checklist for each player. Which would help you most?

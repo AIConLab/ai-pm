@@ -1,0 +1,116 @@
+AIPM Player Instructions - Round 10
+Generated at: 20250905_195130
+==================================================
+
+HIGH-LEVEL PLAN:
+ROUND 10 – SPEED PLAN (Structure 10)
+
+Core idea: Split iron base vs. crafted components. Two builders place all iron blocks and bars while one crafter produces trapdoors and banners, then joins to finish.
+
+1) Resource collection priorities and routes
+Immediate pickups (no smelting):
+- Iron blocks: 10 total
+  - 7 for placement
+  - 3 to craft 6 iron trapdoors (3 blocks → 27 ingots → 6 trapdoors)
+- Iron bars: 6
+- White wool: 48 (to dye into 48 red wool)
+- Oak log: 1 (for sticks → banners)
+
+Optimal collection and delivery split:
+- P1 (Resource → Structure):
+  - Grab 4 iron blocks + 3 iron bars (plus 1 extra bar if you want buffer)
+  - Head straight to structure
+- P3 (Resource → Structure):
+  - Grab 3 iron blocks + 3 iron bars
+  - Head straight to structure
+- P2 (Resource → Processing → Structure):
+  - Grab 3 iron blocks + 48 white wool + 1 oak log
+  - Sprint to Processing to craft, then deliver to Structure
+Inventory tips:
+- Keep hotbar light and sorted: 1) iron blocks 2) bars 3) trapdoors 4) banners
+- P2: craft planks and sticks on the run (2x2) to shorten processing time
+
+2) Processing workflow (P2)
+At Processing:
+- Pull a stack of red dye
+- Pre-crafts (can do while traveling):
+  - 1 oak log → 4 planks → 8 sticks (2 planks → 4 sticks; you need 8 sticks total)
+At crafting table:
+- Dye 48 white wool → 48 red wool
+- Craft 8 red banners (6 red wool + 1 stick each)
+- Convert 3 iron blocks → 27 ingots
+- Craft 6 iron trapdoors (4 ingots each; 24 ingots used)
+Depart immediately to Structure with: 8 red banners + 6 iron trapdoors (+ leftover ingots)
+
+Processing timing priority:
+- Make trapdoors first if you arrive early and builders are nearly done with the base; otherwise banners first is fine. Both are fast—travel is the critical path.
+
+3) Build execution plan (at Structure)
+Critical path: P2’s craft and delivery. P1/P3 must fully finish all iron placement before P2 arrives.
+
+Order for fastest completion:
+- Phase A (P1 + P3, in parallel)
+  - Place all 7 iron blocks (coordinate with each other to avoid collision)
+  - Place all 6 iron bars (match reference exactly; verify connections after adjacent blocks go in)
+- Phase B (upon P2 arrival)
+  - Place iron trapdoors (6 total):
+    - All trapdoors are half=bottom and closed
+    - Facing east: 4
+    - Facing north: 1
+    - Facing south: 1
+    Placement technique (to guarantee states):
+    - Click the lower half of the correct side face of the supporting block:
+      - Facing east: click the EAST face (lower half)
+      - Facing north: click the NORTH face (lower half)
+      - Facing south: click the SOUTH face (lower half)
+    - Do not toggle after placing (must remain closed)
+  - Place red wall banners (8 total):
+    - Facing N: 2 on north faces
+    - Facing S: 2 on south faces
+    - Facing E: 2 on east faces
+    - Facing W: 2 on west faces
+- Phase C (finalize)
+  - Quick 360° verification of trapdoor facings, banner facings, iron bar connections, and iron block count
+
+4) Team coordination and assignments
+Roles:
+- P1: Iron base lead
+  - Route: Resource → Structure
+  - Place 4 iron blocks + 3 bars
+- P3: Iron base support + QA
+  - Route: Resource → Structure
+  - Place 3 iron blocks + 3 bars; then pre-mark locations for trapdoors/banners (stand at blocks and call out faces)
+- P2: Crafter/finisher
+  - Route: Resource → Processing (craft) → Structure (deliver and place)
+  - Place all 6 trapdoors (fastest single-placer for consistency); then place banners
+Parallel opportunities:
+- P1 and P3 place blocks simultaneously on opposite sides of the structure to avoid collision
+- While waiting for P2, P1/P3 pre-aim crosshairs at the exact trapdoor faces to reduce P2’s placement hesitation
+
+5) Communication checkpoints (short calls)
+- “Base iron down” (P1/P3): All 7 iron blocks placed
+- “Bars done” (P1/P3): All 6 bars placed and checked
+- “Crafts en route” (P2): Leaving Processing with trapdoors + banners
+- “Trapdoors placed” (P2): All 6 done; request banner placements
+- “Banners placed” (P2 or helper): All 8 placed
+- “360 check clear” (Anyone): All orientations and counts verified
+
+6) Milestones for tracking
+- M1: 7/7 iron blocks placed (target: before P2 arrives)
+- M2: 6/6 iron bars placed (target: before P2 arrives)
+- M3: P2 arrival with 6 trapdoors + 8 banners
+- M4: 6/6 trapdoors placed with correct facing and bottom half
+- M5: 8/8 red wall banners placed with correct facing
+- M6: Final orientation/connection check complete → submit
+
+Notes to prevent mistakes
+- Trapdoors: always click lower half of the correct side face; avoid right-clicking again
+- Banners: must be red banners (crafted from red wool); place on the correct wall face for exact facing
+- Bars: if connections don’t match reference, adjust surrounding placements; bars auto-update connections
+
+This plan minimizes trips, parallelizes base placement, and keeps the single longest leg (P2’s crafting/delivery) off the critical path by having the entire iron foundation done before arrival.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+P1: At Resource, grab 4 iron blocks and 3 iron bars (take 1 extra bar if available) and sprint directly to Structure 10; success when you deliver exactly 4 iron blocks and 3–4 bars to site. P1: Place your 4 iron blocks and 3 iron bars on one side per reference while P3 works the opposite side to avoid collision, targeting team milestones M1 and M2 complete before P2 arrives. P1: Verify iron bar connections match the reference and adjust surrounding placements if needed; call Base iron down at 7/7 blocks and Bars done at 6/6 bars. P1: While waiting for P2, pre-aim at the lower halves of the east, north, and south faces where trapdoors will go and stand at banner spots to guide placements; keep hotbar slot 1 iron blocks and slot 2 bars. P3: At Resource, grab 3 iron blocks and 3 iron bars and sprint to Structure 10; success when you deliver exactly 3 iron blocks and 3 bars to site. P3: Place your 3 iron blocks and 3 iron bars on the side opposite P1 to complete the base before P2 arrives; coordinate to avoid overlap and finish team milestones M1 and M2. P3: Pre-mark trapdoor and banner locations by standing at each supporting block and calling the faces needed (trapdoors: east x4, north x1, south x1; banners: N2 S2 E2 W2); QA iron bar connections and block count; echo calls Base iron down and Bars done when achieved. P3: Keep crosshair pre-aimed at the correct lower face halves for trapdoor placement to speed P2; keep hotbar slot 1 iron blocks and slot 2 bars. P2: At Resource, grab 3 iron blocks, 48 white wool, and 1 oak log, then sprint to Processing; success when you reach Processing with all items in inventory. P2: On the run, convert 1 oak log to 4 planks and craft to 8 sticks using the 2x2 so you arrive ready to assemble banners. P2: At Processing, pull a stack of red dye, dye 48 white wool into 48 red wool, craft 8 red banners (6 red wool + 1 stick each), convert 3 iron blocks into 27 ingots, and craft 6 iron trapdoors using 24 ingots, keeping 3 ingots spare; if P1/P3 report base nearly done, craft trapdoors first, otherwise banners first is fine. P2: Announce Crafts en route and sprint to Structure 10 carrying 8 red banners and 6 iron trapdoors; success when you arrive with exactly 8 banners and 6 trapdoors. P2: Place 6 iron trapdoors all half=bottom and closed by clicking the lower half of the supporting block’s side face with facings distributed as east 4, north 1, south 1; do not toggle after placement; call Trapdoors placed when done. P2: Place 8 red wall banners with exact facings N2 S2 E2 W2 and call Banners placed when done; then with any teammate run a 360 check for trapdoor facings, banner facing counts, iron bar connections, and iron block count and call 360 check clear.
