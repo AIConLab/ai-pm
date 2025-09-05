@@ -1,226 +1,142 @@
 [
   {
-    "inventory_id": 8105,
-    "user_id": 1,
-    "item_type": "wooden_axe",
-    "quantity": 2,
-    "last_updated": "2025-08-23 11:16:44.112888"
-  },
-  {
-    "inventory_id": 8106,
-    "user_id": 1,
-    "item_type": "white_terracotta",
+    "inventory_id": 161634,
+    "user_id": 3986,
+    "item_type": "grass_block",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.112992"
+    "last_updated": "2025-08-28 01:51:18.756987"
   },
   {
-    "inventory_id": 8107,
-    "user_id": 1,
+    "inventory_id": 161635,
+    "user_id": 3986,
+    "item_type": "wooden_axe",
+    "quantity": 1,
+    "last_updated": "2025-08-28 01:51:18.757134"
+  },
+  {
+    "inventory_id": 161636,
+    "user_id": 3986,
+    "item_type": "nether_brick_stairs",
+    "quantity": 1,
+    "last_updated": "2025-08-28 01:51:18.757162"
+  },
+  {
+    "inventory_id": 161637,
+    "user_id": 3986,
+    "item_type": "bedrock",
+    "quantity": 1,
+    "last_updated": "2025-08-28 01:51:18.757183"
+  },
+  {
+    "inventory_id": 161638,
+    "user_id": 3986,
+    "item_type": "oak_planks",
+    "quantity": 1,
+    "last_updated": "2025-08-28 01:51:18.757200"
+  },
+  {
+    "inventory_id": 161639,
+    "user_id": 3986,
+    "item_type": "lantern",
+    "quantity": 1,
+    "last_updated": "2025-08-28 01:51:18.757216"
+  },
+  {
+    "inventory_id": 161640,
+    "user_id": 3986,
+    "item_type": "elytra",
+    "quantity": 1,
+    "last_updated": "2025-08-28 01:51:18.757232"
+  },
+  {
+    "inventory_id": 161641,
+    "user_id": 3986,
+    "item_type": "firework_rocket",
+    "quantity": 1,
+    "last_updated": "2025-08-28 01:51:18.757247"
+  },
+  {
+    "inventory_id": 161642,
+    "user_id": 3986,
     "item_type": "light_gray_concrete",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113010"
+    "last_updated": "2025-08-28 01:51:18.757266"
   },
   {
-    "inventory_id": 8108,
+    "inventory_id": 161643,
+    "user_id": 3986,
+    "item_type": "peony",
+    "quantity": 9,
+    "last_updated": "2025-08-28 01:51:18.757285"
+  },
+  {
+    "inventory_id": 320783,
     "user_id": 1,
-    "item_type": "oak_stairs",
+    "item_type": "lever",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113022"
+    "last_updated": "2025-09-01 01:50:42.734141"
   },
   {
-    "inventory_id": 8109,
+    "inventory_id": 320784,
     "user_id": 1,
-    "item_type": "dirt",
+    "item_type": "hopper",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113034"
+    "last_updated": "2025-09-01 01:50:42.734286"
   },
   {
-    "inventory_id": 8110,
+    "inventory_id": 320785,
     "user_id": 1,
-    "item_type": "command_block",
+    "item_type": "pale_oak_sign",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113045"
+    "last_updated": "2025-09-01 01:50:42.734311"
   },
   {
-    "inventory_id": 8111,
+    "inventory_id": 320786,
     "user_id": 1,
-    "item_type": "chain_command_block",
-    "quantity": 2,
-    "last_updated": "2025-08-23 11:16:44.113056"
-  },
-  {
-    "inventory_id": 8112,
-    "user_id": 1,
-    "item_type": "sea_lantern",
+    "item_type": "light_blue_terracotta",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113066"
+    "last_updated": "2025-09-01 01:50:42.734328"
   },
   {
-    "inventory_id": 8113,
+    "inventory_id": 320787,
     "user_id": 1,
     "item_type": "painting",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113077"
+    "last_updated": "2025-09-01 01:50:42.734344"
   },
   {
-    "inventory_id": 8114,
+    "inventory_id": 320788,
     "user_id": 1,
-    "item_type": "stripped_oak_wood",
+    "item_type": "verdant_froglight",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113088"
+    "last_updated": "2025-09-01 01:50:42.734359"
   },
   {
-    "inventory_id": 8115,
+    "inventory_id": 320789,
     "user_id": 1,
-    "item_type": "pale_oak_button",
-    "quantity": 2,
-    "last_updated": "2025-08-23 11:16:44.113098"
-  },
-  {
-    "inventory_id": 8116,
-    "user_id": 1,
-    "item_type": "birch_pressure_plate",
+    "item_type": "bedrock",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113109"
+    "last_updated": "2025-09-01 01:50:42.734375"
   },
   {
-    "inventory_id": 8117,
+    "inventory_id": 320790,
     "user_id": 1,
-    "item_type": "piston",
+    "item_type": "jukebox",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113119"
+    "last_updated": "2025-09-01 01:50:42.734390"
   },
   {
-    "inventory_id": 8118,
+    "inventory_id": 320791,
     "user_id": 1,
-    "item_type": "orange_concrete",
+    "item_type": "observer",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113130"
+    "last_updated": "2025-09-01 01:50:42.734405"
   },
   {
-    "inventory_id": 8119,
+    "inventory_id": 320792,
     "user_id": 1,
-    "item_type": "quartz_pillar",
+    "item_type": "dropper",
     "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113141"
-  },
-  {
-    "inventory_id": 8120,
-    "user_id": 1,
-    "item_type": "quartz_block",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113151"
-  },
-  {
-    "inventory_id": 8121,
-    "user_id": 1,
-    "item_type": "blue_dye",
-    "quantity": 58,
-    "last_updated": "2025-08-23 11:16:44.113162"
-  },
-  {
-    "inventory_id": 8122,
-    "user_id": 1,
-    "item_type": "sentry_armor_trim_smithing_template",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113173"
-  },
-  {
-    "inventory_id": 8123,
-    "user_id": 1,
-    "item_type": "red_candle",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113184"
-  },
-  {
-    "inventory_id": 8124,
-    "user_id": 1,
-    "item_type": "diamond_pickaxe",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113194"
-  },
-  {
-    "inventory_id": 8125,
-    "user_id": 1,
-    "item_type": "repeating_command_block",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113205"
-  },
-  {
-    "inventory_id": 8126,
-    "user_id": 1,
-    "item_type": "loom",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113215"
-  },
-  {
-    "inventory_id": 8127,
-    "user_id": 1,
-    "item_type": "flint_and_steel",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113226"
-  },
-  {
-    "inventory_id": 8128,
-    "user_id": 1,
-    "item_type": "brown_dye",
-    "quantity": 63,
-    "last_updated": "2025-08-23 11:16:44.113256"
-  },
-  {
-    "inventory_id": 8129,
-    "user_id": 1,
-    "item_type": "dune_armor_trim_smithing_template",
-    "quantity": 63,
-    "last_updated": "2025-08-23 11:16:44.113279"
-  },
-  {
-    "inventory_id": 8130,
-    "user_id": 1,
-    "item_type": "leather_boots",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113295"
-  },
-  {
-    "inventory_id": 8131,
-    "user_id": 1,
-    "item_type": "leather_leggings",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113312"
-  },
-  {
-    "inventory_id": 8132,
-    "user_id": 1,
-    "item_type": "leather_chestplate",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113339"
-  },
-  {
-    "inventory_id": 8133,
-    "user_id": 1,
-    "item_type": "golden_helmet",
-    "quantity": 2,
-    "last_updated": "2025-08-23 11:16:44.113365"
-  },
-  {
-    "inventory_id": 8134,
-    "user_id": 1,
-    "item_type": "bolt_armor_trim_smithing_template",
-    "quantity": 61,
-    "last_updated": "2025-08-23 11:16:44.113390"
-  },
-  {
-    "inventory_id": 8135,
-    "user_id": 1,
-    "item_type": "shears",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113416"
-  },
-  {
-    "inventory_id": 8136,
-    "user_id": 1,
-    "item_type": "enchanted_book",
-    "quantity": 1,
-    "last_updated": "2025-08-23 11:16:44.113441"
+    "last_updated": "2025-09-01 01:50:42.734419"
   }
 ]

@@ -13,7 +13,7 @@ processing_area_xyz = [-69.365, 66, -84.426]
 [aipm]
 
 # list of mc username of team members for AIPM team
-members = ["Loopking", "BT1013", "jc_cr"]
+members = ["Loopking", "mnm117", "summervibe555"]
 
 # How often mc_game_query should query the game state in seconds
 query_interval_sec = 3
@@ -21,7 +21,7 @@ query_interval_sec = 3
 
 [aipm.planner_agent]
 
-model = "gpt-5-mini"
+model = "gpt-5"
 
 planner_system_prompt = """
 You are an AI Strategic Planner for a Minecraft Build Mart speed-building challenge. Your role is to create OPTIMAL strategic plans for completing single structures as quickly as possible with a 3-player team.
@@ -123,7 +123,7 @@ Focus on SPEED OPTIMIZATION and COORDINATION EFFICIENCY.
 [aipm.manager_agent]
 
 
-model = "gpt-5-mini"
+model = "gpt-5"
 
 manager_system_prompt = """
 You are an AI Task Manager translating strategic plans into immediate, actionable instructions for a multi-player Minecraft Build Mart team.

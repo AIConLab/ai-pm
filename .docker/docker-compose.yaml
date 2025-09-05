@@ -18,7 +18,7 @@ services:
       - ../scripts:/app/scripts
       - ../config.toml:/app/config.toml
       - ../data:/app/database
-      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+      - ../minecraft-dev:/mc-data:ro
     command: bash -c "python3 /app/scripts/mc_event_listener.py"
 
   # Queries game state at fixed intervals and writes to DB
@@ -28,7 +28,7 @@ services:
       - ../scripts:/app/scripts
       - ../data:/app/database
       - ../config.toml:/app/config.toml
-      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+      - ../minecraft-dev:/mc-data:ro
       command: bash -c "python3 /app/scripts/mc_game_query.py"
 
   nbt:
@@ -37,7 +37,7 @@ services:
       - ../scripts:/app/scripts
       - ../data:/app/database
       - ../config.toml:/app/config.toml
-      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+      - ../minecraft-dev:/mc-data:ro
     command: bash -c "python3 /app/scripts/create_resource_area_table.py"
 
 
@@ -47,7 +47,7 @@ services:
       - ../scripts:/app/scripts
       - ../data:/app/database
       - ../config.toml:/app/config.toml
-      - /root/ai-pm-mc-world-dev/minecraft-dev/:/mc-data:ro
+      - ../minecraft-dev:/mc-data:ro
     command: bash -c "python3 /app/scripts/export_tables.py"
 
   # Minecraft server service
@@ -65,6 +65,8 @@ services:
         Loopking
         BT1013
         jc_cr
+        mnm117
+        summervibe555
       ONLINE_MODE: "true"
       ENABLE_COMMAND_BLOCK: "true"
       LEVEL_TYPE: "flat"
@@ -84,20 +86,3 @@ services:
     volumes:
       - ../minecraft-dev:/data
     restart: unless-stopped
-
-  # For running latex
-  latex:
-      user: "${UID:-1000}:${GID:-1000}"
-      build:
-        context: ..
-        dockerfile: .docker/Dockerfile.latex 
-      ports:
-        - "3000:3000"  # For LaTeX Workshop
-      working_dir: /project
-      command: tail -f /dev/null
-      volumes:
-       - ../paper/src:/project/src
-       - ../paper/output:/project/output
-       - ../paper/figures:/project/figures
-       - ../paper/include:/project/include
-
