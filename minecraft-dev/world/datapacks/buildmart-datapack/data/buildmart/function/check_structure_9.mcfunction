@@ -18,25 +18,31 @@ execute store result score #slab_bottom bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 m
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:smooth_stone_slab[type=bottom,waterlogged=false] replace minecraft:barrier
 execute unless score #slab_bottom bm_timer matches 19 run scoreboard players set #valid bm_status 0
 
-# Count iron_trapdoor [facing=west] (need exactly 8)
+# FLEXIBLE: Count iron trapdoors in all orientations (need exactly 16 total)
+# Count west-facing trapdoors
 execute store result score #trapdoor_w bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:iron_trapdoor[facing=west,half=bottom,open=false,powered=false,waterlogged=false]
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:iron_trapdoor[facing=west,half=bottom,open=false,powered=false,waterlogged=false] replace minecraft:barrier
-execute unless score #trapdoor_w bm_timer matches 8 run scoreboard players set #valid bm_status 0
 
-# Count iron_trapdoor [facing=east] (need exactly 2)
+# Count east-facing trapdoors
 execute store result score #trapdoor_e bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:iron_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=false]
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:iron_trapdoor[facing=east,half=bottom,open=false,powered=false,waterlogged=false] replace minecraft:barrier
-execute unless score #trapdoor_e bm_timer matches 2 run scoreboard players set #valid bm_status 0
 
-# Count iron_trapdoor [facing=south] (need exactly 1)
+# Count south-facing trapdoors
 execute store result score #trapdoor_s bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:iron_trapdoor[facing=south,half=bottom,open=false,powered=false,waterlogged=false]
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:iron_trapdoor[facing=south,half=bottom,open=false,powered=false,waterlogged=false] replace minecraft:barrier
-execute unless score #trapdoor_s bm_timer matches 1 run scoreboard players set #valid bm_status 0
 
-# Count iron_trapdoor [facing=north] (need exactly 5)
+# Count north-facing trapdoors
 execute store result score #trapdoor_n bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:iron_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false] replace minecraft:barrier
-execute unless score #trapdoor_n bm_timer matches 5 run scoreboard players set #valid bm_status 0
+
+# Sum all trapdoor orientations
+scoreboard players operation #trapdoor_total bm_timer = #trapdoor_w bm_timer
+scoreboard players operation #trapdoor_total bm_timer += #trapdoor_e bm_timer
+scoreboard players operation #trapdoor_total bm_timer += #trapdoor_s bm_timer
+scoreboard players operation #trapdoor_total bm_timer += #trapdoor_n bm_timer
+
+# Check total trapdoors equals 16 (8+2+1+5 from original)
+execute unless score #trapdoor_total bm_timer matches 16 run scoreboard players set #valid bm_status 0
 
 # --- Final Check ---
 execute if score #valid bm_status matches 1 if score #already_complete bm_status matches 0 run function buildmart:structure_9_done

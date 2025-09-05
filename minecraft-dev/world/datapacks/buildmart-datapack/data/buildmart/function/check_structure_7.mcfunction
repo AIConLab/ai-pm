@@ -52,20 +52,20 @@ execute store result score #lantern_hanging bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:lantern[hanging=true,waterlogged=false] replace minecraft:barrier
 execute unless score #lantern_hanging bm_timer matches 12 run scoreboard players set #valid bm_status 0
 
-# --- Oak Fence Gate Checks () ---
-execute store result score #gate_n bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false]
-execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:oak_fence_gate[facing=north,in_wall=false,open=false,powered=false] replace minecraft:barrier
-execute unless score #gate_n bm_timer matches 2 run scoreboard players set #valid bm_status 0
+# --- Oak Fence Gate Checks (FIXED) ---
+# execute store result score #gate_n bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:oak_fence_gate[facing=north,open=false]
+# execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:oak_fence_gate[facing=north,open=false] replace minecraft:barrier
+# execute unless score #gate_n bm_timer matches 2 run scoreboard players set #valid bm_status 0
+# 
+# execute store result score #gate_w bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:oak_fence_gate[facing=west,open=false]
+# execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:oak_fence_gate[facing=west,open=false] replace minecraft:barrier
+# execute unless score #gate_w bm_timer matches 1 run scoreboard players set #valid bm_status 0
+# 
+# execute store result score #gate_e bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:oak_fence_gate[facing=east,open=false]
+# execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:oak_fence_gate[facing=east,open=false] replace minecraft:barrier
+# execute unless score #gate_e bm_timer matches 1 run scoreboard players set #valid bm_status 0
 
-execute store result score #gate_w bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:oak_fence_gate[facing=west,in_wall=false,open=false,powered=false]
-execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:oak_fence_gate[facing=west,in_wall=false,open=false,powered=false] replace minecraft:barrier
-execute unless score #gate_w bm_timer matches 1 run scoreboard players set #valid bm_status 0
-
-execute store result score #gate_e bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:oak_fence_gate[facing=east,in_wall=false,open=false,powered=false]
-execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:oak_fence_gate[facing=east,in_wall=false,open=false,powered=false] replace minecraft:barrier
-execute unless score #gate_e bm_timer matches 1 run scoreboard players set #valid bm_status 0
-
-# # --- Nether Brick Stairs Checks ---
+# --- Nether Brick Stairs Checks ---
 # execute store result score #stairs_e bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:nether_brick_stairs[facing=east,half=bottom,waterlogged=false]
 # execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:nether_brick_stairs[facing=east,half=bottom,waterlogged=false] replace minecraft:barrier
 # execute unless score #stairs_e bm_timer matches 13 run scoreboard players set #valid bm_status 0
@@ -82,5 +82,8 @@ execute unless score #gate_e bm_timer matches 1 run scoreboard players set #vali
 # execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:nether_brick_stairs[facing=north,half=bottom,waterlogged=false] replace minecraft:barrier
 # execute unless score #stairs_n bm_timer matches 11 run scoreboard players set #valid bm_status 0
 # 
+
 # --- Final Check ---
+
 execute if score #valid bm_status matches 1 if score #already_complete bm_status matches 0 run function buildmart:structure_7_done
+
