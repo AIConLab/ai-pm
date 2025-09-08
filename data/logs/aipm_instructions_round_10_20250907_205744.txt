@@ -1,0 +1,126 @@
+AIPM Player Instructions - Round 10
+Generated at: 20250907_205744
+==================================================
+
+HIGH-LEVEL PLAN:
+Summary (goal): finish Structure 10 fastest by prioritizing immediate collection of ready-made blocks (iron_block, iron_bars), start crafting-required items (iron trapdoors, red wall banners) immediately at the processing area, and overlap building with crafting. Processing (banners + trapdoors) is the critical path — get it started ASAP while a dedicated placer begins placing iron_blocks/iron_bars.
+
+Quick facts / exact needs
+- Iron blocks (final form): 7 (available in Resource area)
+- Iron bars (final form): 6 (available in Resource area)
+- Iron trapdoors: 6 (not in Resource — must be made from iron ingots; convert iron_block → ingots → trapdoors)
+- Red wall banners: 8 (must craft: 6 wool + 1 stick each -> 8 banners = 48 wool + 8 sticks; wool can be dyed red using red_dye in Processing)
+
+Pre-start: Everyone empty nonessential inventory (Loopking has heavy items). Walk/run to Processing area (nearest) and deposit anything not required into processing chests (very quick; saves inventory slots/trips). Confirm readiness.
+
+1) Resource collection strategy (what to take, who, order)
+- Immediate, no-processing items (grab first and deliver to structure):
+  - 7 iron_block (structure)
+  - 6 iron_bars (structure)
+  - +1 extra iron_block as backup
+  These are carried straight from Resource -> Structure by the placer.
+
+- Items that require processing/crafting (start immediately):
+  - Iron for trapdoors: reserve 3 iron_blocks (safe number). 3 blocks → 27 ingots → > enough for 6 iron trapdoors.
+  - Banner materials: 48 white_wool + 8 sticks OR logs to make sticks. (Logs/planks → sticks, bring simple: 2 logs per crafter is plenty.)
+  - Red dye: present in Processing area, no need to fetch.
+
+Optimal pickup split (minimize trips, balance carry):
+- Player A (Loopking) — Primary Placer/Block Runner:
+  - Grab 7 iron_block + 6 iron_bars + 1 backup iron_block from Resource.
+  - Deliver directly to Structure and begin placement (no processing).
+- Player B (jc_cr) — Primary Processor (crafting lead):
+  - Grab 3 iron_block (for ingots/trapdoors) + half the wool (24 white_wool) + 1 log (for sticks).
+  - Go to Processing area immediately, start crafting (ingots → trapdoors; dye wool → make banners).
+- Player C (summervibe555) — Support Runner / Secondary Builder:
+  - Grab remaining 24 white_wool + 1–2 logs + 1 extra iron_block (backup).
+  - Move to Processing area to assist banner assembly and ferry crafted items to Structure; once banners/trapdoors ready, join building and place them.
+
+Inventory packing tips:
+- Stack wool in single slots (64) — 48 fits in one stack: have B or C carry full 48 if possible. But split 24/24 to parallelize transport and reduce one person becoming bottleneck.
+- Iron blocks are light (single slots). Avoid carrying unneeded bulky items (Loopking must drop chest/glowstone).
+- Use the processing chests as temporary stash if one player arrives with too much.
+
+2) Processing workflow (what to craft and when)
+- Critical-path items: iron_trapdoors (6) and red_wall_banners (8). Start processing immediately on arrival.
+- Processing area resources: crafting_table present (one). Use it in this order and in parallel where possible:
+  - Step 1 (immediate): Player B places iron_block → craft into ingots (use crafting table). Convert all 3 blocks into ingots at once.
+  - Step 2 (concurrent if possible): With ingots ready, craft iron_trapdoors. If iron trapdoor requires only a small pattern that can be done in inventory you can craft some while others use the crafting table; but assume the crafting_table will be the bottleneck — B prioritizes trapdoors first because they are required and cannot be placed until made.
+  - Step 3 (banner prep): While trapdoors are being created, B or C dyes wool red. Dyeing wool can be done in inventory (1 dye + 1 wool) — do this off the crafting_table while the table is occupied. Prepare 48 red wool quickly by using red_dye from Processing chests.
+  - Step 4 (banner assembly): Use the crafting_table to convert 6 red wool + stick → banner. Because there is only one crafting_table, have one player (the fastest crafter) do all banner assembly continuously while the other brings finished trapdoors and prepared materials to Structure or prepares sticks.
+- Player assignment in Processing:
+  - B = lead on trapdoors (crafting_table first), converts iron_blocks → ingots → makes trapdoors, then switches to final assembly if needed.
+  - C = dye wool and prepare sticks/planks; hand off wool and sticks to B for final banner crafting OR, if B is busy on trapdoors, C takes over banner crafting when table free.
+- Timing priority: start trapdoors immediately; dye wool simultaneously; assemble banners as soon as table is free. Don’t wait to collect all materials before starting — start with any subset to get pipeline moving.
+
+3) Build execution plan (fastest sequence + parallelization)
+- Critical path: banner + trapdoor crafting → these must be finished to reach 100% match.
+- Non-critical parallel work: placing iron_blocks and iron_bars (ready-made), which is long but can be done concurrently while crafting happens.
+- Sequence:
+  1. Placer (A) begins by placing all iron_blocks that are in positions that don’t need to wait for trapdoors/banners. Start by building the structure’s frame/focal iron_block placements.
+  2. Simultaneously, A places iron_bars in their positions that are final form — these are ready-made and quick placements.
+  3. Processor (B) finishes trapdoors → hands finished trapdoors to C (or runs them) to Structure for immediate placement in correct facings (orientations given).
+  4. Once banners are finished, place wall banners in correct facing order (two per wall side). While banner placement happens, A finishes any remaining block detail.
+  5. Final pass: all players check alignment & facings: trapdoors (east x4, north x1, south x1) and banners (north 2, west 2, east 2, south 2).
+
+Parallel opportunities:
+- A: Keep placing iron_blocks and iron_bars the whole time.
+- B: Crafts trapdoors → when finished, runs some trapdoors to structure, returns to finish banners.
+- C: Dyes wool and prepares sticks while shuttling completed trapdoors/banners to A for placement; places banners/trapdoors as they arrive.
+- Use continuous ferry cycles: while B crafts, C ferries previous batch to structure and places them, then returns for the next batch.
+
+Critical path identification
+- Banner creation (8 banners) + trapdoor crafting (6 trapdoors) are the longest serial tasks (crafting_table is the choke point). Start both immediately and keep the crafting_table continuously occupied.
+- Placement of iron_blocks/iron_bars is parallelizable and shouldn't block final completion if started immediately.
+
+4) Team coordination & communication
+Task allocation (concise)
+- Loopking (A) — Placer / Block Runner:
+  - Immediately clear inventory at Processing chests.
+  - Run to Resource, pick up 7 iron_blocks + 6 iron_bars + 1 backup iron_block.
+  - Run to Structure and begin placement of all iron_blocks/iron_bars. Call out placement progress regularly.
+- jc_cr (B) — Processing Lead:
+  - Run to Resource, pick 3 iron_blocks + 24 wool + 1 log (or 48/own if confident).
+  - Immediately to Processing area. Convert blocks → ingots → craft 6 trapdoors first. Simultaneously use/red_dye (from Processing) to dye wool. Then craft banners on crafting_table when trapdoors finished or in gaps.
+  - Ferry trapdoors/banners to structure if not enough runners.
+- summervibe555 (C) — Support Runner / Banner Assistant:
+  - Run to Resource, pick remaining 24 wool + 1–2 logs + spare iron_block.
+  - At Processing: dye wool, make sticks (logs → planks → sticks), hand materials to B. Ferry banners/trapdoors to structure; help place banners/trapdoors and tidy final details.
+
+Communication checkpoints (short radio-like calls)
+- “Cleared and ready at Processing” — after dumping inventory.
+- “Resource loaded — leaving for Processing/Structure” — each player announces when they depart Resource.
+- “Processing start — converting blocks” — B announces when crafting table occupied.
+- “Trapdoors ready: X/6” — B counts up to 6.
+- “Banners ready: X/8” — crafter counts up.
+- “Blocks placed: N/7; Bars placed: M/6” — A updates progress so processors know remaining placements.
+- “Final check?” — call when all pieces placed; each player checks assigned facet (north, south, east, west) for banners/trapdoors facings.
+
+Milestones (milestone, expected action)
+- M0 (T0): Everyone dumps nonessential inventory at Processing chests and confirms ready.
+- M1 (T0+0-10s): All three run to Resource area and split picks (A: blocks/bars; B: blocks + wool; C: wool + logs).
+- M2 (T0+10-25s): A delivering blocks/bars to Structure and starting placement; B & C arriving at Processing and starting conversion/dyeing. (Processing table occupied immediately.)
+- M3 (T0+25-60s): First trapdoors complete and ferried to Structure; A places mechanical/structural base. B continues trapdoors then moves to banner assembly; C dyes wool and preps sticks.
+- M4 (T0+60-120s): B or C finishes banners continuously; they are ferried and placed immediately; trapdoors placed into correct orientations. A finalizes block/bar placements & supports banner/trapdoor alignment.
+- M5 (T0+120s): Final check & corrections — verify trapdoor facings (east x4, north x1, south x1) and banners (north 2, west 2, east 2, south 2) then call completion.
+
+Speed tips (small but critical)
+- One player must keep the crafting_table occupied; that player should be the fastest crafter (B). Never leave table idle while more items pending.
+- Do not wait to collect everything: begin processing with partial materials so pipeline runs.
+- Use sprint/jump on runs to reduce travel; each player should carry maximum stackable items (wool stacks) to minimize extra trips.
+- Use processing chests as temporary drop zones to consolidate materials if one player becomes overloaded.
+- Place iron_blocks first in areas that don’t interact with banners/trapdoors to maximize parallel placement while crafting continues.
+
+Wrap-up checklist before build start
+- Everyone: inventory cleared (confirm).
+- A: confirmed 7 iron_blocks + 6 iron_bars loaded.
+- B: confirmed 3 iron_blocks + wool loaded and processing table clear to start.
+- C: confirmed rest of wool + logs loaded for sticks/dyeing.
+- Communication: set voice/text check-ins on the milestone calls.
+
+This plan keeps the single crafting-table and processing area fully utilized, begins placement immediately with ready-made blocks, and assigns a dedicated runner/ferry so the structure gets built while the bottleneck tasks are executing. Follow the milestones and short callouts to avoid idle time.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+Loopking: Immediately deposit all nonessential inventory items (armor_stand, birch_button, chest, command_block, glowstone, hopper, hopper_minecart, iron_helmet, lantern, lever) into Processing chests to clear your inventory. Confirm when ready. Then go to Resource area and pick up exactly 7 iron_blocks, 6 iron_bars, and 1 backup iron_block. Once loaded, run directly to Structure 10 and begin placing all iron_blocks and iron_bars in designated positions starting with frame and focal placements. Provide progress updates on blocks and bars placed regularly. jc_cr: Confirm you have cleared any minor inventory (verdant_froglight if not required) by depositing it to Processing chests. Then go to Resource area and collect 3 iron_blocks, 24 white_wool, and 1 log. Run immediately to the Processing area and start converting the 3 iron_blocks into iron ingots using the crafting table. As soon as ingots are ready, craft 6 iron trapdoors prioritizing continuous use of the crafting table. Simultaneously start dyeing your 24 wool red off the table using available red_dye. Once trapdoors are underway, begin crafting red wall banners on the crafting table using dyed wool and sticks (coordinate stick supply with summervibe555). Ferry completed trapdoors and banners to Structure 10 for placement if needed and update team on crafting progress with counts. summervibe555: Pick up from Resource area the remaining 24 white_wool plus 1 to 2 logs and 1 spare iron_block. Move to Processing area and begin dyeing wool red and converting logs into planks then sticks to supply jc_cr for banner crafting. Assist with ferrying finished trapdoors and banners from Processing area to Structure 10. Help place banners and trapdoors as they arrive and support final alignment checks. Announce once wool dyeing and stick prep start. All players: confirm "Cleared and ready at Processing" once inventories are dumped and before heading to Resource. Announce "Resource loaded—leaving for Processing/Structure" upon departure from Resource. Maintain quick updates on crafting and placement milestones as per plan.

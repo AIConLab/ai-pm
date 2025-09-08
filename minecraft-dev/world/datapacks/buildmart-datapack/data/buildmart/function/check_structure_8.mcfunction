@@ -28,30 +28,41 @@ execute store result score #stone_brick_wall bm_timer run fill ~-3 ~1 ~-3 ~3 ~15
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:stone_brick_wall replace minecraft:barrier
 execute unless score #stone_brick_wall bm_timer matches 14 run scoreboard players set #valid bm_status 0
 
-# Count end_rod [facing=down] (need exactly 4)
+# Count end_rod [facing=down] 
 execute store result score #end_rod_down bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:end_rod[facing=down]
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:end_rod[facing=down] replace minecraft:barrier
-execute unless score #end_rod_down bm_timer matches 4 run scoreboard players set #valid bm_status 0
 
-# Count end_rod [facing=up] (need exactly 1)
+# Count end_rod [facing=up]
 execute store result score #end_rod_up bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:end_rod[facing=up]
 execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:end_rod[facing=up] replace minecraft:barrier
-execute unless score #end_rod_up bm_timer matches 1 run scoreboard players set #valid bm_status 0
 
-# Count brick_stairs [facing=west,shape=inner_right] (need exactly 1)
-execute store result score #brick_stairs_w bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:brick_stairs[facing=west,half=bottom,shape=inner_right,waterlogged=false]
-execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:brick_stairs[facing=west,half=bottom,shape=inner_right,waterlogged=false] replace minecraft:barrier
-execute unless score #brick_stairs_w bm_timer matches 1 run scoreboard players set #valid bm_status 0
+# Count end_rod [facing=north]
+execute store result score #end_rod_north bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:end_rod[facing=north]
+execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:end_rod[facing=north] replace minecraft:barrier
 
-# Count brick_stairs [facing=south,shape=inner_right] (need exactly 1)
-execute store result score #brick_stairs_s bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:brick_stairs[facing=south,half=bottom,shape=inner_right,waterlogged=false]
-execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:brick_stairs[facing=south,half=bottom,shape=inner_right,waterlogged=false] replace minecraft:barrier
-execute unless score #brick_stairs_s bm_timer matches 1 run scoreboard players set #valid bm_status 0
+# Count end_rod [facing=south]
+execute store result score #end_rod_south bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:end_rod[facing=south]
+execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:end_rod[facing=south] replace minecraft:barrier
 
-# Count brick_stairs [facing=east,shape=inner_right] (need exactly 1)
-execute store result score #brick_stairs_e bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:brick_stairs[facing=east,half=bottom,shape=inner_right,waterlogged=false]
-execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:brick_stairs[facing=east,half=bottom,shape=inner_right,waterlogged=false] replace minecraft:barrier
-execute unless score #brick_stairs_e bm_timer matches 1 run scoreboard players set #valid bm_status 0
+# Count end_rod [facing=east]
+execute store result score #end_rod_east bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:end_rod[facing=east]
+execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:end_rod[facing=east] replace minecraft:barrier
+
+# Count end_rod [facing=west]
+execute store result score #end_rod_west bm_timer run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:barrier replace minecraft:end_rod[facing=west]
+execute run fill ~-3 ~1 ~-3 ~3 ~15 ~3 minecraft:end_rod[facing=west] replace minecraft:barrier
+
+# Sum all end rod orientations
+scoreboard players operation #end_rods_total bm_timer = #end_rod_down bm_timer
+scoreboard players operation #end_rods_total bm_timer += #end_rod_up bm_timer
+scoreboard players operation #end_rods_total bm_timer += #end_rod_north bm_timer
+scoreboard players operation #end_rods_total bm_timer += #end_rod_south bm_timer
+scoreboard players operation #end_rods_total bm_timer += #end_rod_east bm_timer
+scoreboard players operation #end_rods_total bm_timer += #end_rod_west bm_timer
+
+# Check total end rods equals 5 (4 down + 1 up from original)
+execute unless score #end_rods_total bm_timer matches 5 run scoreboard players set #valid bm_status 0
+
 
 # --- Final Check ---
 execute if score #valid bm_status matches 1 if score #already_complete bm_status matches 0 run function buildmart:structure_8_done

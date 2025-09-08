@@ -1,0 +1,130 @@
+AIPM Player Instructions - Round 4
+Generated at: 20250907_221142
+==================================================
+
+HIGH-LEVEL PLAN:
+Summary (primary objective): minimize trips and parallelize processing so builders get concrete and iron blocks immediately while jc_cr + one crafter finish all 27 iron trapdoors. Key bottleneck = crafting 27 iron trapdoors (ingot supply + craft time). Follow roles, milestones and short loops below.
+
+1) Resource collection priorities (what to grab first)
+- Immediate pickup (collector brings to processing & build site in 1–2 fast trips):
+  - 12 × iron_block (for structure placement) — take as blocks (don’t convert these)
+  - 2 × iron_block (spare → will be converted to ingots for trapdoors)
+  - 19 × orange_concrete_powder (will be converted to orange_concrete at processing water)
+  - 4 × redstone_torch (lit torches are listed in structure; pick these)
+  - (optional if inventory space OK) any extra scaffolding / bucket from processing if needed
+- Items already in team inventories:
+  - jc_cr: 98 iron_ingot (use as trapdoor raw material), 2 iron doors (sufficient)
+  - Loopking: has crafting_table — can be used to parallel craft
+- Items NOT to waste time on:
+  - Don’t break iron_block you intend to place for structure.
+  - Don’t smelt or convert anything that’s already available as the final block.
+
+Optimal pickup sequencing to minimize trips
+- Trip 1 (collector): grab 12 iron_blocks + 2 spare iron_blocks + 19 orange_concrete_powder + 4 redstone_torches. Return directly to processing area (fastest route: go to processing first to convert powder to concrete and convert spare blocks to ingots).
+  - Rationale: One visit delivers both blocks for placement and raw materials for processing, avoiding an extra trip later.
+- If inventory space forces splitting, do powder and torches first, then blocks second — but keep to 1–2 trips max.
+
+Inventory management
+- Collector should pack counts as single stacks: iron_block (12), iron_block spare (2), orange_powder (19) — fits under 36-slot typical inventory (≈33 items).
+- Keep a dedicated slot for scaffolding/buckets for quick movement at build site.
+- Processors keep inventory free for ingots and crafted trapdoors (trapdoors stack; craft into full stacks to minimize slot use).
+
+2) Processing workflow (what needs crafting/smelting and timing)
+What requires processing:
+- Orange_concrete_powder → orange_concrete: requires water contact. Use processing-area water source to convert.
+- Iron trapdoors: must be crafted from iron_ingots (total needed = 27 trapdoors → 108 iron ingots).
+  - Team has 98 ingots (jc_cr) → short by 10 ingots. Use the 2 spare iron_blocks (collected) to craft into 18 ingots at a crafting table (1 iron_block → 9 ingots). That yields ≥108 ingots.
+- No smelting needed (no raw ores). Furnaces not required unless you choose to convert iron blocks back and forth (avoid).
+
+Processing order & timing (parallelized)
+- Immediately on collector return:
+  1. Convert 19 orange_powder → 19 orange_concrete at the processing water block (1 player). This is instant per block when placed into water; do this first so builder can start placing concrete ASAP.
+  2. At the same time: convert the 2 spare iron_blocks → 18 iron_ingots using a crafting table (jc_cr or Loopking). jc_cr adds these to existing 98 ingots.
+  3. Begin bulk trapdoor crafting on crafting tables. Use two crafting tables in parallel:
+     - jc_cr uses processing crafting_table (and their ingot stack).
+     - Loopking (or summoned teammate) uses their carried crafting_table to craft in parallel at the processing area.
+     - Craft continuously until 27 trapdoors are made (split workload; each crafts half-ish).
+- Expected critical path: trapdoor crafting time. Parallel crafting reduces this.
+
+Player assignment for processing tasks
+- jc_cr: primary crafter (stay at processing area). Manage ingot bookkeeping, craft majority of trapdoors.
+- Loopking: secondary crafter/runner. After initial deliveries to processing, help craft trapdoors in parallel; can return to bring any missing bricks/blocks if needed.
+- summervibe555: lead builder at structure site — begins placing blocks as they arrive and converts concrete if collector returns with powder instead of visiting processing area (see roles below).
+
+3) Build execution plan (sequence + parallel tasks)
+Construction sequence (fast and low rework):
+1. Foundation / frame: place 12 iron_blocks in their positions first (these are large unique blocks and help orient build).
+2. Fill in orange concrete regions next (19 concrete blocks) — builder uses pre-converted orange_concrete from processing area.
+3. Place iron door (lower & upper are the door item): place iron door in correct orientation. If it must be powered/opened, leave powering until trapdoors and torches are ready.
+4. Place iron trapdoors (crafted items) into their positions but do NOT finalize powered state until all trapdoors are placed in their correct orientations. Place closed ones first (open=false). Place open ones next, then apply power.
+5. Place 4 redstone torches in the exact positions required by blueprint (these serve dual role of being the 4 structure torches and powering groups of trapdoors).
+6. Final check: adjust trapdoor orientations and torch positions to ensure those specified as powered=true are powered (place or remove torches in required order), then open/close door/trapdoor final states as needed.
+
+Parallel work opportunities
+- While jc_cr + Loopking craft trapdoors at processing:
+  - summervibe555 (builder) immediately places iron_blocks and orange_concrete as batches arrive (or if orange concrete not yet available, start positioning iron_blocks & scaffolding).
+  - Once the first small batch of trapdoors is finished, send them to builder to place progressively (do not wait for all 27).
+- While trapdoors are being crafted, one crafter can deliver small batches to builder to avoid any idle time.
+- Converting concrete (water conversion) can be done by a runner and directly handed/stacked to builder to place.
+
+Critical path identification
+- Longest tasks: (1) converting enough ingots for trapdoors if spare blocks must be converted (fast), (2) crafting 27 trapdoors. So maximize parallel crafting (use two tables) and start as soon as spare blocks arrive. Building placement of blocks (19 + 12 + 1 door) will be shorter if materials are staged; therefore staging materials at the build site early reduces idle time.
+
+4) Team coordination (detailed task allocation + communication)
+Roles (clear and static for round)
+- jc_cr — Processing lead & chief crafter
+  - Immediately move to processing area, set up on main crafting_table.
+  - Manage ingot count, convert spare blocks → ingots, craft trapdoors.
+  - Communicate "% crafted" updates every 30 seconds or after each full stack crafted.
+- Loopking — Runner + secondary crafter
+  - First trip: collect and deliver 12 iron_blocks + 2 spares + 19 orange_powder + 4 torches (as above).
+  - After delivering, set up second crafting_table at processing area and craft trapdoors in parallel with jc_cr.
+  - Make quick shuttle runs if builder needs a new stack of orange_concrete or iron_blocks at the site.
+- summervibe555 — Lead builder / finisher
+  - Wait at build site and prepare layout (clear scaffold, mark exact block positions if needed).
+  - As soon as full or partial material stacks arrive, place iron_blocks and orange_concrete.
+  - Receive trapdoors as they are crafted and place them in specified slots (place closed ones first, then open ones).
+  - Finalize iron door placement and redstone torch placement to achieve powered/open states.
+  - Do final verification and call “done” when match is exact.
+
+Communication checkpoints (short, timed)
+- At collector departure: “Collector leaving” + ETA (~15–25s depending on distance).
+- On first material deposit at processing: “Powder & blocks delivered — start conversion/craft”
+- Every full stack of trapdoors crafted: “Trapdoors +N” (e.g., +10, +20, +27)
+- When foundation finished: builder says “Frame done” and requests last batch of trapdoors or torches.
+- Final check: builder says “Ready for power placement” — then jc_cr/Loopking place torches as needed (or builder places them if close).
+
+Milestones (concrete progress states)
+- M1 (T+0 to ~T+20s): Collector en route / first delivery in processing; orange powder conversion started; spare blocks conversion started.
+- M2 (T+20s to ~T+60s): Orange concrete blocks available; builders start placing iron blocks + concrete frame.
+- M3 (T+20s to ~T+90s): Trapdoor crafting in progress; first batch (≈half) received at build site and placer starts installing trapdoors.
+- M4 (When trapdoors complete): All trapdoors installed in correct orientations; builder ready to power required ones.
+- M5 (Final): Place 4 redstone_torches and finalize door/trapdoor powered states; final verification and submit.
+
+Tactics & micro-optimizations (speed tricks)
+- Use two crafting tables simultaneously for trapdoor crafting — craft stacks to minimize clicking.
+- Convert orange_concrete_powder at water while standing on the processing table to dip/convert fast; immediately push converted blocks to builder via hotbar drop/throw or run.
+- When placing multiple identical trapdoors, have crafter drop a full stack on the ground near builder and builder shift-click places quickly.
+- Powering groups: place trapdoors then place the 4 redstone torches in positions that power multiple trapdoors at once (test with one torch first to avoid toggling too much).
+- Keep one player (Loopking) as immediate shuttle for last-minute tiny items (scaffolding, bucket, extra torches) to avoid builder leaving the site.
+- Use shift+click + quick move to craft stacks (craft as many trapdoors as available ingots until you run out).
+
+Quick timeline example (approx times for a practiced 3-player team)
+- 0–10s: roles acknowledged, collector leaves.
+- 10–35s: collector returns to processing with powders & blocks; conversion begins instantly.
+- 20–80s: Trapdoor crafting in two parallel crafters; builder places iron blocks + concrete as first batches arrive.
+- 80–120s: Trapdoors finished; final placement & redstone torch power adjustments; final verification & submit.
+
+Final check-list to hand to team before starting
+- jc_cr: move to processing, prepare crafting table, count ingots (98), wait for 2 spare blocks to craft into ingots, start crafting.
+- Loopking: act as collector (12 iron_blocks + 2 spare blocks + 19 orange_powder + 4 torches), deliver to processing, set up second crafting_table and craft, then shuttle materials to build site as needed.
+- summervibe555: at build site, ready to place iron_blocks & orange_concrete immediately; place trapdoors as they arrive; final power placement.
+
+If constraints change (e.g., trapdoors are already available in resource area), switch collector to fetch finished trapdoors instead of doing ingot conversion/crafting — this will be faster.
+
+Execute this plan and keep verbal updates at each milestone. Focus on parallel crafting for trapdoors and staging materials at the build site — that is the fastest path to finish. Good luck.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+Loopking: Collect 12 iron_blocks, 2 spare iron_blocks, 19 orange_concrete_powder, and 4 redstone_torches in as few trips as possible then deliver all to the processing area quickly. Set up your crafting_table at processing and immediately begin crafting iron trapdoors in parallel with jc_cr once spare iron_blocks are converted to ingots. Be ready to shuttle stacks of orange_concrete and iron_blocks to summervibe555 at the build site as soon as available. jc_cr: Move to processing area, place your crafting_table, prepare for ingot bookkeeping starting with 98 iron_ingots. Convert the 2 spare iron_blocks delivered by Loopking into 18 iron_ingots using the crafting_table, then begin crafting iron trapdoors continuously, updating the team after each full stack of trapdoors crafted. Simultaneously coordinate with Loopking to parallel craft trapdoors using both crafting tables. Start converting orange_concrete_powder to orange_concrete immediately upon delivery using water at the processing area and pass converted blocks quickly to summervibe555. summervibe555: Remain at build site, prepare layout for foundation and frame. As iron_blocks and orange_concrete arrive from processing, start placing the 12 iron_blocks foundation followed immediately by the 19 orange_concrete blocks to create the frame. When first trapdoors get delivered by jc_cr or Loopking, start placing closed trapdoors in correct positions. Continue placing trapdoors progressively as more arrive. Prepare to place the iron door and finally place the 4 redstone torches once trapdoors are installed for powering. Call out “Frame done” after completing iron_blocks and concrete frame and “Ready for power placement” when all trapdoors are placed. Maintain communication checkpoints during the round for collector departure, material delivery, trapdoor crafting progress, and final power placements.

@@ -3,9 +3,18 @@
     "user_id": 1,
     "minecraft_username": "jc_cr",
     "is_online": 1,
-    "current_x": -25.118684680771622,
-    "current_y": 72.7431359597822,
-    "current_z": -83.25061533721907,
-    "last_updated": "2025-08-23 11:16:44.082212"
+    "current_x": -30.31947468067566,
+    "current_y": 89.73209754530133,
+    "current_z": -46.268523956539944,
+    "last_updated": "2025-09-01 01:50:42.716281"
+  },
+  {
+    "user_id": 3986,
+    "minecraft_username": "BT1013",
+    "is_online": 0,
+    "current_x": -36.91344999075529,
+    "current_y": 66.7880471960683,
+    "current_z": -77.49370745806931,
+    "last_updated": "2025-08-28 01:51:21.168821"
   }
 ]
