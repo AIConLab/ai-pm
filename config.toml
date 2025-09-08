@@ -13,7 +13,7 @@ processing_area_xyz = [-69.365, 66, -84.426]
 [aipm]
 
 # list of mc username of team members for AIPM team
-members = ["Loopking", "mnm117", "summervibe555"]
+members = ["Loopking", "jc_cr", "summervibe555"]
 
 # How often mc_game_query should query the game state in seconds
 query_interval_sec = 3
@@ -184,7 +184,7 @@ FORMAT: Direct player instructions.
 
 [aipm.helper_agent]
 
-model = "gpt-5-mini"
+model = "gpt-4.1-mini-2025-04-14"
 
 helper_instructions = """
 You are an AI Helper Agent for a Minecraft Build Mart team. You provide real-time support and answer miscellaneous questions from players during building challenges.

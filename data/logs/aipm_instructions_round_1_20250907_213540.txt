@@ -1,0 +1,107 @@
+AIPM Player Instructions - Round 1
+Generated at: 20250907_213540
+==================================================
+
+HIGH-LEVEL PLAN:
+Summary (goal): place 25 light_gray_concrete, 20 oak stairs (5 facing each direction), and 5 iron bars as fast as possible with 3 players starting at the structure. Major bottleneck = crafting/transport of oak stairs (requires a crafting table), so minimize trips and parallelize: builder places concrete immediately while two runners fetch/craft and return stairs/iron bars.
+
+1) Resource collection priorities
+- Immediate (must fetch/craft)
+  - Oak logs → craft into oak planks → craft stair blocks (stairs are the critical path).
+  - Iron bars (5) — small, must be brought to structure.
+- Optional / not needed now
+  - Light_gray_concrete: NOT required to fetch — Loopking already has 35 concrete blocks (≥25). No powder processing required unless additional concrete needed.
+- Recommended collection counts (one-trip target):
+  - Logs: 10 oak logs (10 logs → 40 planks → plenty for 20 stairs: need 30 planks). Carry margin to avoid re-trip.
+  - Iron bars: 5.
+  - Optional: 1 scaffolding stack (processing area has scaffolding) if placement height needs it.
+- Route optimization: resource area (x≈34) → processing area (x≈-69) → structure (x≈-20). Do a single loop resource → processing → structure rather than separate back-and-forth.
+
+2) Processing workflow (who does what and when)
+- Processing needs: craft logs → planks (crafting table) → stairs (crafting table). No smelting required.
+- Order & timing:
+  - Runner picks up logs and iron bars at resource area (1 stop).
+  - Go directly to processing area to craft immediately: logs → planks (1 craft step) → craft planks into stairs. Each 6 planks → 4 stairs; need 5 crafting operations to produce 20 stairs (use 30 planks).
+  - While crafting, other runner can start moving iron bars and any scaffolding to structure.
+- Player assignment for processing:
+  - Primary crafter: jc_cr (or fastest runner) — does logs→planks→stairs at the processing-area crafting_table to avoid extra item shuffling. Stays at processing until stairs are finished or hands off finished stairs in runs.
+  - Support fetch/carry: summervibe555 — helps carry logs/ironbars to processing and transports finished stairs back to structure (or vice versa if faster).
+
+3) Build execution plan & critical path
+- Critical path = stairs production + transport to structure → placing oriented stairs correctly. Concrete placement is parallel and not on the critical path since Loopking already has concrete.
+- Fastest sequence:
+  - T0: Loopking (Builder) begins placing the 25 light_gray_concrete blocks per blueprint. Do a continuous sweep of all concrete positions first; leave stair positions empty or flagged so later placers do not overwrite concrete.
+  - Runners depart immediately to resource area for logs + iron bars (single trip).
+  - Runners → processing area: craft stairs as quickly as possible. As soon as first batch of stairs is ready (craft 4 each operation), start sending them back while crafter continues until 20 stairs done.
+  - On return, place stairs in assigned orientations; place iron bars once the adjacent blocks are present to avoid connections changing orientation.
+- Parallel opportunities:
+  - Loopking places all concrete uninterrupted.
+  - As soon as the first partial set of stairs returns, two players (Loopking + 1 runner) can split stair placement: assign directions to minimize rotation/placement time.
+  - Iron bars placement should be done last or after surrounding blocks are set (to ensure they don’t auto-connect incorrectly).
+
+4) Team coordination, exact task allocation & inventory plan
+- Loopking (Primary Builder / Anchor)
+  - Inventory: already has ≥25 light_gray_concrete — start building immediately.
+  - Tasks:
+    - Immediately start placing the 25 concrete blocks per blueprint.
+    - Prepare exact placement map: mark where stairs and iron bars go (use a single block or sign placeholder) so returning players can place faster.
+    - When first stairs return, take responsibility for placing two directions (recommend: North + West) so orientation is grouped and consistent.
+    - Place iron bars (all 5) when materials arrive, final-check the structure.
+  - Advantage: stays at structure and prevents idle time for others.
+
+- jc_cr (Primary Runner + Crafter)
+  - Tasks:
+    - Run to resource area, collect logs (10) and the 5 iron bars. Do not stop back at structure first — go straight to processing.
+    - At processing area: convert logs → planks → craft stairs (use crafting_table). Make the 5 crafting-operations needed to yield 20 stairs.
+    - As soon as a batch of stairs is done (every craft yields 4), hand off / run back with them to structure while continuing to craft next batch.
+    - Aim to craft continuously until 20 stairs are done. If possible, hand off 4-8 stairs early to avoid bottleneck in placement.
+  - Inventory notes: carry logs and iron bars in one trip; stairs stack in inventory as they are crafted.
+
+- summervibe555 (Support Runner / Transport & Place)
+  - Tasks:
+    - Leave immediately with jc_cr or slightly staggered. Assist in resource pickup if jc_cr focuses on logs: summervibe can pick up iron bars and/or fetch scaffolding from processing area.
+    - While jc_cr crafts, summervibe returns to structure with the first batch of stairs and begins placement for the other two directions (recommend: South + East).
+    - If stairs/crafting finish earlier, summervibe helps place iron bars and final touches, or picks up leftover planks/scaffolding to prevent re-trip.
+  - Inventory: use to shuttle stairs if jc_cr remains crafting; pick up scaffolding/water if needed.
+
+5) Milestones & communication checkpoints (concise)
+- M0 (Start): Loopking: "Placing concrete now." jc_cr & summervibe: "Departing to resources."
+- M1 (Resource collected): runner(s) call "Logs+ironbars collected" when they reach processing area.
+- M2 (Crafting start): jc_cr: "Crafting stairs — first batch ETA 6–10s" (actual seconds depend on players).
+- M3 (First stairs delivered): summervibe/jc_cr: "First 4 stairs delivered" — Loopking pauses concrete if needed to let them place in marked spots.
+- M4 (Halfway): When 10 stairs placed: "Halfway — 10/20 stairs done."
+- M5 (Stairs complete): "All stairs done — placing iron bars now."
+- M6 (Finish): "Final check complete — structure finished."
+
+6) Quick slot & inventory management tips
+- Keep one hotbar slot reserved for stairs / iron bars when returning so you can immediately place instead of opening inventory.
+- Loopking reserves 25 concrete in hotbar slots 1–3 to place uninterrupted.
+- Runner uses full inventory for logs; stacks of logs and then stairs will occupy inventory on the way back — offload stairs in hotbar to place faster.
+- Avoid carrying any unnecessary bulky items (buckets, wool) on runners.
+
+7) Time-saving micro-tips
+- Single-loop trips: resource → processing → structure. Do not run back to resource for planks because crafting is at processing area.
+- Craft stairs in full batches (6 planks → 4 stairs) to avoid excessive crafting time.
+- Drop one stair in the hotbar to place while running and returning (no menu open).
+- Use scaffolding only if stairs are vertical or awkward; otherwise avoid extra placements to reduce overhead.
+- Place iron bars when no adjacent blocks that would change their connections are being placed.
+
+Expected critical-path timeline (approximate; adjust to player speed)
+- 0–5s: Loopking places concrete baseline.
+- 5–12s: runners collect logs+iron bars.
+- 12–20s: crafting starts and first stairs produced; staggered deliveries to structure begin.
+- 20–40s: all stairs delivered and placed (parallel placement with Loopking).
+- 40–50s: iron bars placed & final check — finish.
+
+Final checklist before starting
+- Confirm Loopking will start concreting immediately.
+- Confirm jc_cr is the dedicated crafter; summervibe is dedicated transporter/placer.
+- Agree the milestones and short verbal callouts above (M1–M6).
+- Collect 10 logs + 5 iron bars in one trip; go processing then return.
+
+This plan minimizes trips, keeps the builder active the whole time, and places the stairs-crafting/transportation on the single critical runner/crafter loop. Follow the milestones and hotbar rules to keep placement smooth and finish the round as fast as possible.
+
+==================================================
+
+PLAYER INSTRUCTIONS:
+Loopking: Begin placing the 25 light_gray_concrete blocks per blueprint immediately at the build area. Mark stair and iron bar placement spots with a single block or sign placeholders for orientation reference. Reserve hotbar slots 1–3 for concrete to place uninterrupted. jc_cr: Immediately run to resource area at x≈34 and collect 10 oak logs and 5 iron bars in one trip. Travel directly to processing area at x≈-69 without stopping at structure. At processing area, use the crafting table to convert all 10 oak logs into planks and then craft 5 batches of oak stairs (total 20 stairs). As each batch of 4 stairs is finished, return promptly to structure to hand off or begin placing stairs facing assigned directions (recommend coordination with summervibe555), then return immediately to processing area to continue crafting remaining stairs until all 20 are produced and delivered. summervibe555: Leave immediately with or slightly after jc_cr to assist with resource collection—focus on collecting iron bars and carrying scaffolding stack if needed. As jc_cr crafts stairs, begin transporting finished stairs back to structure to place stairs facing South and East directions as they arrive. Assist Loopking by placing stairs as soon as they return to reduce bottlenecks and keep placements synchronized. When all stairs are placed or nearly done, help place all 5 iron bars last to avoid auto-connection issues and perform final structure check. Maintain hotbar slots clear for stairs and iron bars to place instantly.
