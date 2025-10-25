@@ -10,14 +10,29 @@ AI PM project source code
 - `paper`
 - `.docker`
 
+## Starting
 
-## Minecraft
-
-To start a minecraft server instance:
+Minecraft:
 ```
-tmux new-session -d -s minecraft
-tmux send-keys -t minecraft 'docker compose up minecraft --remove-orphans --abort-on-container-exit' Enter
+./scripts/start_minecraft.sh
+./scripts/start-auto-backup-mc-world.sh
 ```
 
+AIPM:
+```
+./scripts/start_aipm.sh
+```
 
-test
+## Stopping
+
+
+Minecraft:
+```
+./scripts/stop_minecraft.sh
+./scripts/stop-auto-backup-mc-world.sh
+```
+
+AIPM:
+```
+./scripts/stop_aipm.sh
+```

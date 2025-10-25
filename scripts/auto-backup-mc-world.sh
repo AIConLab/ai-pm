@@ -4,7 +4,7 @@
 while true; do
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting backup check..."
     
-    cd /root/ai-pm-mc-world-dev
+    cd /root/ai-pm
     git add .
     
     if ! git diff --staged --quiet; then
