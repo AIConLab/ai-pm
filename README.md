@@ -19,3 +19,5 @@ tmux new-session -d -s minecraft
 tmux send-keys -t minecraft 'docker compose up minecraft --remove-orphans --abort-on-container-exit' Enter
 ```
 
+
+test
