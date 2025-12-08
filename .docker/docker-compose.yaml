@@ -13,4 +13,11 @@ services:
     extends: py-base
     volumes:
       - ../scripts:/app/scripts
-    command: bash -c "python3 /app/scripts/main.py"
+    command: bash -c "python3 /app/scripts/figures.py"
+
+
+  infer:
+    extends: py-base
+    volumes:
+      - ../scripts:/app/scripts
+    command: bash -c "python3 /app/scripts/infer.py"
