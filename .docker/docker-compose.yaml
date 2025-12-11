@@ -21,3 +21,9 @@ services:
     volumes:
       - ../scripts:/app/scripts
     command: bash -c "python3 /app/scripts/infer.py"
+
+  check:
+    extends: py-base
+    volumes:
+      - ../scripts:/app/scripts
+    command: bash -c "python3 /app/scripts/linear_check.py"

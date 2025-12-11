@@ -438,8 +438,10 @@ def create_survey_results_plot():
     for label in ax.get_xticklabels():
         label.set_color(COLOR_DARK_GREY)
     
-    # Legend - moved to bottom right to avoid covering chart data
-    ax.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5), framealpha=0.5, fontsize=LEGEND_SIZE)
+    # move legend to avoid collision
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, -0.13), framealpha=0.9, 
+          fontsize=LEGEND_SIZE, ncol=2)
+
     
     plt.tight_layout()
     save_figure(fig, 'Post-Round_Survey_Results.png')
